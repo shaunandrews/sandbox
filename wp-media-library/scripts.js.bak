@@ -1,0 +1,117 @@
+// Run a function when the page is ready
+$(document).ready(function () {
+    renderMediaItems();
+});
+
+// Run a function anytime the user clicks on the page
+$(document).click(function (event) {
+    // hideOrShowUnselectButton();
+});
+
+var media = [
+    { src: 'library/1.jpeg', title: 'A bridge over troubled water', id: 1 },
+    { src: 'library/2.jpeg', title: 'Rocks meet sea', id: 2 },
+    { src: 'library/3.jpeg', title: 'Bayfront view', id: 3 },
+    { src: 'library/4.jpeg', title: 'Love at sunset', id: 4 },
+    { src: 'library/5.jpeg', title: 'Harvest time!', id: 5 },
+    { src: 'library/6.webp', title: 'Reading time', id: 6 },
+    { src: 'library/7.jpeg', title: 'Ignoring the sunset', id: 7 },
+    { src: 'library/8.jpeg', title: 'Path through the field', id: 8 },
+    { src: 'library/9.jpeg', title: 'All the windows', id: 9 },
+    { src: 'library/10.jpeg', title: 'Dew on a web', id: 10 }
+];
+
+function getTemplate(templateName) {
+    template = $('#template__' + templateName);
+    clone = template.clone();
+    return clone;
+}
+
+function setMediaItemTemplateData(template, mediaItem) {
+    
+}
+
+function renderMediaItem(mediaItem) {
+    var template = getTemplate('media-item');
+    template.find('.media-item__img').attr('src', mediaItem.src);
+    console.log(template, mediaItem);
+    return template;
+}
+
+function renderMediaItems() {
+    renderMediaItem(media[0]);
+    var renderedMediaItems = media.map(function (mediaItem) {
+        // $('#media').append(renderMediaItem(mediaItem));
+    });
+    // var output = media.map(function (mediaItem) {
+    //     return '<div class="media-item"><img src = "' + mediaItem.src + '" height="200" /><div class="media-item__description">' + mediaItem.title + '</div></div >';
+    // });
+
+    // // Insert output into #media div
+    // $('#media').html(output);
+}
+
+function rotateByRandomAmount(element) {
+    var randomnum = Math.floor(Math.random() * 20 - 10);
+    element.css('transform', 'rotate(' + randomnum + 'deg)');
+}
+
+
+// Select Mode
+function handleMediaItemClick() {
+    $('.media-item').click(function (event) {
+        if ($(this).hasClass('selected')) {
+            unselectMedia($(this));
+        } else {
+            selectMedia($(this));
+        }
+    });
+}
+
+function selectMedia(mediaItem) {
+    mediaItem.addClass('selected');
+    rotateByRandomAmount($('img', mediaItem));
+}
+
+function unselectMedia(mediaItem) {
+    mediaItem.removeClass('selected');
+    $('img', mediaItem).css('transform', 'rotate(0deg)');
+}
+
+
+// Unused Functions
+function checkIfAnyMediaItemsSelected() {
+    return $('.media-item.selected').length > 0;
+}
+
+function hideOrShowUnselectButton() {
+    if (checkIfAnyMediaItemsSelected()) {
+        $('.tool__unselect-all').show();
+    } else {
+        $('.tool__unselect-all').hide();
+    }
+}
+
+function unselectAllMedia() {
+    mediaItem = $('.media-item');
+    unselectMedia(mediaItem);
+}
+
+function handleUnselectAllButton() {
+    $('.tool__unselect-all').click(function () {
+        unselectAllMedia();
+    });
+}
+
+function selectAllMedia() {
+    mediaItem = $('.media-item');
+    mediaItem.each(function (index, item) {
+        selectMedia($(item));
+    });
+}
+
+function handleSelectAllButton() {
+    $('.tool__select-all').click(function () {
+        selectAllMedia();
+    });
+}
