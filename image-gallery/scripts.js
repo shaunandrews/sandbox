@@ -24,9 +24,7 @@ $(document).ready(function () {
         }
     });
 
-    // renderMediaItemDetails(media[1]);
-    // toggleSidebar('edit');
-
+    // renderMediaItemDetails(getMediaByID(0));
 });
 
 // Defines a fake collection of media items, right now
@@ -72,28 +70,46 @@ function renderMediaItems(media) {
     }
 }
 
-function setView(view = "grid") {
+// Toggle Select Mode
+function enableSelectMode() {
+    $("body").addClass("is-select-mode");
+    var template = $("#template__top-bar__selecting").html();
+    var header = Mustache.render(template);
+    $("#top-bar").replaceWith(header);
+}
+
+function disableSelectMode() {
+    $("body").removeClass("is-select-mode");
+    var template = $("#template__top-bar").html();
+    var header = Mustache.render(template);
+    $("#top-bar").replaceWith(header);
+}
+
+// View Controls
+function changeView(view = "grid") {
+    $(".view-type-option").removeClass("checked");
+
     if (view === "grid") {
+        $("#view-type-grid").addClass("checked");
         $("#media").removeClass("is-list-view");
         $("#media").addClass("is-grid-view");
     } else if (view === "list") {
+        $("#view-type-list").addClass("checked");
         $("#media").removeClass("is-grid-view");
         $("#media").addClass("is-list-view");
     }
 }
 
 // Thumbnail Slider
-function changeMediaItemWidth(width) {
+function setGridSize() {
+    var size = $("#grid-size-slider").val(),
+        width = changeMediaItemWidth("calc(" + size + "% - 12px");
     $(".media-item").css("width", width);
 }
 
-function getThumbnailSliderValue() {
-    return $("#thumbnail-slider").val();
-}
-
-function setThumbnailSize() {
-    var size = getThumbnailSliderValue();
-    changeMediaItemWidth("calc(" + size + "% - 12px");
+// View Settings {
+function toggleSettings() {
+    $("#view-settings").toggleClass("toggled");
 }
 
 

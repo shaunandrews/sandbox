@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Media</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb@7.3.1/dist/pouchdb.min.js"></script>
+
+    <script src="./scripts.js"></script>
+    <!-- <script src="database.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+
+<body>
+    <header id="top-bar">
+        <h1>Media</h1>
+
+        <!-- A button to enable select mode -->
+        <button id="select-mode" onclick="enableSelectMode()">
+            Select
+        </button>
+
+        <!-- Two radio buttons to choose between a grid or list view -->
+        <div id="view-type">
+            <div class="view-type-option checked" id="view-type-list">
+                <input type="radio" name="view-type" value="list" onchange="changeView('list')" checked>
+                <label for="view-type-list">List view</label>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="44" height="44" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="4" width="16" height="6" rx="2" />
+                    <rect x="4" y="14" width="16" height="6" rx="2" />
+                </svg>
+            </div>
+
+            <div class="view-type-option" id="view-type-grid">
+                <input type="radio" name="view-type" value="grid" onchange="changeView('grid')">
+                <label for="view-type-grid">Grid view</label>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="44" height="44" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="4" width="6" height="6" rx="1" />
+                    <rect x="14" y="4" width="6" height="6" rx="1" />
+                    <rect x="4" y="14" width="6" height="6" rx="1" />
+                    <rect x="14" y="14" width="6" height="6" rx="1" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- <input id="grid-size-slider" type="range" min="10" max="50" value="25" oninput="setGridSize()"> -->
+
+        <!-- An icon to open a settings menu -->
+        <div id="view-settings">
+            <button id="view-settings__button" onclick="toggleSettings()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="44" height="44" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="8" width="4" height="4" />
+                    <line x1="6" y1="4" x2="6" y2="8" />
+                    <line x1="6" y1="12" x2="6" y2="20" />
+                    <rect x="10" y="14" width="4" height="4" />
+                    <line x1="12" y1="4" x2="12" y2="14" />
+                    <line x1="12" y1="18" x2="12" y2="20" />
+                    <rect x="16" y="5" width="4" height="4" />
+                    <line x1="18" y1="4" x2="18" y2="5" />
+                    <line x1="18" y1="9" x2="18" y2="20" />
+                </svg>
+            </button>
+            <div id="view-settings__menu">
+                <ul>
+                    <li>
+                        <h3>Grid Size</h3>
+                        <select>
+                            <option>Small</option>
+                            <option>Medium</option>
+                            <option>Large</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- <section id="folders">
+        <h2>Folders</h2>
+        <ol id="folders-list">
+            <li class="folder">
+                <div class="folder__thumbnail">
+                    <img src="library/4.jpeg" />
+                    <img src="library/8.jpeg" />
+                    <img src="library/14.jpeg" />
+                    <img src="library/1.jpeg" />
+                </div>
+                <h3>Travel</h3>
+            </li>
+            <li class="folder">
+                <h3>Family</h3>
+            </li>
+            <li class="folder">
+                <h3>Holidays</h3>
+            </li>
+        </ol>
+    </section> -->
+
+    <section id="media" class="is-grid-view"></section>
+</body>
+
+<template id="template__top-bar">
+    <header id="top-bar">
+        <h1>Media</h1>
+
+        <!-- A button to enable select mode -->
+        <button id="select-mode" onclick="enableSelectMode()">
+            Select
+        </button>
+
+        <!-- Two radio buttons to choose between a grid or list view -->
+        <div id="view-type">
+            <div class="view-type-option checked" id="view-type-list">
+                <input type="radio" name="view-type" value="list" onchange="changeView('list')" checked>
+                <label for="view-type-list">List view</label>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="44" height="44" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="4" width="16" height="6" rx="2" />
+                    <rect x="4" y="14" width="16" height="6" rx="2" />
+                </svg>
+            </div>
+
+            <div class="view-type-option" id="view-type-grid">
+                <input type="radio" name="view-type" value="grid" onchange="changeView('grid')">
+                <label for="view-type-grid">Grid view</label>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="44" height="44" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="4" width="6" height="6" rx="1" />
+                    <rect x="14" y="4" width="6" height="6" rx="1" />
+                    <rect x="4" y="14" width="6" height="6" rx="1" />
+                    <rect x="14" y="14" width="6" height="6" rx="1" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- <input id="grid-size-slider" type="range" min="10" max="50" value="25" oninput="setGridSize()"> -->
+
+        <!-- An icon to open a settings menu -->
+        <div id="view-settings">
+            <button id="view-settings__button" onclick="toggleSettings()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="44" height="44" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="8" width="4" height="4" />
+                    <line x1="6" y1="4" x2="6" y2="8" />
+                    <line x1="6" y1="12" x2="6" y2="20" />
+                    <rect x="10" y="14" width="4" height="4" />
+                    <line x1="12" y1="4" x2="12" y2="14" />
+                    <line x1="12" y1="18" x2="12" y2="20" />
+                    <rect x="16" y="5" width="4" height="4" />
+                    <line x1="18" y1="4" x2="18" y2="5" />
+                    <line x1="18" y1="9" x2="18" y2="20" />
+                </svg>
+            </button>
+            <div id="view-settings__menu">
+                <ul>
+                    <li>
+                        <h3>Grid Size</h3>
+                        <select>
+                            <option>Small</option>
+                            <option>Medium</option>
+                            <option>Large</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+</template>
+
+<template id="template__top-bar__selecting">
+    <header id="top-bar__selecting">
+        <button id="select-mode-header__cancel" onclick="disableSelectMode()">
+            Cancel
+        </button>
+        <button id="select-mode-header__delete" onclick="deleteSelected()">
+            Delete
+        </button>
+    </header>
+</template>
+
+<template id="template__media-item">
+    <div class="media-item" id="media-item-{{ id }}" data-id="{{ id }}">
+        <div class="media-item__preview">
+            <div class="media-item__image">
+                <img src="{{ src }}" height="200" />
+            </div>
+        </div>
+        <div class="media-item__description">
+            <h3>{{ title }}</h3>
+            <p>A brief description of the media item.</p>
+            <ul class="description__technicals">
+                <li>Dec 25, 2000</li>
+                <li>1200 x 800</li>
+                <li>238 kb</li>
+            </ul>
+        </div>
+        <div class="media-item__actions">
+            <button class="link">Edit</button>
+            <button class="link">Copy URL</button>
+            <button class="link">Delete</button>
+        </div>
+    </div>
+</template>
+
+<template id="template__media-details">
+    <div id="media-details">
+        <header id="media-details__header">
+            <button class="media-details__close tertiary" onclick="closeDetails()">Close</button>
+
+            <div id="media-details__navigation">
+                <button class="media-details__previous tertiary" onclick="previousMedia()">&lt;</button>
+                <button class="media-details__next tertiary" onclick="nextMedia()">&gt;</button>
+            </div>
+
+            <ul id="media-details__tools">
+                <li class="tool" id="tools__info" onclick="toggleSidebar('info')">
+                    <span class="tool-label">Info</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="tool-icon" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                        <rect x="4" y="4" width="16" height="16" rx="2" />
+                        <polyline points="11 12 12 12 12 16 13 16" />
+                    </svg>
+                </li>
+                <li id="tools__edit">
+                    <button class="primary" onclick="toggleSidebar('edit')">Edit</button>
+                </li>
+            </ul>
+        </header>
+
+        <section id="media-details__main">
+            <section id="media-details__preview">
+                <div id="media-details__image">
+                    <img src="{{ src }}" />
+                </div>
+            </section>
+            <aside id="media-details__sidebar"></aside>
+        </section>
+
+        <div id="media-details__description">
+            <h1>{{ title }}</h1>
+            <p>This is a brief description of the image.</p>
+        </div>
+    </div>
+</template>
+
+<template id="template__media-info">
+    <dl class="sidebar__container">
+        <dt>Dimensions</dt>
+        <dd>1200 x 800</dd>
+        <dt>File Size</dt>
+        <dd>238 kb</dd>
+        <dt>File Name</dt>
+        <dd>image-01.jpeg</dd>
+        <dt>Uploaded</dt>
+        <dd>Dec 25, 2001</dd>
+        <dt>Tags</dt>
+        <dd>Ocean, Drone, Photography</dd>
+    </dl>
+</template>
+
+<template id="template__media-edit">
+    <div id="media-editor" class="sidebar__container">
+        <div>
+            <label for="resize-slider">Resize</label>
+            <input type="range" name="resize-slider" min="0" max="100" value="0">
+        </div>
+
+        <div>
+            <label for="rotate-stepper">Rotate</label>
+            <input type="number" name="rotate-stepper" min="-360" max="360" value="0">
+        </div>
+
+        <div>
+            <label for="flip">Flip</label>
+            <div>
+                <button class="tertiary" onclick="flipImage('horizontal')">Horizontal</button>
+                <button class="tertiary" onclick="flipImage('vertical')">Vertical</button>
+            </div>
+        </div>
+
+        <hr />
+
+        <h3>Cropping</h3>
+        <div>
+            <label for="aspect-ratio">Aspect Ratio</label>
+            <div>
+                <button class="tertiary" onclick="setAspectRatio('1:1')">1:1</button>
+                <button class="tertiary" onclick="setAspectRatio('4:3')">4:3</button>
+                <button class="tertiary" onclick="setAspectRatio('16:9')">16:9</button>
+                <button class="tertiary" onclick="setAspectRatio('3:2')">3:2</button>
+            </div>
+        </div>
+
+        <div>
+            <label for="crop-slider">Crop</label>
+            <input type="range" name="crop-slider" min="0" max="100" value="0">
+        </div>
+
+        <hr />
+
+        <h3>Color</h3>
+        <div>
+            <label for="brightness-slider">Brightness</label>
+            <input type="range" name="brightness-slider" min="0" max="100" value="0">
+        </div>
+
+        <div>
+            <label for="contrast-slider">Contrast</label>
+            <input type="range" name="contrast-slider" min="0" max="100" value="0">
+        </div>
+
+        <div>
+            <label for="saturation-slider">Saturation</label>
+            <input type="range" name="saturation-slider" min="0" max="100" value="0">
+        </div>
+
+        <div>
+            <label for="hue-slider">Hue</label>
+            <input type="range" name="hue-slider" min="0" max="100" value="0">
+        </div>
+
+        <div>
+            <label for="opacity-slider">Opacity</label>
+            <input type="range" name="opacity-slider" min="0" max="100" value="0">
+        </div>
+
+        <div>
+            <label for="tint">Tint</label>
+            <input type="color" name="tint" />
+        </div>
+    </div>
+</template>
+
+</html>

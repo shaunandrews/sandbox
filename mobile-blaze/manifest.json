@@ -1,0 +1,9 @@
+{
+    "name": "Blaze",
+    "short_name": "Blaze",
+    "start_url": "http://127.0.0.1:5500/mobile-blaze/index.html",
+    "display": "standalone",
+    "icons": [
+        {}
+    ]
+}

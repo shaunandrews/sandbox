@@ -1,0 +1,192 @@
+/* CSS color variables */
+:root {
+    --color-light: rgb(255, 255, 255);
+    --color-light-opacity-1: rgba(255, 255, 255, 0.5);
+    --color-light-opacity-2: rgba(255, 255, 255, 0.25);
+    --color-light-opacity-3: rgba(255, 255, 255, 0.1);
+    --color-dark: rgb(0, 0, 0);
+    --color-dark-opacity-1: rgba(0, 0, 0, 0.5);
+    --color-dark-opacity-2: rgba(0, 0, 0, 0.25);
+    --color-dark-opacity-3: rgba(0, 0, 0, 0.1);
+    --color-accent: rgb(0, 0, 255);
+
+    --color-grey-1: rgb(68, 68, 68);
+    --color-grey-2: rgb(102, 102, 102);
+    --color-grey-3: rgb(136, 136, 136);
+    --color-grey-4: rgb(170, 170, 170);
+    --color-grey-5: rgb(204, 204, 204);
+    --color-grey-6: rgb(238, 238, 238);
+}
+
+
+
+/* CSS Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    color: var(--color-accent);
+}
+
+svg {
+    display: block;
+}
+
+
+
+/* Defaults */
+body {
+    font-family: sans-serif;
+    font-size: 15px;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    margin: 20px 50px;
+}
+
+
+
+/* Toolbar */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: flex-end;
+}
+
+.today-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.today-heading .app-title {
+    font-size: 18px;
+}
+
+.today-heading .app-date {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.today-heading .app-time {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.app-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.app-actions button {
+    color: var(--color-light);
+}
+
+.app-actions button svg {
+    height: 24px;
+    width: 24px;
+}
+
+
+
+/* Views */
+#views {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+}
+
+.view {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+}
+
+.view.primary {
+    flex-grow: 1;
+}
+
+.view.secondary {
+    display: none;
+    min-width: 300px;
+    background-color: var(--color-grey-6);
+}
+
+.view.secondary.show {
+    display: block;
+}
+
+
+
+/* Task Creator */
+.task-creator {
+    display: flex;
+    gap: 10px;
+}
+
+.task-creator input,
+.task-creator button {
+    font-size: 15px;
+}
+
+.task-creator input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--color-grey-6);
+    border: 1.5px solid transparent;
+}
+
+.task-creator input:focus {
+    outline: none;
+    background-color: var(--color-light);
+    border-color: var(--color-accent);
+}
+
+.task-creator button {
+    color: var(--color-light);
+    background-color: var(--color-accent);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.task-creator button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+
+/* Tasks List */
+.tasks-list ol.tasks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+/* Task */
+.task {
+    border-radius: 5px;
+    border: 1.5px solid transparent;
+}
+
+.task.is-selected {
+    border: 1.5px solid var(--color-accent);
+}

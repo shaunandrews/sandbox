@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="green">
+    <meta name="apple-mobile-web-app-title" content="Blaze">
+
+    <title>Blaze</title>
+    <link rel="manifest" href="./manifest.json">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb@7.3.1/dist/pouchdb.min.js"></script>
+    <script src="./scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+
+<body>
+    <section id="view">
+        <section id="view-content">
+            <header id="blaze-intro">
+                <svg width="75" height="75">
+                    <circle cx="37.5" cy="37.5" r="37.5" fill="url(#paint0_linear_280_4310)" />
+                    <path
+                        d="M23.0136 71H53.1824C66.9861 53.7008 63.0536 39.5 60.2405 32.8966C58.2824 28.3 49.1293 14.75 35.2052 8C35.2052 28.25 20.9483 28.25 14.7076 38.3238C8.46695 48.3976 13.7584 62.3108 23.0136 71Z"
+                        fill="url(#paint1_linear_280_4310)" />
+                    <path
+                        d="M33.6871 75C11.9602 55.5717 25.5058 39.4761 34.5587 33C28.2216 41.9046 30.9713 55.5718 39.1189 55.5718C49.9824 55.5718 44.5506 38.572 44.5506 38.572C44.5506 38.572 63.5617 55.5717 44.5506 75H33.6871Z"
+                        fill="white" />
+                    <defs>
+                        <linearGradient id="paint0_linear_280_4310" x1="37.5" y1="0" x2="37.5" y2="75"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#E94338" />
+                            <stop offset="1" stop-color="#FFB800" />
+                        </linearGradient>
+                        <linearGradient id="paint1_linear_280_4310" x1="37.5" y1="8" x2="37.5" y2="71"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FEB104" />
+                            <stop offset="1" stop-color="#FFB403" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <h1>Let Blaze ignite your traffic</h1>
+            </header>
+
+            <section id="blaze-details">
+                <div id="total-spend">
+                    <h2>$<span id="total-spend__budget">70</span> over <span id="total-spend__duration">14</span> days
+                    </h2>
+                    <p>Total spend</p>
+                </div>
+                <div id="reach">
+                    <h3 id="estimated-reach">1,150 - 19,000</h3>
+                    <p>Estimate reach</p>
+                </div>
+            </section>
+
+            <section id="blaze-options">
+                <section id="budget">
+
+                    <input type="range" id="budget__input" name="budget" min="1" max="20" value="10"
+                        oninput="setBudget()" onchange="hideLabel()">
+                    <label>Daily budget</label>
+                    <p class="range-value" id="budget-value">10</p>
+                </section>
+                <section id="duration">
+
+                    <input type="range" id="duration__input" name="duration" min="1" max="14" value="5"
+                        oninput="setDuration()" onchange="hideLabel()">
+                    <label>Campaign length</label>
+                    <p class="range-value" id="duration-value">5</p>
+                </section>
+            </section>
+        </section>
+
+        <section id="view-footer">
+            <button>Continue to Payment</button>
+            <small>Your campaign will start immediately after payment.</small>
+        </section>
+    </section>
+</body>
+
+</html>
