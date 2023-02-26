@@ -15,19 +15,19 @@ function App() {
         });
 
         // Add event listener to clear selected task when clicking outside of the task list
-        // document.addEventListener('click', handleClickOutside);
+        document.addEventListener('click', handleClickOutside);
 
         // Cleanup the event listener
-        // return () => {
-        //     document.removeEventListener('click', handleClickOutside);
-        // };
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
     }, []);
 
-    // function handleClickOutside(event) {
-    //     if (!event.target.closest('.task')) {
-    //         setSelectedTaskId(null);
-    //     }
-    // }
+    function handleClickOutside(event) {
+        if (!event.target.closest('.task')) {
+            setSelectedTask(null);
+        }
+    }
 
     function toggleSecondary() {
         setIsSecondaryViewDisplayed(!isSecondaryViewDisplayed);
@@ -132,7 +132,7 @@ function App() {
                 {/* The Secondary view is hidden by default, but can be opened with the app-actions */}
                 <div className={`view secondary ${isSecondaryViewDisplayed ? 'show' : 'hide'}`}>
                     <h2>Details</h2>
-                    
+
                 </div>
             </div>
         </div>
