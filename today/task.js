@@ -1,5 +1,11 @@
 function Task(props) {
-    const { onComplete, onIncomplete, onDelete } = props;
+    const {
+        onComplete,
+        onIncomplete,
+        onDelete,
+        onSelect,
+        isSelected,
+    } = props;
 
     function completeTask() {
         // Call a function passed down through props to complete the task with this ID
@@ -16,8 +22,25 @@ function Task(props) {
         onDelete(props.id);
     }
 
+    function selectTask() {
+        // Call a function passed down through props to select the task with this ID
+        onSelect(props);
+    }
+
     return (
-        <div className={`task ${props.status}`} tabindex="0">
+        <div
+            className={`
+                task
+                ${props.status}
+                ${isSelected ? 'is-selected' : ''}
+            `}
+            onClick={selectTask}
+        >
+            {/* Show if the task is selected */}
+            {props.selected && (
+                <p>selected</p>
+            )}
+
             <div className="task-status">
                 {props.status === 'incomplete' && (
                     <button onClick={completeTask}>
