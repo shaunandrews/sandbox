@@ -53,7 +53,7 @@ function App() {
         setTasks([...tasks, task]);
     }
 
-    function completeTask(id) {
+    function updateTaskStatus(id, status) {
         // Find the task with the specified ID
         const taskIndex = tasks.findIndex((task) => task.id === id);
 
@@ -63,34 +63,22 @@ function App() {
         // Update the status of the task at the specified index
         updatedTasks[taskIndex] = {
             ...updatedTasks[taskIndex],
-            status: "complete",
+            status,
         };
 
         // Update the task in the database
-        db.tasks.update(id, { status: "complete" });
+        db.tasks.update(id, { status });
 
         // Update the task in the state variable
         setTasks(updatedTasks);
-    }
 
-    function incompleteTask(id) {
-        // Find the task with the specified ID
-        const taskIndex = tasks.findIndex((task) => task.id === id);
-
-        // Create a new copy of the tasks array
-        const updatedTasks = [...tasks];
-
-        // Update the status of the task at the specified index
-        updatedTasks[taskIndex] = {
-            ...updatedTasks[taskIndex],
-            status: "incomplete",
-        };
-
-        // Update the task in the database
-        db.tasks.update(id, { status: "incomplete" });
-
-        // Update the task in the state variable
-        setTasks(updatedTasks);
+        // Update the selected task if it has the same ID
+        if (selectedTask && selectedTask.id === id) {
+            setSelectedTask({
+                ...selectedTask,
+                status,
+            });
+        }
     }
 
     function deleteTask(id) {
@@ -135,8 +123,8 @@ function App() {
                     <TasksList
                         tasks={tasks}
                         selectedTask={selectedTask}
-                        onComplete={completeTask}
-                        onIncomplete={incompleteTask}
+                        onComplete={(id) => updateTaskStatus(id, 'complete')}
+                        onIncomplete={(id) => updateTaskStatus(id, 'incomplete')}
                         onDelete={deleteTask}
                         onSelect={selectTask}
                     />
