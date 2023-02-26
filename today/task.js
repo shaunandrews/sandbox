@@ -1,9 +1,14 @@
 function Task(props) {
-    const { onComplete, onDelete } = props;
+    const { onComplete, onIncomplete, onDelete } = props;
 
     function completeTask() {
         // Call a function passed down through props to complete the task with this ID
         onComplete(props.id);
+    }
+
+    function incompleteTask() {
+        // Call a function passed down through props to complete the task with this ID
+        onIncomplete(props.id);
     }
 
     function deleteTask() {
@@ -13,27 +18,24 @@ function Task(props) {
 
     return (
         // <div className={isSelected ? 'task is-selected' : 'task'} onClick={onClick}>
-        <div className='task'>
-            <div className="task-description">
-                <h3>{props.description}</h3>
-            </div>
-            <div className="task-created">
-                <h4>{props.created}</h4>
-            </div>
-            <div className="task-status">
-                <p>{props.status}</p>
-            </div>
-            <div className="task-notes" dangerouslySetInnerHTML={{ __html: props.notes }} />
-            <div className="task-actions">
-                {/* Only show the button if props.status is 'incomplete' */}
+        <div className={`task ${props.status}`}>
+            <div class="task-status">
                 {props.status === 'incomplete' && (
                     <button onClick={completeTask}>
-                        <Icon name="complete" />
-                    </button>  
+                        <Icon name="incomplete" />
+                    </button>
                 )}
-                <button>
-                    <Icon name="edit" />
-                </button>
+                {props.status === 'complete' && (
+                    <button onClick={incompleteTask}>
+                        <Icon name="complete" />
+                    </button>
+                )}
+            </div>
+            <h3 className="task-description">{props.description}</h3>
+            <h4 className="task-created">{props.created}</h4>
+            <div className="task-notes" dangerouslySetInnerHTML={{ __html: props.notes }} />
+
+            <div className="task-actions">
                 <button onClick={deleteTask}>
                     <Icon name="delete" />
                 </button>

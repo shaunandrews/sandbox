@@ -61,6 +61,26 @@ function App() {
         setTasks(updatedTasks);
     }
 
+    function incompleteTask(id) {
+        // Find the task with the specified ID
+        const taskIndex = tasks.findIndex((task) => task.id === id);
+
+        // Create a new copy of the tasks array
+        const updatedTasks = [...tasks];
+
+        // Update the status of the task at the specified index
+        updatedTasks[taskIndex] = {
+            ...updatedTasks[taskIndex],
+            status: "incomplete",
+        };
+
+        // Update the task in the database
+        db.tasks.update(id, { status: "incomplete" });
+
+        // Update the task in the state variable
+        setTasks(updatedTasks);
+    }
+
     function deleteTask(id) {
         // Filter out the task with the specified ID
         const filteredTasks = tasks.filter((task) => task.id !== id);
@@ -98,6 +118,7 @@ function App() {
                     <TasksList
                         tasks={tasks}
                         onComplete={completeTask}
+                        onIncomplete={incompleteTask}
                         onDelete={deleteTask}
                     />
                 </div>

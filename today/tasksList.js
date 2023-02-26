@@ -1,8 +1,13 @@
-function TasksList({ tasks, onComplete, onDelete }) {
+function TasksList({ tasks, onComplete, onIncomplete, onDelete }) {
 
     function onTaskComplete(id) {
         // Call a function passed down through props to complete the task with this ID
         onComplete(id);
+    }
+
+    function onTaskIncomplete(id) {
+        // Call a function passed down through props to complete the task with this ID
+        onIncomplete(id);
     }
 
     function onTaskDelete(id) {
@@ -28,6 +33,7 @@ function TasksList({ tasks, onComplete, onDelete }) {
                             // isSelected={task.id === selectedTaskId}
                             // onClick={() => selectTask(task.id)}
                             onComplete={onTaskComplete}
+                            onIncomplete={onTaskIncomplete}
                             onDelete={onTaskDelete}
                         />
                     </li>

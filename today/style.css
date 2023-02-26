@@ -182,9 +182,49 @@ body {
 
 
 /* Task */
+/* Resting State */
 .task {
     border-radius: 5px;
     border: 1.5px solid transparent;
+    display: flex;
+    gap: 10px;
+}
+
+.task-status {}
+
+.task-status button {}
+
+.task-status svg {
+    height: 24px;
+    width: 24px;
+}
+
+.task-description {
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.task-created {
+    display: none;
+}
+
+.task-actions {
+    opacity: 0;
+}
+
+/* Hover State */
+.task:hover {}
+
+.task:hover .task-actions {
+    opacity: 1;
+}
+
+/* Completed Task */
+.task.complete {}
+
+.task.complete .task-description {
+    text-decoration: line-through;
+    font-style: italic;
 }
 
 .task.is-selected {
