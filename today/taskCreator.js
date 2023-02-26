@@ -1,6 +1,7 @@
 function TaskCreator({ onAdd }) {
     const [newTask, setNewTask] = useState('');
     const isInputEmpty = newTask.trim() === '';
+    const [isFocused, setIsFocused] = useState(false);
 
     function addTask() {
         const task = {
@@ -16,8 +17,26 @@ function TaskCreator({ onAdd }) {
         setNewTask('')
     }
 
+    function setFocus() {
+        // Set the focus to the input field
+        document.querySelector('.task-creator input').focus();
+
+        // Set the focus state to true
+        setIsFocused(true);
+    }
+
+    function unsetFocus() {
+        // Set the focus state to false
+        setIsFocused(false);
+    }
+
     return (
-        <form className="task-creator">
+        // a form element with a class of task-creator and the focus state
+        <form
+            className={`task-creator ${isFocused ? 'is-focused' : ''}`} onClick={setFocus}
+            onBlur={unsetFocus}
+        >
+            <Icon name="incomplete" />
             <input
                 type="text"
                 placeholder="Add to your day..."

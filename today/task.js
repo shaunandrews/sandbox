@@ -17,9 +17,8 @@ function Task(props) {
     }
 
     return (
-        // <div className={isSelected ? 'task is-selected' : 'task'} onClick={onClick}>
         <div className={`task ${props.status}`}>
-            <div class="task-status">
+            <div className="task-status">
                 {props.status === 'incomplete' && (
                     <button onClick={completeTask}>
                         <Icon name="incomplete" />
