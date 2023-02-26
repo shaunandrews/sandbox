@@ -33,6 +33,14 @@ function App() {
         setIsSecondaryViewDisplayed(!isSecondaryViewDisplayed);
     }
 
+    function addTask(task) {
+        // Add the task to the database
+        db.tasks.add(task);
+
+        // Add the task to the state variable
+        setTasks([...tasks, task]);
+    }
+
     function completeTask(id) {
         // Find the task with the specified ID
         const task = tasks.find((task) => task.id === id);
@@ -63,23 +71,23 @@ function App() {
                     <h1 className="app-title">Today.</h1>
                     <TodayNow />
                 </div>
-                {/* <div className="app-actions">
+                <div className="app-actions">
                     <button onClick={toggleSecondary}>
                         <Icon name="sidebar" />
                     </button>
                     <button>
                         <Icon name="menu" />
                     </button>
-                </div> */}
+                </div>
             </div>
 
             <div id="views">
                 <div className="view primary">
-                    {/* Render a form to add new tasks */}
-                    {/* <TaskCreator
+                    <TaskCreator
                         tasks={tasks}
                         setTasks={setTasks}
-                    /> */}
+                        onAdd={addTask}
+                    />
 
                     <TasksList
                         tasks={tasks}

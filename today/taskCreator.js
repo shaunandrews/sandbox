@@ -1,4 +1,4 @@
-function TaskCreator({ tasks, setTasks }) {
+function TaskCreator({ onAdd }) {
     const [newTask, setNewTask] = useState('');
     const isInputEmpty = newTask.trim() === '';
 
@@ -9,21 +9,20 @@ function TaskCreator({ tasks, setTasks }) {
             status: 'incomplete'
         };
 
-        // Add the new task to the state variable and also save it to the database
-        setTasks([...tasks, task]);
-        db.tasks.add(task);
+        // Call a function passed down through props to add the new task
+        onAdd(task);
 
         // Clear the input field
-        setNewTask('');
+        setNewTask('')
     }
 
     return (
-        <form className="task-creator" onSubmit={addTask}>
+        <form className="task-creator">
             <input
                 type="text"
                 placeholder="Add to your day..."
                 value={newTask}
-                onFocus={() => selectTask(null)}
+                onChange={(e) => setNewTask(e.target.value)}
             />
             <button onClick={addTask} disabled={isInputEmpty}>Add</button>
         </form>

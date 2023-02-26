@@ -5,7 +5,7 @@ function TasksList({ tasks, onComplete, onDelete }) {
         onComplete(id);
     }
 
-    function onTaskDelete() {
+    function onTaskDelete(id) {
         // Call a function passed down through props to delete the task with this ID
         onDelete(id);
     }
@@ -15,9 +15,9 @@ function TasksList({ tasks, onComplete, onDelete }) {
             {/* Render a list of tasks */}
             <ol className="tasks">
                 {tasks.map((task) => (
-                    <li key={task.id}>
+                    <li key={`li-${task.id}`}>
                         <Task
-                            key={task.id}
+                            key={`task-${task.id}`}
                             id={task.id}
                             description={task.description}
                             status={task.status}
