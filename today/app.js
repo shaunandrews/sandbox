@@ -43,16 +43,22 @@ function App() {
 
     function completeTask(id) {
         // Find the task with the specified ID
-        const task = tasks.find((task) => task.id === id);
+        const taskIndex = tasks.findIndex((task) => task.id === id);
 
-        // Update the status of the task
-        task.status = 'complete';
+        // Create a new copy of the tasks array
+        const updatedTasks = [...tasks];
+
+        // Update the status of the task at the specified index
+        updatedTasks[taskIndex] = {
+            ...updatedTasks[taskIndex],
+            status: "complete",
+        };
 
         // Update the task in the database
-        db.tasks.update(id, task);
+        db.tasks.update(id, { status: "complete" });
 
         // Update the task in the state variable
-        setTasks([...tasks]);
+        setTasks(updatedTasks);
     }
 
     function deleteTask(id) {
