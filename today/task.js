@@ -17,7 +17,7 @@ function Task(props) {
     }
 
     return (
-        <div className={`task ${props.status}`}>
+        <div className={`task ${props.status}`} tabindex="0">
             <div className="task-status">
                 {props.status === 'incomplete' && (
                     <button onClick={completeTask}>
