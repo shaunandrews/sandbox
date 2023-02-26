@@ -1,18 +1,19 @@
 function Task(props) {
-    const { task, isSelected, onClick, onComplete, onDelete } = props;
+    const { onComplete, onDelete } = props;
 
     function completeTask() {
         // Call a function passed down through props to complete the task with this ID
-        props.onComplete(props.id);
+        onComplete(props.id);
     }
 
     function deleteTask() {
         // Call a function passed down through props to delete the task with this ID
-        props.onDelete(props.id);
+        onDelete(props.id);
     }
 
     return (
-        <div className={isSelected ? 'task is-selected' : 'task'} onClick={onClick}>
+        // <div className={isSelected ? 'task is-selected' : 'task'} onClick={onClick}>
+        <div className='task'>
             <div className="task-description">
                 <h3>{props.description}</h3>
             </div>
@@ -30,9 +31,9 @@ function Task(props) {
                         <Icon name="complete" />
                     </button>  
                 )}
-                {/* <button>
+                <button>
                     <Icon name="edit" />
-                </button> */}
+                </button>
                 <button onClick={deleteTask}>
                     <Icon name="delete" />
                 </button>
