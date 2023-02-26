@@ -3,6 +3,18 @@ db.version(1).stores({
     tasks: "++id, description, status, notes, created, updated",
 });
 
+function TaskDetails({ task }) {
+    return (
+        <div className="task-details">
+            <h2>{task.description}</h2>
+            <p>{task.created}</p>
+            <p>{task.updated}</p>
+            <p>{task.status}</p>
+            <p>{task.notes}</p>
+        </div>
+    );
+}
+
 function App() {
     const [tasks, setTasks] = useState([]);
     const [selectedTask, setSelectedTask] = useState(null);
@@ -92,6 +104,7 @@ function App() {
 
     function selectTask(task) {
         setSelectedTask(task);
+        setIsSecondaryViewDisplayed(true);
     }
 
     return (
@@ -131,8 +144,8 @@ function App() {
 
                 {/* The Secondary view is hidden by default, but can be opened with the app-actions */}
                 <div className={`view secondary ${isSecondaryViewDisplayed ? 'show' : 'hide'}`}>
-                    <h2>Details</h2>
-
+                    {selectedTask && <TaskDetails task={selectedTask} />}
+                    {!selectedTask && <p>Select a task to view details</p>}
                 </div>
             </div>
         </div>

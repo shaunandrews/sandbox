@@ -7,14 +7,20 @@ function Task(props) {
         isSelected,
     } = props;
 
-    function completeTask() {
+    function completeTask(event) {
         // Call a function passed down through props to complete the task with this ID
         onComplete(props.id);
+
+        // Prevent the event from bubbling up to the task div
+        event.stopPropagation();
     }
 
-    function incompleteTask() {
+    function incompleteTask(event) {
         // Call a function passed down through props to complete the task with this ID
         onIncomplete(props.id);
+
+        // Prevent the event from bubbling up to the task div
+        event.stopPropagation();
     }
 
     function deleteTask() {
@@ -43,12 +49,12 @@ function Task(props) {
 
             <div className="task-status">
                 {props.status === 'incomplete' && (
-                    <button onClick={completeTask}>
+                    <button onClick={(event) => completeTask(event)}>
                         <Icon name="incomplete" />
                     </button>
                 )}
                 {props.status === 'complete' && (
-                    <button onClick={incompleteTask}>
+                    <button onClick={(event) => incompleteTask(event)}>
                         <Icon name="complete" />
                     </button>
                 )}
