@@ -1,7 +1,7 @@
 function TaskCreator({ onAdd }) {
     const [newTask, setNewTask] = useState('');
-    const isInputEmpty = newTask.trim() === '';
     const [isFocused, setIsFocused] = useState(false);
+    const isInputEmpty = newTask.trim() === '';
 
     function addTask() {
         const task = {
@@ -33,7 +33,8 @@ function TaskCreator({ onAdd }) {
     return (
         // a form element with a class of task-creator and the focus state
         <form
-            className={`task-creator ${isFocused ? 'is-focused' : ''}`} onClick={setFocus}
+            className={`task-creator ${isFocused ? 'is-focused' : ''}`}
+            onClick={setFocus}
             onBlur={unsetFocus}
         >
             <Icon name="incomplete" />

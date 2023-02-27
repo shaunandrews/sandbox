@@ -3,7 +3,15 @@ db.version(1).stores({
     tasks: "++id, description, status, notes, created, updated",
 });
 
-function TaskDetails({ task }) {
+function TaskDetails({ task, onUpdateTask }) {
+    const [newNote, setNewNote] = useState('');
+
+    function saveTaskNotes() {
+        onUpdateTask(task.id, {
+            notes: task.notes + newNote
+        });
+    }
+
     return (
         <div className="task-details">
             <h2>{task.description}</h2>
@@ -11,6 +19,16 @@ function TaskDetails({ task }) {
             <p>{task.updated}</p>
             <p>{task.status}</p>
             <p>{task.notes}</p>
+            <hr />
+            <textarea
+                name="notes"
+                id="notes"
+                cols="30"
+                rows="10"
+                value={newNote}
+                onChange={(e) => setNewNote(e.target.value)}
+            />
+            <button onClick={saveTaskNotes}>Save</button>
         </div>
     );
 }
@@ -26,13 +44,13 @@ function App() {
             setTasks(data);
         });
 
-        // Add event listener to clear selected task when clicking outside of the task list
-        document.addEventListener('click', handleClickOutside);
+        // // Add event listener to clear selected task when clicking outside of the task list
+        // document.addEventListener('click', handleClickOutside);
 
-        // Cleanup the event listener
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
+        // // Cleanup the event listener
+        // return () => {
+        //     document.removeEventListener('click', handleClickOutside);
+        // };
     }, []);
 
     function handleClickOutside(event) {
@@ -77,6 +95,23 @@ function App() {
             setSelectedTask({
                 ...selectedTask,
                 status,
+            });
+        }
+    }
+
+    function updateTask(id, updates) {
+        const taskIndex = tasks.findIndex((task) => task.id === id);
+        const updatedTasks = [...tasks];
+        updatedTasks[taskIndex] = {
+            ...updatedTasks[taskIndex],
+            ...updates,
+        };
+        setTasks(updatedTasks);
+        db.tasks.update(id, updates);
+        if (selectedTask && selectedTask.id === id) {
+            setSelectedTask({
+                ...selectedTask,
+                ...updates,
             });
         }
     }
@@ -132,8 +167,12 @@ function App() {
 
                 {/* The Secondary view is hidden by default, but can be opened with the app-actions */}
                 <div className={`view secondary ${isSecondaryViewDisplayed ? 'show' : 'hide'}`}>
-                    {selectedTask && <TaskDetails task={selectedTask} />}
-                    {!selectedTask && <p>Select a task to view details</p>}
+                    {selectedTask &&
+                        <TaskDetails
+                            task={selectedTask}
+                            onUpdateTask={(id, updates) => updateTask(id, updates)}
+                        />
+                    }
                 </div>
             </div>
         </div>

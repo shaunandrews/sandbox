@@ -59,9 +59,8 @@ function Task(props) {
                     </button>
                 )}
             </div>
+            
             <h3 className="task-description">{props.description}</h3>
-            <h4 className="task-created">{props.created}</h4>
-            <div className="task-notes" dangerouslySetInnerHTML={{ __html: props.notes }} />
 
             <div className="task-actions">
                 <button onClick={deleteTask}>
