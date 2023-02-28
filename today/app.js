@@ -3,42 +3,6 @@ db.version(1).stores({
     tasks: "++id, description, status, notes, created, updated",
 });
 
-function TaskDetails({ task, onUpdateTask }) {
-    const [newNote, setNewNote] = useState('');
-
-    function saveTaskNotes() {
-        onUpdateTask(task.id, {
-            notes: task.notes + newNote
-        });
-    }
-
-    function clearAllNotes() {
-        onUpdateTask(task.id, {
-            notes: ""
-        });
-    }
-
-    return (
-        <div className="task-details">
-            <div className="task-notes">
-                <p>{task.notes}</p>
-            </div>
-
-            <div className="note-creator">
-                <textarea
-                    value={newNote}
-                    onChange={(e) => setNewNote(e.target.value)}
-                />
-                <button onClick={saveTaskNotes}>Add note</button>
-                <button onClick={clearAllNotes}>Clear all notes</button>
-            </div>
-
-            {/* <p>{task.created}</p>
-            <p>{task.updated}</p>
-            <p>{task.status}</p> */}
-        </div>
-    );
-}
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -52,20 +16,24 @@ function App() {
             setSelectedTask(data[0]);
         });
 
-        // // Add event listener to clear selected task when clicking outside of the task list
-        // document.addEventListener('click', handleClickOutside);
+        // Add event listener to clear selected task when clicking outside of the task list
+        document.addEventListener('click', handleClickOutside);
 
-        // // Cleanup the event listener
-        // return () => {
-        //     document.removeEventListener('click', handleClickOutside);
-        // };
+        // Cleanup the event listener
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
     }, []);
 
     function handleClickOutside(event) {
-        if (!event.target.closest('.task')) {
+        const isTaskElement = event.target.closest('.task');
+        const isSecondaryViewElement = event.target.closest('.view.secondary');
+
+        if (!isTaskElement && !isSecondaryViewElement) {
             setSelectedTask(null);
         }
     }
+
 
     function toggleSecondary() {
         setIsSecondaryViewDisplayed(!isSecondaryViewDisplayed);
@@ -110,16 +78,16 @@ function App() {
     function updateTask(id, updates) {
         const taskIndex = tasks.findIndex((task) => task.id === id);
         const updatedTasks = [...tasks];
-        
+
         updatedTasks[taskIndex] = {
             ...updatedTasks[taskIndex],
             ...updates,
             updated: new Date().toLocaleString(),
         };
-        
+
         setTasks(updatedTasks);
         db.tasks.update(id, updates);
-        
+
         if (selectedTask && selectedTask.id === id) {
             setSelectedTask({
                 ...selectedTask,
