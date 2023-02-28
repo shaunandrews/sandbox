@@ -1,13 +1,16 @@
 /* CSS color variables */
 :root {
     --color-light: rgb(255, 255, 255);
-    --color-light-opacity-1: rgba(255, 255, 255, 0.5);
-    --color-light-opacity-2: rgba(255, 255, 255, 0.25);
-    --color-light-opacity-3: rgba(255, 255, 255, 0.1);
+    --color-light-opacity-0: rgba(255, 255, 255, 0.95);
+    --color-light-opacity-1: rgba(255, 255, 255, 0.9);
+    --color-light-opacity-2: rgba(255, 255, 255, 0.4);
+    --color-light-opacity-3: rgba(255, 255, 255, 0.2);
+
     --color-dark: rgb(0, 0, 0);
-    --color-dark-opacity-1: rgba(0, 0, 0, 0.5);
-    --color-dark-opacity-2: rgba(0, 0, 0, 0.25);
-    --color-dark-opacity-3: rgba(0, 0, 0, 0.1);
+    --color-dark-opacity-0: rgba(0, 0, 0, 0.9);
+    --color-dark-opacity-1: rgba(0, 0, 0, 0.8);
+    --color-dark-opacity-2: rgba(0, 0, 0, 0.4);
+    --color-dark-opacity-3: rgba(0, 0, 0, 0.2);
     --color-accent: rgb(0, 0, 255);
 
     --color-grey-1: rgb(68, 68, 68);
@@ -47,16 +50,19 @@ svg {
 
 /* Defaults */
 body {
+    min-height: calc(100vh - 40px);
     font-family: sans-serif;
     font-size: 15px;
     background-color: var(--color-dark);
+    /* background: url("./background.png") no-repeat center;
+    background-size: cover; */
     color: var(--color-light);
     margin: 20px;
 }
 
 @media (min-width: 640px) {
     body {
-        margin: 20px 50px;
+        /* margin: 20px 50px; */
     }
 }
 
@@ -108,9 +114,10 @@ body {
 
 /* Views */
 #views {
-    background-color: var(--color-light);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     color: var(--color-dark);
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
     display: flex;
 }
@@ -122,13 +129,14 @@ body {
 
 .view.primary {
     flex-grow: 1;
-    padding: 10px
+    padding: 10px;
+    background: var(--color-light-opacity-0);
 }
 
 .view.secondary {
     display: none;
-    min-width: 300px;
-    background-color: var(--color-grey-6);
+    width: 320px;
+    background: var(--color-light-opacity-1);
 }
 
 .view.secondary.show {
@@ -146,14 +154,15 @@ body {
     margin: 5px;
     border-radius: 5px;
     border: 1.5px solid transparent;
-    background-color: var(--color-grey-6);
+    /* background-color: var(--color-grey-6); */
+    /* background-color: var(--color-light); */
     cursor: text;
 }
 
 .task-creator:focus-within,
 .task-creator.is-focused {
-    border-color: var(--color-accent);
-    background-color: var(--color-light);
+    /* border-color: var(--color-accent); */
+    /* background-color: var(--color-light); */
 }
 
 .task-creator svg {
@@ -205,11 +214,10 @@ body {
 /* Task */
 /* Resting State */
 .task {
-    border-radius: 5px;
-    border: 1.5px solid transparent;
+    border-radius: 10px;
     display: flex;
     gap: 10px;
-    padding: 5px;
+    padding: 10px;
 }
 
 .task-status {}
@@ -256,5 +264,44 @@ body {
 .task:focus,
 .task.is-selected {
     outline: none;
-    border: 1.5px solid var(--color-accent);
+    background-color: var(--color-light);
+    box-shadow: 0 1px 3px var(--color-dark-opacity-3);
+}
+
+
+
+/* Task Details */
+.task-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.task-notes {
+    flex-grow: 1;
+    word-break: break-word;
+}
+
+.note-creator textarea {
+    display: block;
+    height: 50px;
+    padding: 5px 10px;
+    outline: none;
+    width: 100%;
+    background: var(--color-light);
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.note-creator button {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    background: var(--color-dark);
+    color: var(--color-light);
+    border-radius: 5px;
+    padding: 5px 10px;
 }

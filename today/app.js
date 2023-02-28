@@ -12,23 +12,30 @@ function TaskDetails({ task, onUpdateTask }) {
         });
     }
 
+    function clearAllNotes() {
+        onUpdateTask(task.id, {
+            notes: ""
+        });
+    }
+
     return (
         <div className="task-details">
-            <h2>{task.description}</h2>
-            <p>{task.created}</p>
+            <div className="task-notes">
+                <p>{task.notes}</p>
+            </div>
+
+            <div className="note-creator">
+                <textarea
+                    value={newNote}
+                    onChange={(e) => setNewNote(e.target.value)}
+                />
+                <button onClick={saveTaskNotes}>Add note</button>
+                <button onClick={clearAllNotes}>Clear all notes</button>
+            </div>
+
+            {/* <p>{task.created}</p>
             <p>{task.updated}</p>
-            <p>{task.status}</p>
-            <p>{task.notes}</p>
-            <hr />
-            <textarea
-                name="notes"
-                id="notes"
-                cols="30"
-                rows="10"
-                value={newNote}
-                onChange={(e) => setNewNote(e.target.value)}
-            />
-            <button onClick={saveTaskNotes}>Save</button>
+            <p>{task.status}</p> */}
         </div>
     );
 }
@@ -36,12 +43,13 @@ function TaskDetails({ task, onUpdateTask }) {
 function App() {
     const [tasks, setTasks] = useState([]);
     const [selectedTask, setSelectedTask] = useState(null);
-    const [isSecondaryViewDisplayed, setIsSecondaryViewDisplayed] = useState(false);
+    const [isSecondaryViewDisplayed, setIsSecondaryViewDisplayed] = useState(true);
 
     useEffect(() => {
         // Fetch the tasks from the database
         db.tasks.toArray().then((data) => {
             setTasks(data);
+            setSelectedTask(data[0]);
         });
 
         // // Add event listener to clear selected task when clicking outside of the task list
@@ -102,16 +110,21 @@ function App() {
     function updateTask(id, updates) {
         const taskIndex = tasks.findIndex((task) => task.id === id);
         const updatedTasks = [...tasks];
+        
         updatedTasks[taskIndex] = {
             ...updatedTasks[taskIndex],
             ...updates,
+            updated: new Date().toLocaleString(),
         };
+        
         setTasks(updatedTasks);
         db.tasks.update(id, updates);
+        
         if (selectedTask && selectedTask.id === id) {
             setSelectedTask({
                 ...selectedTask,
                 ...updates,
+                updated: new Date().toLocaleString(),
             });
         }
     }
@@ -149,12 +162,6 @@ function App() {
 
             <div id="views">
                 <div className="view primary">
-                    <TaskCreator
-                        tasks={tasks}
-                        setTasks={setTasks}
-                        onAdd={addTask}
-                    />
-
                     <TasksList
                         tasks={tasks}
                         selectedTask={selectedTask}
@@ -162,6 +169,11 @@ function App() {
                         onIncomplete={(id) => updateTaskStatus(id, 'incomplete')}
                         onDelete={deleteTask}
                         onSelect={selectTask}
+                    />
+                    <TaskCreator
+                        tasks={tasks}
+                        setTasks={setTasks}
+                        onAdd={addTask}
                     />
                 </div>
 
