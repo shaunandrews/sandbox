@@ -3,7 +3,7 @@ function TaskDetails({ task, onUpdateTask }) {
 
     function saveTaskNotes() {
         onUpdateTask(task.id, {
-            notes: task.notes + newNote
+            notes: task.notes + "\n---\n\n" + newNote
         });
     }
 
