@@ -4,7 +4,9 @@ function TasksList({
     onComplete,
     onIncomplete,
     onDelete,
-    onSelect }) {
+    onSelect,
+    updateTask,
+}) {
 
     function onTaskComplete(id) {
         // Call a function passed down through props to complete the task with this ID
@@ -45,6 +47,7 @@ function TasksList({
                             onIncomplete={onTaskIncomplete}
                             onDelete={onTaskDelete}
                             onSelect={onSelectTask}
+                            updateTask={updateTask}
                         />
                     </li>
                 ))}

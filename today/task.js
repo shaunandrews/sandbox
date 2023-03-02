@@ -5,6 +5,7 @@ function Task(props) {
         onDelete,
         onSelect,
         isSelected,
+        updateTask,
     } = props;
 
     function completeTask(event) {
@@ -59,8 +60,17 @@ function Task(props) {
                     </button>
                 )}
             </div>
-            
-            <h3 className="task-description">{props.description}</h3>
+
+            <div className="task-details">
+                <h3 className="task-description">{props.description}</h3>
+
+                {/* {isSelected && (
+                    <TaskDetails
+                        task={props}
+                        onUpdateTask={(id, updates) => updateTask(id, updates)}
+                    />
+                )} */}
+            </div>
 
             <div className="task-actions">
                 <button onClick={deleteTask}>

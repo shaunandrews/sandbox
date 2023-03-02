@@ -13,7 +13,7 @@ function App() {
         // Fetch the tasks from the database
         db.tasks.toArray().then((data) => {
             setTasks(data);
-            setSelectedTask(data[0]);
+            // setSelectedTask(data[0]);
         });
 
         // Add event listener to clear selected task when clicking outside of the task list
@@ -23,7 +23,7 @@ function App() {
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, []);
+    }, [selectedTask]);
 
     function handleClickOutside(event) {
         const isTaskElement = event.target.closest('.task');
@@ -33,7 +33,6 @@ function App() {
             setSelectedTask(null);
         }
     }
-
 
     function toggleSecondary() {
         setIsSecondaryViewDisplayed(!isSecondaryViewDisplayed);
@@ -137,6 +136,7 @@ function App() {
                         onIncomplete={(id) => updateTaskStatus(id, 'incomplete')}
                         onDelete={deleteTask}
                         onSelect={selectTask}
+                        updateTask={updateTask}
                     />
                     <TaskCreator
                         tasks={tasks}
@@ -146,14 +146,14 @@ function App() {
                 </div>
 
                 {/* The Secondary view is hidden by default, but can be opened with the app-actions */}
-                <div className={`view secondary ${isSecondaryViewDisplayed ? 'show' : 'hide'}`}>
+                {/* <div className={`view secondary ${isSecondaryViewDisplayed ? 'show' : 'hide'}`}>
                     {selectedTask &&
                         <TaskDetails
                             task={selectedTask}
                             onUpdateTask={(id, updates) => updateTask(id, updates)}
                         />
                     }
-                </div>
+                </div> */}
             </div>
         </div>
     );

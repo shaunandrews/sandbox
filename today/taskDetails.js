@@ -5,6 +5,7 @@ function TaskDetails({ task, onUpdateTask }) {
         onUpdateTask(task.id, {
             notes: task.notes + "\n---\n\n" + newNote
         });
+        setNewNote('');
     }
 
     function clearAllNotes() {
@@ -20,12 +21,14 @@ function TaskDetails({ task, onUpdateTask }) {
             </div>
 
             <div className="note-creator">
-                <textarea
+                <ExpandingTextarea
                     value={newNote}
-                    onChange={(e) => setNewNote(e.target.value)}
+                    onChange={(value) => setNewNote(value)}
+                    minHeight={"1em"}
+                    maxHeight={"300pm"}
                 />
                 <button onClick={saveTaskNotes}>Add note</button>
-                <button onClick={clearAllNotes}>Clear all notes</button>
+                {/* <button onClick={clearAllNotes}>Clear all notes</button> */}
             </div>
 
             {/* <p>{task.created}</p>
