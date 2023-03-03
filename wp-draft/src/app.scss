@@ -1,0 +1,33 @@
+.application {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    min-height: 100vh;
+}
+
+header {}
+
+main {
+    display: flex;
+    gap: 20px;
+}
+
+.drafts {
+    width: 280px;
+
+    li.draft {
+        padding: 10px;
+
+        &.is-selected {
+            background: blue;
+            color: white;
+        }
+    }
+}
+
+.canvas {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 20px;
+    background: white;
+}
