@@ -64,12 +64,10 @@ select {
     scroll-behavior: auto;
   }
   *,
-*::before,
-*::after {
-    -webkit-animation-duration: 0.01ms !important;
-            animation-duration: 0.01ms !important;
-    -webkit-animation-iteration-count: 1 !important;
-            animation-iteration-count: 1 !important;
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
@@ -89,7 +87,6 @@ body.no-scroll {
   gap: 10px;
   align-items: center;
   padding: 10px 20px;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   right: 0;
@@ -375,18 +372,7 @@ body.no-scroll {
 
 .media-item-clone {
   z-index: 1;
-  -webkit-animation: scaleOut 0.2s ease-in-out;
-          animation: scaleOut 0.2s ease-in-out;
-}
-
-@-webkit-keyframes scaleOut {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(2.5);
-  }
+  animation: scaleOut 0.2s ease-in-out;
 }
 
 @keyframes scaleOut {
@@ -396,16 +382,6 @@ body.no-scroll {
   100% {
     opacity: 0;
     transform: scale(2.5);
-  }
-}
-@-webkit-keyframes scaleIn {
-  0% {
-    opacity: 1;
-    transform: scale(0.98);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
   }
 }
 @keyframes scaleIn {
@@ -486,8 +462,7 @@ body.no-scroll {
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-animation: scaleIn 0.1s ease-in-out;
-          animation: scaleIn 0.1s ease-in-out;
+  animation: scaleIn 0.1s ease-in-out;
 }
 #media-details #media-details__preview #media-details__image img {
   max-height: calc(100vh - 80px - 110px);
