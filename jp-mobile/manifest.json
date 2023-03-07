@@ -1,0 +1,8 @@
+{
+    "name": "Jetpack",
+    "short_name": "Jetpack",
+    "start_url": "/jp-mobile/",
+    "display": "standalone",
+    "background_color": "rgba(255,255,255,0.9)",
+    "theme_color": "rgba(255,255,255,0.9)"
+}
