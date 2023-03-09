@@ -27,11 +27,6 @@ select,
 button {
     font-size: inherit;
     background: transparent;
-    border-radius: 5px;
-    border: 1px solid rgba(black, 0.25);
-}
-
-button {
-    padding: 5px 10px;
-    cursor: pointer;
+    border: none;
+    padding: 0;
 }

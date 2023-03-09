@@ -74,12 +74,7 @@ function CardHeader(props) {
     return (
         <header className="card-header">
             <h3>{props.title}</h3>
-            <button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                </svg>
-                <span className="visually-hidden">Options</span>
-            </button>
+            {props.optionsMenu && props.optionsMenu}
         </header>
     )
 }
@@ -119,6 +114,7 @@ function CurrentSite(props) {
                 icon={props.icon}
                 title={props.title}
                 url={props.url}
+                isCurrent={true}
             />
         </div>
     );
@@ -131,7 +127,10 @@ function Site(props) {
                 {props.icon}
             </div>
             <div className="site-details">
-                <h1 className="site-title">{props.title}</h1>
+                <div className="site-title">
+                    <h1>{props.title}</h1>
+                    {props.isCurrent && <Icon name="chevron-down" />}
+                </div>
                 <p className="site-url">{props.url}</p>
             </div>
         </div>
@@ -162,6 +161,14 @@ function SitesList() {
                 title="Automattic Design"
                 url="automattic.design"
             />
+            {/* Button to add a new site */}
+            <div className="add-site">
+                <Icon name="add" />
+                <label>
+                    <strong>Add a site</strong>
+                    <small>Create a new site or add an existing site.</small>
+                </label>
+            </div>
         </div>
     );
 }
@@ -213,7 +220,7 @@ function AccountView(props) {
 }
 
 function App() {
-    const [currentTab, setCurrentTab] = useState('tab-home');
+    const [currentTab, setCurrentTab] = useState('tab-reader');
     const [sitesSheet, setSitesSheet] = useState(false);
 
     function toggleSitesSheet() {

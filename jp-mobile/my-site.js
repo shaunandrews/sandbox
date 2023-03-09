@@ -47,50 +47,24 @@ function MySiteToday() {
     return (
         <div className="my-site__home">
             <Card className="card-stats">
-                <CardHeader title="Today's Stats" />
-                <StatsChart />
-                <hr />
+                <CardHeader
+                    title="Today's Stats"
+                    optionsMenu={(
+                        <DropdownMenu
+                            name="Options"
+                            icon="menu"
+                            showLabel={false}
+                            showChevron={false}
+                            options={[
+                                { label: 'Option 1' },
+                                { label: 'Option 2' },
+                                { label: 'Option 3' },
+                            ]}
+                        />
+                    )}
+                />
                 <StatsHighlights />
-
             </Card>
-
-            <div className="card card-domain">
-                <header className="card-header">
-                    <h3>Domain</h3>
-                    <Menu>
-                        <MenuButton>Options</MenuButton>
-                        <MenuContainer>
-                            <MenuOption
-                                label="Option 1"
-                                selected={true}
-                                onSelect={() => console.log('Option 1 selected')}
-                            />
-                            <MenuOption
-                                label="Option 2"
-                                selected={false}
-                                onSelect={() => console.log('Option 2 selected')}
-                            />
-                        </MenuContainer>
-                    </Menu>
-                </header>
-                <p>You site is viewable at the following domains:</p>
-                <p>sporadicthoughts.com</p>
-                <p>sporadicthoughts.wordpress.com</p>
-                <button>Add domain</button>
-            </div>
-
-            <div className="card card-share">
-                <header className="card-header">
-                    <h3>Share</h3>
-                    <button>Options</button>
-                </header>
-                <p>Share your site with your friends and followers!</p>
-                <div className="share-buttons">
-                    <button className="share-button share-button-facebook">Facebook</button>
-                    <button className="share-button share-button-twitter">Twitter</button>
-                    <button className="share-button share-button-link">Copy Link</button>
-                </div>
-            </div>
 
             <div className="card card-prompt">
                 <h3>Writing Prompt</h3>
@@ -123,6 +97,38 @@ function MySiteToday() {
                     </li>
                 </ol>
                 <button>New draft</button>
+            </div>
+
+            <div className="card card-domain">
+                <header className="card-header">
+                    <h3>Domain</h3>
+                    <DropdownMenu
+                        name="Options"
+                        icon="menu"
+                        showChevron={false}
+                        options={[
+                            { label: 'Option 1' },
+                            { label: 'Option 2' },
+                        ]}
+                    />
+                </header>
+                <p>You site is viewable at the following domains:</p>
+                <p>sporadicthoughts.com</p>
+                <p>sporadicthoughts.wordpress.com</p>
+                <button>Add domain</button>
+            </div>
+
+            <div className="card card-share">
+                <header className="card-header">
+                    <h3>Share</h3>
+                    <button>Options</button>
+                </header>
+                <p>Share your site with your friends and followers!</p>
+                <div className="share-buttons">
+                    <button className="share-button share-button-facebook">Facebook</button>
+                    <button className="share-button share-button-twitter">Twitter</button>
+                    <button className="share-button share-button-link">Copy Link</button>
+                </div>
             </div>
         </div>
     )
@@ -180,9 +186,6 @@ function MySiteView(props) {
                     url="sporadicthoughts.com"
                     switchSite={props.toggleSitesSheet}
                 />
-            </header>
-
-            <main className="view__content">
                 <SegmentedControl
                     options={[
                         { value: 'today', label: 'Today' },
@@ -191,7 +194,9 @@ function MySiteView(props) {
                     value={mySiteView}
                     onChange={handleMySiteViewChange}
                 />
+            </header>
 
+            <main className="view__content">
                 {mySiteView === 'today' && (
                     <MySiteToday />
                 )}
