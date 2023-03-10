@@ -43,9 +43,40 @@ function StatsChart() {
     )
 }
 
-function MySiteToday() {
+function QuickLink({ icon, label, data, onClick }) {
+    function handleClick(label) {
+        onClick(label);
+    }
+
+    return (
+        <div className="quick-link" onClick={() => handleClick(label)}>
+            <Icon name={icon} />
+            <label className="quick-link__label">{label}</label>
+        </div>
+    )
+}
+
+function MySiteToday({ toggleCommentsView }) {
+    function handleQuickLinkClick(label) {
+        if (label === 'Comments') {
+            toggleCommentsView(true);
+        }
+    }
+
     return (
         <div className="my-site__home">
+            <div className="quick-links">
+                <QuickLink icon="posts" label="Posts" data="82" />
+                <QuickLink icon="pages" label="Pages" data="12" />
+                <QuickLink
+                    icon="comment"
+                    label="Comments"
+                    data="3"
+                    onClick={handleQuickLinkClick}
+                />
+                <QuickLink icon="media" label="Media" data="1,392" />
+            </div>
+
             <Card className="todays-stats">
                 <CardHeader
                     title="Today's Stats"
@@ -137,18 +168,19 @@ function MySiteToday() {
                 </div>
             </Card>
 
-            <div className="card card-share">
-                <header className="card-header">
-                    <h3>Share</h3>
-                    <button>Options</button>
-                </header>
-                <p>Share your site with your friends and followers!</p>
-                <div className="share-buttons">
-                    <button className="share-button share-button-facebook">Facebook</button>
-                    <button className="share-button share-button-twitter">Twitter</button>
-                    <button className="share-button share-button-link">Copy Link</button>
+            <Card className="share">
+                <CardHeader
+                    title="Share"
+                />
+                <div className="card__content">
+                    <p>Share your site with your friends and followers!</p>
+                    <div className="share-buttons">
+                        <button className="share-button share-button-facebook">Facebook</button>
+                        <button className="share-button share-button-twitter">Twitter</button>
+                        <button className="share-button share-button-link">Copy Link</button>
+                    </div>
                 </div>
-            </div>
+            </Card>
         </div>
     )
 }
@@ -189,11 +221,93 @@ function MySiteMenu() {
     )
 }
 
+function CommentDetail() {
+    const [commentStatus, setCommentStatus] = useState('pending');
+
+    function changeStatus(status) {
+        setCommentStatus(status);
+    }
+
+    return (
+        <div className="comment-detail">
+            <div className="author">
+                <img className="author__avatar" src="https://loremflickr.com/40/40/?lock=592" alt="Avatar" />
+                <div className="author__details">
+                    <h3 className="author__display-name">Dan Hauk</h3>
+                    <p className="author__website"><a href="https://blog.danhauk.com">blog.danhauk.com</a></p>
+                    <p className="author__email"><a href="mailto:bill.bradski@gmail.com">bill.bradski@gmail.com</a></p>
+                    <p className="author__ip">192.168.0.1</p>
+                </div>
+            </div>
+            <h4 className="comment-date">October 3, 2016</h4>
+            <div className="comment-content">
+                <p>This is so much cooler than the random strokes of colors and stars I painted at the GM.</p>
+            </div>
+            {commentStatus === 'pending' && (
+                <div className="comment-status pending">
+                    <h5>Pending</h5>
+                    <p>This comment is pending approval and only visible to you.</p>
+                    <div className="comment-actions">
+                        <button onClick={() => changeStatus('approved')}>
+                            <Icon name="check" />
+                            <label>Approve</label>
+                        </button>
+                        <button>
+                            <Icon name="spam" />
+                            <label>Spam</label>
+                        </button>
+                        <button>
+                            <Icon name="delete" />
+                            <label>Trash</label>
+                        </button>
+                    </div>
+                </div>
+            )}
+            {commentStatus === 'approved' && (
+                <div className="comment-status approved">
+                    <div className="comment-actions">
+                        <button>
+                            <Icon name="reply" />
+                            <label>Reply</label>
+                        </button>
+                        <button>
+                            <Icon name="star" />
+                            <label>Like</label>
+                        </button>
+                        <button>
+                            <Icon name="share" />
+                            <label>Share</label>
+                        </button>
+                    </div>
+                    <h5>Approved on Mar 10, 2023 @ 4:36 PM</h5>
+                    <div className="comment-actions secondary">
+                        <button onClick={() => changeStatus('pending')}>
+                            <Icon name="dash-circle" />
+                            <label>Unapprove</label>
+                        </button>
+                        <button>
+                            <Icon name="delete" />
+                            <label>Trash</label>
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+}
+
 function MySiteView(props) {
     const [mySiteView, setMySiteView] = useState('today');
+    const [commentsViewVisible, setCommentsViewVisible] = useState(false);
+    const [commentViewVisible, setCommentViewVisible] = useState(false);
+
 
     function handleMySiteViewChange(value) {
         setMySiteView(value);
+    }
+
+    function selectComment(comment) {
+        setCommentViewVisible(true);
     }
 
     return (
@@ -234,13 +348,64 @@ function MySiteView(props) {
                 />
 
                 {mySiteView === 'today' && (
-                    <MySiteToday />
+                    <MySiteToday
+                        toggleCommentsView={setCommentsViewVisible}
+                    />
                 )}
 
                 {mySiteView === 'menu' && (
                     <MySiteMenu />
                 )}
             </main>
-        </div>
+
+            {/* Comments Overlay */}
+            <div className={`view__overlay comments ${commentsViewVisible ? 'active' : ''}`}>
+                <div className="overlay__header">
+                    <button className="view__back" onClick={() => setCommentsViewVisible(false)}>
+                        <Icon name="back" />
+                        <label>Back</label>
+                    </button>
+
+                    <h1 className="section-heading">Comments</h1>
+                </div>
+                <div className="overlay__content">
+                    <SegmentedControl
+                        className="view-control"
+                        options={[
+                            { value: 'all', label: 'All' },
+                            { value: 'pending', label: 'Pending' },
+                            // { value: 'unreplied', label: 'Unreplied' },
+                            { value: 'approved', label: 'Approved' },
+                            // { value: 'spam', label: 'Spam' },
+                            // { value: 'trashed', label: 'Trashed' },
+                        ]}
+                        value="all"
+                    />
+
+                    <div className="comment" onClick={selectComment}>
+                        <img src="https://loremflickr.com/40/40/?lock=592" alt="Avatar" />
+                        <h3>Dan Hauk</h3>
+                        <h4>Scale in Tilt Brush</h4>
+                        <p>This is so much cooler than the random strokes of colors and stars I painted at the GM.</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Comment Overlay */}
+            <div className={`view__overlay comment-details ${commentViewVisible ? 'active' : ''}`}>
+                <div className="overlay__header">
+                    <button className="view__back" onClick={() => setCommentViewVisible(false)}>
+                        <Icon name="back" />
+                        <label>Back</label>
+                    </button>
+
+                    <h1 className="section-heading">Comment</h1>
+                    <h2 className="section-subheading">Scale in Tile Brush</h2>
+                </div>
+                <div className="overlay__content">
+                    <CommentDetail />
+                </div>
+            </div>
+        </div >
     )
 }

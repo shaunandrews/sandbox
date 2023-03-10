@@ -87,27 +87,27 @@ function SectionHeadingMenu({
     return (
         <div className="section-heading-menu">
             <button onClick={toggleMenu}>
-                <h1>{currentSection}</h1>
+                <h1 className="section-heading">{currentSection}</h1>
                 <Icon name="chevron-down" />
             </button>
 
             {isMenuVisible && (
-            <div className="section-heading-menu__options">
-                {sections.map((section) => (
-                    <div
-                        key={section.label}
-                        className={`section-heading-menu__option ${currentSection === section.label ? 'active' : ''}`}
-                        onClick={() => selectOption(section.label)}
-                    >
-                        {section.icon && (
-                            <Icon name={section.icon} />
-                        )}
-                        <label>{section.label}</label>
-                        {currentSection === section.label && (
-                            <Icon name="check" />
-                        )}
-                    </div>
-                ))}
+                <div className="section-heading-menu__options">
+                    {sections.map((section) => (
+                        <div
+                            key={section.label}
+                            className={`section-heading-menu__option ${currentSection === section.label ? 'active' : ''}`}
+                            onClick={() => selectOption(section.label)}
+                        >
+                            {section.icon && (
+                                <Icon name={section.icon} />
+                            )}
+                            <label>{section.label}</label>
+                            {currentSection === section.label && (
+                                <Icon name="check" />
+                            )}
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

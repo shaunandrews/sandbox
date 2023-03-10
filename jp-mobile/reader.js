@@ -110,7 +110,6 @@ function ReaderFollowingPosts() {
 function ReaderView() {
     const [currentView, setCurrentView] = React.useState('Following');
     const [currentType, setCurrentType] = React.useState('posts');
-
     const [currentSection, setCurrentSection] = useState('Following');
 
     return (
