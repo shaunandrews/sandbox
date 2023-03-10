@@ -30,6 +30,14 @@
 
 
 
+// Global Vars
+// ------
+:root {
+    --border-radius: 10px;
+}
+
+
+
 // Misc.
 // ------ 
 .visually-hidden {
@@ -53,31 +61,8 @@ body {
     overscroll-behavior: contain;
 }
 
-.card {
-    background: var(--color-card);
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    .card-header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-    }
-
-    hr {
-        margin-left: -20px;
-        margin-right: -20px;
-    }
-}
-
 .table-view {
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background: var(--color-card);
     padding-left: 54px;
     margin-bottom: 20px;
@@ -108,22 +93,28 @@ body {
         height: 40px;
         padding: 0 20px;
         background: var(--color-card);
-        border-radius: 10px;
+        border-radius: var(--border-radius);
 
-        svg {
-            height: 14px;
-            width: 14px;
+        &.icon-only {
+            background: none;
         }
     }
 
     .dropdown-menu__options {
         position: absolute;
         top: 40px;
-        left: 5px;
         min-width: 200px;
         background: var(--color-card);
-        border-radius: 10px;
+        border-radius: var(--border-radius);
         box-shadow: 0 2px 15px var(--color-shadow);
+    }
+
+    &.position-left .dropdown-menu__options {
+        left: 5px;
+    }
+
+    &.position-right .dropdown-menu__options {
+        right: 5px;
     }
 
     .dropdown-menu__option {
@@ -166,7 +157,87 @@ button.icon-only {
     display: inline-block;
     height: 40px;
     width: 40px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
+}
+
+
+
+// Section Heading
+// ------
+.section-heading-menu {
+    button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        min-height: 40px;
+    }
+
+    h1 {
+        font-weight: 700;
+        font-size: 22px;
+    }
+
+    .section-heading-menu__options {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        left: 0;
+        background: var(--color-card);
+        border-bottom: .5px solid var(--color-card-divider);
+        padding: 0 10px 20px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .section-heading-menu__option {
+        border-radius: 5px;
+        padding: 15px 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        label {
+            flex-grow: 1;
+        }
+
+        &.active {
+            background: var(--color-shadow);
+        }
+    }
+}
+
+
+
+// Cards
+// ------
+.card {
+    background: var(--color-card);
+    // border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .card__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding-left: 20px;
+        min-height: 40px;
+    }
+
+    .card__content {
+        padding: 0 20px 20px 20px;
+    }
+
+    hr {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
 }
 
 
@@ -177,20 +248,24 @@ button.icon-only {
     overflow-y: auto;
     overflow-x: hidden;
     overscroll-behavior: contain;
-    height: calc(100vh - 119px);
+    height: calc(100vh - 83px);
 
     &::-webkit-scrollbar {
         display: none;
     }
 
     .view__header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        right: 0;
+        left: 0;
         z-index: 1;
-        padding: 20px;
-        background: var(--color-surface-blur);
-        -webkit-backdrop-filter: blur(5px);
-        backdrop-filter: blur(5px);
+        padding: 5px 0 5px 20px;
+        // background: var(--color-surface-blur);
+        // -webkit-backdrop-filter: blur(5px);
+        // backdrop-filter: blur(5px);
+        background: var(--color-card);
+        border-bottom: .5px solid var(--color-card-divider);
 
         &.toolbar {
             display: flex;
@@ -202,10 +277,15 @@ button.icon-only {
     }
 
     .view__content {
-        padding: 0 20px 20px 20px;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        padding-top: 51px;
+        padding-bottom: 20px;
+        // gap: 20px;
+
+        .segmented-control:first-child {
+            margin: 20px;
+        }
     }
 }
 
@@ -219,9 +299,9 @@ button.icon-only {
     bottom: 0;
     left: 0;
     z-index: 1;
-    background: var(--color-surface-blur);
+    background: var(--color-card);
     border-top: 0.5px solid rgba(black, 0.25);
-    padding: 10px 15px 50px 15px;
+    padding: 5px 15px 25px 15px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -233,13 +313,14 @@ button.icon-only {
         padding: 5px;
         gap: 5px;
         width: 33.3%;
-        border-radius: 10px;
-        color: var(--color-text-alpha-50);
+        border-radius: var(--border-radius);
+        color: var(--color-text);
+        opacity: 0.35;
 
         svg {
-            height: 32px;
-            width: 32px;
-            fill: var(--color-text-alpha-50);
+            height: 24px;
+            width: 24px;
+            fill: var(--color-text);
         }
 
         label {
@@ -247,11 +328,7 @@ button.icon-only {
         }
 
         &.active {
-            color: var(--color-text);
-
-            svg {
-                fill: var(--color-text);
-            }
+            opacity: 1;
         }
     }
 }
@@ -288,7 +365,7 @@ button.icon-only {
     z-index: 2;
     padding: 20px 20px 50px 20px;
     background: var(--color-card);
-    border-radius: 10px 10px 0 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
     transition: all 0.15s ease-out;
 
     &.is-hidden {
@@ -309,7 +386,7 @@ button.icon-only {
     display: flex;
     flex-direction: row;
     background: var(--color-shadow);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     padding: 2px;
     overflow: hidden;
 
@@ -338,16 +415,20 @@ button.icon-only {
         gap: 10px;
 
         .site-icon {
-            height: 40px;
-            width: 40px;
+            display: none;
+            // height: 30px;
+            // width: 30px;
+        }
+
+        .site-title {
+            font-weight: 700;
+            font-size: 22px;
         }
 
         .site-url {
             display: none;
         }
     }
-
-    button.switch-site {}
 }
 
 .site {
@@ -359,7 +440,7 @@ button.icon-only {
     .site-icon {
         height: 52px;
         width: 52px;
-        border-radius: 10px;
+        border-radius: var(--border-radius);
         overflow: hidden;
         display: flex;
         justify-content: center;
@@ -387,8 +468,6 @@ button.icon-only {
         align-items: center;
 
         svg {
-            height: 14px;
-            width: 14px;
             fill: var(--color-text);
         }
     }
@@ -439,7 +518,7 @@ button.icon-only {
         .icon {
             height: 52px;
             width: 52px;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -473,17 +552,6 @@ button.icon-only {
 }
 
 
-// My Site
-// ------ 
-.my-site.view {
-    .view__header {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-}
-
-
 
 // My Site — Home
 // ------ 
@@ -492,7 +560,7 @@ button.icon-only {
     flex-direction: column;
     gap: 20px;
 
-    .card-stats {
+    .todays-stats {
         .chart {
             display: flex;
             align-items: flex-end;
@@ -544,8 +612,8 @@ button.icon-only {
         }
     }
 
-    .card-prompt {
-        .responses {
+    .writing-prompt {
+        .writing-prompt__responses {
             display: flex;
             flex-direction: row;
             gap: 10px;
@@ -586,45 +654,68 @@ button.icon-only {
 // Reader
 // ------
 .reader.view {
-    .reader__post-header {
+    .reader__following-posts {
         display: flex;
+        flex-direction: column;
         gap: 20px;
-
-        .title-meta {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-
-            h2 {}
-
-            .meta {
-                display: flex;
-                flex-direction: row;
-                gap: 5px;
-                font-size: 12px;
-            }
-        }
-
-        button {}
     }
 
-    .reader__post-summary {
+    .reader__following-sites {
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.reader-post {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 20px;
+
+    .post-avatar {
+        border-radius: 3px;
+    }
+
+    .post-content {
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
 
-        img {
-            display: block;
-            margin: 0 -20px 10px -20px;
+    .post-meta {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 5px;
+
+
+        .site-title {
+            font-weight: 500;
         }
 
-        h3 {
-            font-size: 20px;
-            font-weight: 700;
+        .site-url {
+            font-size: 12px;
+            color: var(--color-text-alpha-50);
         }
+    }
 
-        p {}
+    .post-title {
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 1.4;
+    }
+
+    .post-excerpt {
+        line-height: 1.6;
+    }
+
+    .post-actions {
+        margin-left: -10px;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
     }
 }
 
@@ -633,9 +724,16 @@ button.icon-only {
 // Notifications
 // ------
 .notifications.view {
+    .notifications-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 20px;
+    }
+
     .notification {
         display: flex;
-        gap: 10px;
+        gap: 15px;
         align-items: center;
         position: relative;
 
@@ -649,8 +747,8 @@ button.icon-only {
         }
 
         img {
-            height: 60px;
-            width: 60px;
+            height: 42px;
+            width: 42px;
             border-radius: 40px;
         }
 
@@ -668,5 +766,23 @@ button.icon-only {
                 color: var(--color-text-alpha-50);
             }
         }
+    }
+}
+
+
+
+// Account
+// ------
+.account-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 50px 0;
+
+    img {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
     }
 }

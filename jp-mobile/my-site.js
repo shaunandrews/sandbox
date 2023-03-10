@@ -13,10 +13,10 @@ function StatsHighlights() {
                 <div className="label">Comments</div>
                 <div className="value">3</div>
             </div>
-            <div className="stat">
+            {/* <div className="stat">
                 <div className="label">Likes</div>
                 <div className="value">27</div>
-            </div>
+            </div> */}
         </div>
     )
 }
@@ -46,7 +46,7 @@ function StatsChart() {
 function MySiteToday() {
     return (
         <div className="my-site__home">
-            <Card className="card-stats">
+            <Card className="todays-stats">
                 <CardHeader
                     title="Today's Stats"
                     optionsMenu={(
@@ -55,68 +55,87 @@ function MySiteToday() {
                             icon="menu"
                             showLabel={false}
                             showChevron={false}
+                            position="right"
                             options={[
-                                { label: 'Option 1' },
-                                { label: 'Option 2' },
-                                { label: 'Option 3' },
+                                { label: 'Option 1', value: 'option-1' },
+                                { label: 'Option 2', value: 'option-2' },
+                                { label: 'Option 3', value: 'option-3' },
                             ]}
                         />
                     )}
                 />
-                <StatsHighlights />
+                <div className="card__content">
+                    <StatsHighlights />
+                </div>
             </Card>
 
-            <div className="card card-prompt">
-                <h3>Writing Prompt</h3>
-                <p>What's the best thing you've ever eaten?</p>
-                <div className="responses">
-                    <div className="avatars">
-                        <img src="https://loremflickr.com/30/30/?lock=392" alt="Writing Prompt" />
-                        <img src="https://loremflickr.com/30/30/?lock=492" alt="Writing Prompt" />
-                        <img src="https://loremflickr.com/30/30/?lock=592" alt="Writing Prompt" />
+            <Card className="writing-prompt">
+                <CardHeader
+                    title="Writing Prompt"
+                    optionsMenu={(
+                        <DropdownMenu
+                            name="Options"
+                            icon="menu"
+                            showLabel={false}
+                            showChevron={false}
+                            position="right"
+                            options={[
+                                { label: 'View more prompts', value: 'option-1' },
+                                { label: 'Skip for today', value: 'option-2' },
+                                { label: 'Learn more', value: 'option-3' },
+                                { label: 'Turn off prompts', value: 'option-4' }
+                            ]}
+                        />
+                    )}
+                />
+                <div className="card__content">
+                    <p>What's the best thing you've ever eaten?</p>
+                    <div className="writing-prompt__responses">
+                        <div className="avatars">
+                            <img src="https://loremflickr.com/30/30/?lock=392" alt="Writing Prompt" />
+                            <img src="https://loremflickr.com/30/30/?lock=492" alt="Writing Prompt" />
+                            <img src="https://loremflickr.com/30/30/?lock=592" alt="Writing Prompt" />
+                        </div>
+                        <p>232 responses</p>
                     </div>
-                    <p>232 responses</p>
+                    <button>Write an answer</button>
                 </div>
-                <button>Write an answer</button>
-            </div>
+            </Card>
 
-            <div className="card card-drafts">
-                <h3>Drafts</h3>
-                <ol>
-                    <li className="post">
-                        <h4>Post Title</h4>
-                        <p>This is an excerpt of the first few lines of the post.</p>
-                    </li>
-                    <li className="post">
-                        <h4>Post Title</h4>
-                        <p>This is an excerpt of the first few lines of the post.</p>
-                    </li>
-                    <li className="post">
-                        <h4>Post Title</h4>
-                        <p>This is an excerpt of the first few lines of the post.</p>
-                    </li>
-                </ol>
-                <button>New draft</button>
-            </div>
+            <Card className="drafts">
+                <CardHeader
+                    title="Drafts"
+                />
+                <div className="card__content">
+                    <ol>
+                        <li className="post">
+                            <h4>Post Title</h4>
+                            <p>This is an excerpt of the first few lines of the post.</p>
+                        </li>
+                        <li className="post">
+                            <h4>Post Title</h4>
+                            <p>This is an excerpt of the first few lines of the post.</p>
+                        </li>
+                        <li className="post">
+                            <h4>Post Title</h4>
+                            <p>This is an excerpt of the first few lines of the post.</p>
+                        </li>
+                    </ol>
+                    <button>New draft</button>
+                </div>
+            </Card>
 
-            <div className="card card-domain">
-                <header className="card-header">
-                    <h3>Domain</h3>
-                    <DropdownMenu
-                        name="Options"
-                        icon="menu"
-                        showChevron={false}
-                        options={[
-                            { label: 'Option 1' },
-                            { label: 'Option 2' },
-                        ]}
-                    />
-                </header>
-                <p>You site is viewable at the following domains:</p>
-                <p>sporadicthoughts.com</p>
-                <p>sporadicthoughts.wordpress.com</p>
-                <button>Add domain</button>
-            </div>
+            <Card className="domains">
+                <CardHeader
+                    title="Domains"
+                />
+                <div className="card__content">
+                    <p>You site is viewable at the following domains:</p>
+                    <p>sporadicthoughts.com</p>
+                    <p>sporadicthoughts.wordpress.com</p>
+                    <button>Add domain</button>
+                </div>
+            </Card>
 
             <div className="card card-share">
                 <header className="card-header">
@@ -179,14 +198,33 @@ function MySiteView(props) {
 
     return (
         <div className="view my-site">
-            <header className="view__header">
+            <header className="view__header toolbar">
                 <CurrentSite
                     icon={<SiteIcon number="5435" />}
                     title="Sporadic Thoughts"
                     url="sporadicthoughts.com"
                     switchSite={props.toggleSitesSheet}
                 />
+
+                <div className="toolbar-group">
+                    <DropdownMenu
+                        name="Options"
+                        icon="menu"
+                        showLabel={false}
+                        showChevron={false}
+                        position="right"
+                        options={[
+                            { label: 'Change site title', value: 'option-1' },
+                            { label: 'Change domain name', value: 'option-2' },
+                            { label: 'Share your site', value: 'option-3' },
+                        ]}
+                    />
+                </div>
+            </header>
+
+            <main className="view__content">
                 <SegmentedControl
+                    className="view-control"
                     options={[
                         { value: 'today', label: 'Today' },
                         { value: 'menu', label: 'Menu' },
@@ -194,9 +232,7 @@ function MySiteView(props) {
                     value={mySiteView}
                     onChange={handleMySiteViewChange}
                 />
-            </header>
 
-            <main className="view__content">
                 {mySiteView === 'today' && (
                     <MySiteToday />
                 )}

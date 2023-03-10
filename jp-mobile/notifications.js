@@ -14,7 +14,7 @@ function Notification(props) {
 }
 
 function NotificationsView() {
-    const [notificationView, setNotificationView] = useState('All Notifications');
+    const [currentSection, setCurrentSection] = useState('All notifications');
 
     function handleNotificationViewChange(value) {
         setNotificationView(value);
@@ -23,65 +23,48 @@ function NotificationsView() {
     return (
         <div className="view notifications">
             <header className="view__header toolbar">
-                <DropdownMenu
-                    name="Notifications"
-                    showCurrent={true}
-                    showChevron={true}
-                    options={[
-                        {
-                            label: 'All',
-                            value: 'All Notifications',
-                        },
-                        // {
-                        //     label: 'Unread',
-                        //     value: 'Unread',
-                        // },
-                        {
-                            label: 'Comments',
-                            value: 'Comments',
-                        },
-                        {
-                            label: 'Follows',
-                            value: 'Follows',
-                        },
-                        {
-                            label: 'Likes',
-                            value: 'Likes',
-                        },
+                <SectionHeadingMenu
+                    currentSection={currentSection}
+                    onChange={setCurrentSection}
+                    sections={[
+                        { label: 'All notifications', icon: 'bell' },
+                        { label: 'Comments', icon: 'comment' },
+                        { label: 'Likes', icon: 'star' },
+                        { label: 'Follows', icon: 'check-square' },
                     ]}
-                    value={notificationView}
-                    onChange={setNotificationView}
                 />
 
                 <div className="toolbar-group">
-                    <button><Icon name="check-all" /></button>
-                    <button><Icon name="menu" /></button>
+                    <button className="icon-only"><Icon name="check-all" /></button>
+                    <button className="icon-only"><Icon name="menu" /></button>
                 </div>
             </header>
             <main className="view__content">
-
                 <SegmentedControl
                     options={[
                         { value: 'unread', label: 'Unread' },
                         { value: 'read', label: 'Read' },
                     ]}
-                value="unread"
+                    value="unread"
                 // onChange={setCurrentType}
                 />
-                <h3>Today</h3>
-                <Notification
-                    unread={true}
-                />
-                <Notification />
-                <Notification />
-                <Notification />
-                <Notification />
-                <h3>Yesterday</h3>
-                <Notification />
-                <Notification />
-                <Notification />
-                <Notification />
-                <Notification />
+
+                <div className="notifications-list">
+                    <h3>Today</h3>
+                    <Notification
+                        unread={true}
+                    />
+                    <Notification />
+                    <Notification />
+                    <Notification />
+                    <Notification />
+                    <h3>Yesterday</h3>
+                    <Notification />
+                    <Notification />
+                    <Notification />
+                    <Notification />
+                    <Notification />
+                </div>
             </main>
         </div>
     )

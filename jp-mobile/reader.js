@@ -1,19 +1,16 @@
 function ReaderPostHeader(props) {
     return (
         <header className="reader__post-header">
-            <div className="title-meta">
-                <h2>{props.title}</h2>
-                <div className="meta">
-                    <p>{props.url}</p>
-                    <p>{props.time}</p>
+            {props.avatar && (
+                <div className="reader__post-avatar">
+                    {props.avatar}
                 </div>
-            </div>
-            <button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                </svg>
-                <span className="visually-hidden">Options</span>
-            </button>
+            )}
+            <h2>{props.title}</h2>
+
+            <p>{props.url}</p>
+            <p>{props.time}</p>
+
         </header>
     )
 }
@@ -30,11 +27,11 @@ function ReaderPostSummary() {
 
 function ReaderPostActions() {
     return (
-        <div className="reader__post-actions">
-            <button>Bookmark</button>
-            <button>Reblog</button>
-            <button>Comment</button>
-            <button>Like</button>
+        <div className="post-actions">
+            <button className="icon-only"><Icon name="bookmark" /></button>
+            <button className="icon-only"><Icon name="repeat" /></button>
+            <button className="icon-only"><Icon name="comment" /></button>
+            <button className="icon-only"><Icon name="star" /></button>
         </div>
     )
 }
@@ -43,33 +40,68 @@ function ReaderFollowingPosts() {
     return (
         <div className="reader__following-posts">
             <Card className="reader-post">
-                <ReaderPostHeader
-                    title="WordPress News"
-                    url="wordpress.org/news/"
-                    time="2 hours ago"
-                />
-                <ReaderPostSummary />
-                <ReaderPostActions />
+                <img className="post-avatar" src="https://loremflickr.com/42/42/" height="42" width="42" alt="Avatar" />
+                <div className="post-content">
+                    <div className="post-meta">
+                        <h2 className="site-title">Sporadic Thoughts</h2>
+                        <p className="site-url">sporadicthoughts.com</p>
+                        {/* <p className="post-time">2 hours ago</p> */}
+                    </div>
+                    <h3 className="post-title">The Benefits of Meditation for Mental Health</h3>
+                    <div className="post-excerpt">
+                        <p>Meditation has been shown to have numerous benefits for mental health, including reducing anxiety and depression, improving focus and attention, and increasing feelings of well-being. In this article, we explore the science behind meditation and how you can start a meditation practice.</p>
+                    </div>
+                    <p className="post-tags">meditation, mental health, mindfulness, self-care</p>
+                    <ReaderPostActions />
+                </div>
             </Card>
 
             <Card className="reader-post">
-                <ReaderPostHeader
-                    title="WordPress News"
-                    url="wordpress.org/news/"
-                    time="2 hours ago"
-                />
-                <ReaderPostSummary />
-                <ReaderPostActions />
+                <img src="https://loremflickr.com/42/42/" height="42" width="42" alt="Avatar" />
+                <div className="post-content">
+                    <div className="post-meta">
+                        <h2 className="site-title">Sporadic Thoughts</h2>
+                        <p className="site-url">sporadicthoughts.com</p>
+                        {/* <p className="post-time">2 hours ago</p> */}
+                    </div>
+                    <h3 className="post-title">The Benefits of Meditation for Mental Health</h3>
+                    <div className="post-excerpt">
+                        <p>Meditation has been shown to have numerous benefits for mental health, including reducing anxiety and depression, improving focus and attention, and increasing feelings of well-being. In this article, we explore the science behind meditation and how you can start a meditation practice.</p>
+                    </div>
+                    <p className="post-tags">meditation, mental health, mindfulness, self-care</p>
+                </div>
             </Card>
 
             <Card className="reader-post">
-                <ReaderPostHeader
-                    title="WordPress News"
-                    url="wordpress.org/news/"
-                    time="2 hours ago"
-                />
-                <ReaderPostSummary />
-                <ReaderPostActions />
+                <img src="https://loremflickr.com/42/42/" height="42" width="42" alt="Avatar" />
+                <div className="post-content">
+                    <div className="post-meta">
+                        <h2 className="site-title">Sporadic Thoughts</h2>
+                        <p className="site-url">sporadicthoughts.com</p>
+                        {/* <p className="post-time">2 hours ago</p> */}
+                    </div>
+                    <h3 className="post-title">The Benefits of Meditation for Mental Health</h3>
+                    <div className="post-excerpt">
+                        <p>Meditation has been shown to have numerous benefits for mental health, including reducing anxiety and depression, improving focus and attention, and increasing feelings of well-being. In this article, we explore the science behind meditation and how you can start a meditation practice.</p>
+                    </div>
+                    <p className="post-tags">meditation, mental health, mindfulness, self-care</p>
+                </div>
+            </Card>
+
+            <Card className="reader-post">
+                <img src="https://loremflickr.com/42/42/" height="42" width="42" alt="Avatar" />
+                <div className="post-content">
+                    <div className="post-meta">
+                        <h2 className="site-title">Sporadic Thoughts</h2>
+                        <p className="site-url">sporadicthoughts.com</p>
+                        {/* <p className="post-time">2 hours ago</p> */}
+                    </div>
+                    <h3 className="post-title">The Benefits of Meditation for Mental Health</h3>
+                    <div className="post-excerpt">
+                        <p>Meditation has been shown to have numerous benefits for mental health, including reducing anxiety and depression, improving focus and attention, and increasing feelings of well-being. In this article, we explore the science behind meditation and how you can start a meditation practice.</p>
+                    </div>
+                    <p className="post-tags">meditation, mental health, mindfulness, self-care</p>
+                </div>
             </Card>
         </div>
     )
@@ -79,38 +111,25 @@ function ReaderView() {
     const [currentView, setCurrentView] = React.useState('Following');
     const [currentType, setCurrentType] = React.useState('posts');
 
+    const [currentSection, setCurrentSection] = useState('Following');
+
     return (
         <div className="view reader">
             <header className="view__header toolbar">
-                <DropdownMenu
-                    name="Reader"
-                    showCurrent={true}
-                    showChevron={true}
-                    options={[
-                        {
-                            label: 'Following',
-                            value: 'Following',
-                        },
-                        {
-                            label: 'Discover',
-                            value: 'Discover',
-                        },
-                        {
-                            label: 'Liked Posts',
-                            value: 'Liked',
-                        },
-                        {
-                            label: 'Saved Posts',
-                            value: 'Saved',
-                        }
+                <SectionHeadingMenu
+                    currentSection={currentSection}
+                    onChange={setCurrentSection}
+                    sections={[
+                        { label: 'Following', icon: 'check-square' },
+                        { label: 'Discover', icon: 'binoculars' },
+                        { label: 'Liked posts', icon: 'star' },
+                        { label: 'Saved posts', icon: 'bookmarks' }
                     ]}
-                    value={currentView}
-                    onChange={setCurrentView}
                 />
 
                 <div className="toolbar-group">
-                    <button class="icon-only"><Icon name="search" /></button>
-                    <button class="icon-only"><Icon name="menu" /></button>
+                    <button className="icon-only"><Icon name="search" /></button>
+                    <button className="icon-only"><Icon name="menu" /></button>
                 </div>
             </header>
 
@@ -136,7 +155,7 @@ function ReaderView() {
                             title="WordPress News"
                             url="wordpress.org/news/"
                         />
-                        <Site  
+                        <Site
                             icon={<SiteIcon number="2345" />}
                             title="WordPress.com Blog"
                             url="wordpress.com/blog"

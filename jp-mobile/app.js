@@ -6,24 +6,28 @@ function TabBar({ currentTab, setCurrentTab }) {
             <Tab
                 id="tab-home"
                 label="My Site"
+                icon="home"
                 activeTab={currentTab}
                 onTabClick={() => setCurrentTab('tab-home')}
             />
             <Tab
                 id="tab-reader"
                 label="Reader"
+                icon="book"
                 activeTab={currentTab}
                 onTabClick={() => setCurrentTab('tab-reader')}
             />
             <Tab
                 id="tab-notifications"
                 label="Notifications"
+                icon="bell"
                 activeTab={currentTab}
                 onTabClick={() => setCurrentTab('tab-notifications')}
             />
             <Tab
                 id="tab-account"
                 label="Account"
+                icon="vcard"
                 activeTab={currentTab}
                 onTabClick={() => setCurrentTab('tab-account')}
             />
@@ -40,7 +44,7 @@ function Tab(props) {
             className={`tab ${isActive ? 'active' : ''}`}
             onClick={() => props.onTabClick(props.id)}
         >
-            <Icon />
+            <Icon name={props.icon} />
             <label>{props.label}</label>
         </div>
     );
@@ -60,23 +64,6 @@ function SegmentedControl(props) {
             ))}
         </div>
     );
-}
-
-function Card({ children, className }) {
-    return (
-        <div className={`card ${className}`}>
-            {children}
-        </div>
-    )
-}
-
-function CardHeader(props) {
-    return (
-        <header className="card-header">
-            <h3>{props.title}</h3>
-            {props.optionsMenu && props.optionsMenu}
-        </header>
-    )
 }
 
 function Scrim(props) {
@@ -196,10 +183,12 @@ function ContextMenu(props) {
 function AccountView(props) {
     return (
         <div className="view account">
-            <header className="view__header">
-                <h1>Account</h1>
-            </header>
             <main className="view__content">
+                <div className="account-header">
+                    <img src="https://loremflickr.com/100/100/?lock=1234" alt="User Avatar" />
+                    <h1>Shaun Andrews</h1>
+                    <p>@shaunandrews</p>
+                </div>
                 <ol className="table-view">
                     <li>My profile</li>
                     <li>Account settings</li>
@@ -220,7 +209,7 @@ function AccountView(props) {
 }
 
 function App() {
-    const [currentTab, setCurrentTab] = useState('tab-reader');
+    const [currentTab, setCurrentTab] = useState('tab-notifications');
     const [sitesSheet, setSitesSheet] = useState(false);
 
     function toggleSitesSheet() {
