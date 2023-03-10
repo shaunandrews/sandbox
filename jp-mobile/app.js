@@ -209,7 +209,7 @@ function AccountView(props) {
 }
 
 function App() {
-    const [currentTab, setCurrentTab] = useState('tab-notifications');
+    const [currentTab, setCurrentTab] = useState('tab-home');
     const [sitesSheet, setSitesSheet] = useState(false);
 
     function toggleSitesSheet() {
