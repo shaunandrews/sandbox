@@ -68,6 +68,25 @@ function DropdownMenu({
     );
 }
 
+function OptionsMenu({
+    options,
+}) {
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+    function toggleMenu() {
+        setIsMenuVisible(!isMenuVisible);
+    }
+
+    return (
+        <div className="options-menu">
+            <div className="options-menu__option">
+                <Icon name="cog" />
+                <label>Settings</label>
+            </div>
+        </div>
+    )
+}
+
 function SectionHeadingMenu({
     currentSection,
     onChange,

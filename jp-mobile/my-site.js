@@ -56,6 +56,15 @@ function QuickLink({ icon, label, data, onClick }) {
     )
 }
 
+function DraftPost({ title, date, excerpt }) {
+    return (
+        <div className="draft-post">
+            <div className="draft-post__title">{title}</div>
+            <div className="draft-post__excerpt">{excerpt}</div>
+        </div>
+    )
+}
+
 function MySiteToday({ toggleCommentsView }) {
     function handleQuickLinkClick(label) {
         if (label === 'Comments') {
@@ -120,39 +129,40 @@ function MySiteToday({ toggleCommentsView }) {
                     )}
                 />
                 <div className="card__content">
-                    <p>What's the best thing you've ever eaten?</p>
+                    <p className="writing-prompt__question">What's the best thing you've ever eaten?</p>
                     <div className="writing-prompt__responses">
                         <div className="avatars">
                             <img src="https://loremflickr.com/30/30/?lock=392" alt="Writing Prompt" />
                             <img src="https://loremflickr.com/30/30/?lock=492" alt="Writing Prompt" />
                             <img src="https://loremflickr.com/30/30/?lock=592" alt="Writing Prompt" />
                         </div>
-                        <p>232 responses</p>
+                        <p className="response-count">232 responses</p>
                     </div>
-                    <button>Write an answer</button>
+                    <button className="writing-prompt__write">Write your response</button>
                 </div>
             </Card>
 
-            <Card className="drafts">
+            <Card className="lastest-drafts">
                 <CardHeader
                     title="Drafts"
                 />
                 <div className="card__content">
-                    <ol>
-                        <li className="post">
-                            <h4>Post Title</h4>
-                            <p>This is an excerpt of the first few lines of the post.</p>
-                        </li>
-                        <li className="post">
-                            <h4>Post Title</h4>
-                            <p>This is an excerpt of the first few lines of the post.</p>
-                        </li>
-                        <li className="post">
-                            <h4>Post Title</h4>
-                            <p>This is an excerpt of the first few lines of the post.</p>
-                        </li>
-                    </ol>
-                    <button>New draft</button>
+                    <DraftPost
+                        title="10 Ways to Boost Your Productivity"
+                        excerpt={<p>Looking for ways to increase your productivity? Check out these top 10 tips and tricks.</p>}
+                    />
+
+                    <DraftPost
+                        title="The Best Travel Destinations for 2023"
+                        excerpt={<p>Ready to start planning your next adventure? Here are the top travel destinations to add to your list.</p>}
+                    />
+
+                    <DraftPost
+                        title="Why You Should Learn to Code in 2023"
+                        excerpt={<p>Coding is an increasingly valuable skill in today's job market. Here's why you should consider learning to code in the new year.</p>}
+                    />
+
+                    <button className="latest-drafts__new">New draft</button>
                 </div>
             </Card>
 

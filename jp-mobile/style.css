@@ -10,6 +10,7 @@
   --color-text-alpha-50: rgba(0, 0, 0, 0.5);
   --color-text-reverse: rgb(255, 255, 255);
   --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-05: rgba(0, 0, 0, 0.05);
   --color-scrim: rgba(0, 0, 0, 0.5);
 }
 @media (prefers-color-scheme: dark) {
@@ -25,6 +26,7 @@
     --color-text-alpha-50: rgba(255, 255, 255, 0.5);
     --color-text-reverse: rgb(0, 0, 0);
     --color-shadow: rgba(255, 255, 255, 0.1);
+    --color-shadow-05: rgba(255, 255, 255, 0.05);
     --color-scrim: rgba(0, 0, 0, 0.8);
   }
 }
@@ -182,9 +184,10 @@ h1.section-heading {
 
 .card {
   background: var(--color-card);
+  border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 .card .card__header {
   display: flex;
@@ -192,6 +195,7 @@ h1.section-heading {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-top: 5px;
   padding-left: 20px;
   min-height: 40px;
 }
@@ -225,7 +229,7 @@ h1.section-heading {
   right: 0;
   left: 0;
   z-index: 1;
-  padding: 5px 0 5px 20px;
+  padding: 5px 20px;
   background: var(--color-card);
   border-bottom: 0.5px solid var(--color-card-divider);
 }
@@ -490,6 +494,7 @@ h1.section-heading {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 0 20px;
 }
 .my-site__home .todays-stats .chart {
   display: flex;
@@ -534,22 +539,73 @@ h1.section-heading {
   font-weight: 500;
   font-size: 30px;
 }
+.my-site__home .writing-prompt .card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.my-site__home .writing-prompt .writing-prompt__question {
+  font-size: 32px;
+  line-height: 1.1;
+}
 .my-site__home .writing-prompt .writing-prompt__responses {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
 }
-.my-site__home .writing-prompt .avatars {
+.my-site__home .writing-prompt .writing-prompt__responses .avatars {
   display: flex;
   flex-direction: row;
   margin-left: 10px;
 }
-.my-site__home .writing-prompt .avatars img {
+.my-site__home .writing-prompt .writing-prompt__responses .avatars img {
   display: block;
   border-radius: 50%;
   margin-left: -10px;
   border: 2px solid var(--color-card);
+}
+.my-site__home .writing-prompt .writing-prompt__responses .response-count {
+  color: var(--color-text-alpha-50);
+}
+.my-site__home .writing-prompt button.writing-prompt__write {
+  color: var(--color-accent);
+  background: var(--color-shadow-05);
+  padding: 15px 20px;
+  border-radius: var(--border-radius);
+}
+.my-site__home .lastest-drafts .card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.my-site__home .lastest-drafts .draft-post {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+.my-site__home .lastest-drafts .draft-post .draft-post__title {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.my-site__home .lastest-drafts .draft-post .draft-post__excerpt {
+  color: var(--color-text-alpha-50);
+}
+.my-site__home .lastest-drafts .draft-post .draft-post__excerpt p {
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.my-site__home .lastest-drafts .latest-drafts__new {
+  color: var(--color-accent);
+  background: var(--color-shadow-05);
+  padding: 15px 20px;
+  border-radius: var(--border-radius);
 }
 
 .quick-links {
