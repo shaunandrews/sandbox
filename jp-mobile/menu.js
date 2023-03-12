@@ -1,88 +1,68 @@
-DropdownMenu.defaultProps = {
-    showCurrent: false,
-    showChevron: true,
-    showLabel: true,
-    position: 'left',
-};
-
-function DropdownMenu({
-    name,
-    icon,
-    showCurrent,
-    showChevron,
-    showLabel,
-    position,
-    options,
-    value,
-    onChange
-}) {
-    const [menuVisible, setMenuVisible] = useState(false);
-
-    const handleMenuButtonClick = (e) => {
-        setMenuVisible(!menuVisible);
-    };
-
-    const handleMenuOptionClick = (value) => {
-        setMenuVisible(false);
-        onChange(value);
-    };
-
+function MenuItem({ type, label, onClick }) {
     return (
-        <div
-            className={`dropdown-menu position-${position}`}
-        >
-            <button
-                className={`dropdown-menu__button ${icon && !showLabel ? 'icon-only' : ''}`}
-                onClick={handleMenuButtonClick}
-            >
-                {icon && (
-                    <Icon name={icon} />
-                )}
-                {showLabel && (
-                    <label>{showCurrent ? value : name}</label>
-                )}
-                {showChevron && (
-                    <Icon name="chevron-down" />
-                )}
-            </button>
-            {menuVisible && (
-                <div className="dropdown-menu__options">
-                    {options.map((option) => (
-                        <div
-                            key={option.value}
-                            className={`dropdown-menu__option ${value === option.value ? 'active' : ''}`}
-                            onClick={() => handleMenuOptionClick(option.value)}
-                        >
-                            {value === option.value && (
-                                <Icon name="check" />
-                            )}
-                            <label>{option.label}</label>
-                            {option.icon && (
-                                <Icon name={option.icon} />
-                            )}
-                        </div>
-                    ))}
+        <>
+            {type === "option" && (
+                <div
+                    className="menu-item"
+                    onClick={() => onClick(label)}
+                >
+                    <label>{label}</label>
                 </div>
             )}
-        </div>
+            {type === "divider" && <hr />}
+        </>
     );
 }
 
 function OptionsMenu({
-    options,
+    items, className,
 }) {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (isMenuVisible && !event.target.closest('.options-menu')) {
+                setIsMenuVisible(false);
+            }
+        }
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [isMenuVisible]);
 
     function toggleMenu() {
         setIsMenuVisible(!isMenuVisible);
     }
 
+    // handle MenuItem click
+    function handleMenuItemClick(item) {
+        setIsMenuVisible(false);
+        console.log(item);
+    }
+
     return (
-        <div className="options-menu">
-            <div className="options-menu__option">
-                <Icon name="cog" />
-                <label>Settings</label>
-            </div>
+        <div className={`options-menu ${className}`}>
+            <button
+                className={`icon-only ${isMenuVisible ? 'active' : ''}`}
+                onClick={toggleMenu}
+            >
+                <Icon name="menu" />
+            </button>
+            {isMenuVisible && (
+                <div className="menu">
+                    {items.map((item, index) => (
+                        <MenuItem
+                            key={index}
+                            type={item.type}
+                            label={item.label}
+                            onClick={handleMenuItemClick}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

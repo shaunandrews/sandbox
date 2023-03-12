@@ -1,16 +1,25 @@
-function Card({ children, className }) {
+function Card({ children, className, title, optionsMenu }) {
     return (
-        <div className={`card ${className}`}>
-            {children}
-        </div>
-    )
-}
+        <div
+            className={`card ${className}`}
+            onClick={() => { console.log('Card clicked') }}
+        >
+            {optionsMenu &&
+                <OptionsMenu
+                    items={optionsMenu}
+                    className="card__options-menu"
+                />
+            }
 
-function CardHeader(props) {
-    return (
-        <header className="card__header">
-            <h3>{props.title}</h3>
-            {props.optionsMenu && props.optionsMenu}
-        </header>
+            {title &&
+                <div className="card__header">
+                    <h3>{title}</h3>
+                </div>
+            }
+
+            <div className="card__content">
+                {children}
+            </div>
+        </div>
     )
 }

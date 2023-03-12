@@ -85,66 +85,6 @@ body {
     }
 }
 
-.dropdown-menu {
-    position: relative;
-
-    .dropdown-menu__button {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        height: 40px;
-        padding: 0 20px;
-        background: var(--color-card);
-        border-radius: var(--border-radius);
-
-        &.icon-only {
-            background: none;
-        }
-    }
-
-    .dropdown-menu__options {
-        position: absolute;
-        top: 40px;
-        min-width: 200px;
-        background: var(--color-card);
-        border-radius: var(--border-radius);
-        box-shadow: 0 2px 15px var(--color-shadow);
-    }
-
-    &.position-left .dropdown-menu__options {
-        left: 5px;
-    }
-
-    &.position-right .dropdown-menu__options {
-        right: 5px;
-    }
-
-    .dropdown-menu__option {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        padding: 15px 20px;
-        padding-left: calc(20px + 16px + 10px);
-        color: var(--color-text);
-        border-bottom: 0.5px solid var(--color-card-divider);
-
-        label {
-            flex-grow: 1;
-        }
-
-        &.active {
-            padding-left: 20px;
-        }
-
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-}
-
 .toolbar-group {
     display: flex;
     flex-direction: row;
@@ -162,6 +102,61 @@ button.icon-only {
     height: 40px;
     width: 40px;
     border-radius: var(--border-radius);
+}
+
+
+
+// Options Menu
+// ------
+.options-menu {
+    position: relative;
+
+    button {
+        svg {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        &.active svg {
+            transform: rotate(90deg);
+            opacity: 0.25;
+        }
+    }
+
+    .menu {
+        position: absolute;
+        top: 40px;
+        right: -5px;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        background: var(--color-card);
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 0 1px var(--color-shadow-05),
+            0 1px 2px var(--color-shadow),
+            0 3px 12px var(--color-shadow),
+            0 5px 20px var(--color-shadow);
+
+        .menu-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 15px 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border-bottom: 0.5px solid var(--color-card-divider);
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        hr {
+            height: 8px;
+            background: var(--color-shadow-05);
+            border-bottom: 0.5px solid var(--color-shadow);
+        }
+    }
 }
 
 
@@ -218,6 +213,7 @@ h1.section-heading {
 // Cards
 // ------
 .card {
+    position: relative;
     background: var(--color-card);
     border-radius: var(--border-radius);
     display: flex;
@@ -230,18 +226,22 @@ h1.section-heading {
         justify-content: space-between;
         align-items: center;
         gap: 10px;
-        margin-top: 5px;
-        padding-left: 20px;
-        min-height: 40px;
+        padding: 15px 20px 10px 20px;
+
+        h3 {
+            font-weight: 500;
+            color: var(--color-text-alpha-50);
+        }
+    }
+
+    .card__options-menu {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 
     .card__content {
         padding: 0 20px 20px 20px;
-    }
-
-    hr {
-        margin-left: -20px;
-        margin-right: -20px;
     }
 }
 
@@ -254,7 +254,6 @@ h1.section-heading {
     overflow-x: hidden;
     overscroll-behavior: contain;
     height: calc(100vh - 83px);
-    position: relative;
 
     &::-webkit-scrollbar {
         display: none;
@@ -302,7 +301,7 @@ h1.section-heading {
         position: absolute;
         top: 0;
         right: 0;
-        bottom: 0;
+        bottom: 83px;
         left: 0;
         display: flex;
         flex-direction: column;
@@ -319,7 +318,7 @@ h1.section-heading {
     }
 
     .overlay__header {
-        padding: 5px 20px 20px 20px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -327,6 +326,10 @@ h1.section-heading {
 
     .overlay__content {
         flex-grow: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        height: calc(100vh - 83px);
     }
 }
 
@@ -702,13 +705,13 @@ h1.section-heading {
         .card__content {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
 
         .draft-post {
             display: flex;
             flex-direction: column;
-            gap: 0px;
+            gap: 0;
 
             .draft-post__title {
                 font-weight: 700;
@@ -744,17 +747,23 @@ h1.section-heading {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 30px;
-    padding: 10px 20px;
+    gap: 15px;
+    padding: 5px 20px;
 
     .quick-link {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 15px;
+        gap: 10px;
+        padding: 15px 20px;
+        border-radius: var(--border-radius);
+        background: var(--color-shadow-05);
     }
 
-    .quick-link .icon {}
+    .quick-link .icon svg {
+        height: 20px;
+        width: 20px;
+    }
 
     .quick-link__label {
         font-size: 17px;
@@ -796,6 +805,43 @@ h1.section-heading {
 
 // My Site - Comments
 // ------
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
+}
+
+.comment-list-item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 15px 20px;
+    border-bottom: 0.5px solid var(--color-card-divider);
+
+    .comment-list-item__avatar img {
+        border-radius: 50%;
+    }
+
+    .comment-list-item__details {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .comment-list-item__author {
+        font-weight: 600;
+    }
+
+    .comment-list-item__post-title {
+        font-size: 14px;
+        color: var(--color-text-alpha-50);
+    }
+
+    .comment-list-item__content {
+        line-height: 1.25;
+    }
+}
+
 .comment-detail {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,4 @@
-const { useState } = React
+const { useState, useEffect } = React
 
 function TabBar({ currentTab, setCurrentTab }) {
     return (
