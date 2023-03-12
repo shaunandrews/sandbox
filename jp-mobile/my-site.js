@@ -304,6 +304,7 @@ function CommentDetail() {
 }
 
 function CommentListItem({
+    pending,
     author,
     authorAvatar,
     postTitle,
@@ -312,6 +313,9 @@ function CommentListItem({
 }) {
     return (
         <div className="comment-list-item" onClick={onClick}>
+            {pending && (
+                <div className="comment-list-item__pending" />
+            )}
             <div className="comment-list-item__avatar">
                 {authorAvatar}
             </div>
@@ -421,10 +425,10 @@ function MySiteView(props) {
                     <SegmentedControl
                         className="view-control"
                         options={[
-                            { value: 'all', label: 'All' },
-                            { value: 'pending', label: 'Pending' },
+                            { value: 'all', label: 'All (7)' },
+                            { value: 'pending', label: 'Pending (1)' },
                             // { value: 'unreplied', label: 'Unreplied' },
-                            { value: 'approved', label: 'Approved' },
+                            { value: 'approved', label: 'Approved (6)' },
                             // { value: 'spam', label: 'Spam' },
                             // { value: 'trashed', label: 'Trashed' },
                         ]}
@@ -435,6 +439,7 @@ function MySiteView(props) {
                 <div className="overlay__content">
                     <div className="comments-list">
                         <CommentListItem
+                            pending={true}
                             author="Dan Hauk"
                             authorAvatar={<img src="https://loremflickr.com/40/40/?lock=592" alt="Avatar" />}
                             postTitle="Scale in Tilt Brush"
