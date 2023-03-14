@@ -922,24 +922,6 @@ h1.section-heading {
 .comment-actions button.approve {
   color: var(--color-accent);
 }
-.comment-actions button.unapprove {
-  color: var(--color-text-alpha-50);
-}
-.comment-actions button.unapprove svg {
-  fill: var(--color-text-alpha-50);
-}
-.comment-actions button.reply {
-  color: var(--color-accent);
-}
-.comment-actions button.reply svg {
-  fill: var(--color-accent);
-}
-.comment-actions button.like {
-  color: var(--system-orange);
-}
-.comment-actions button.like svg {
-  fill: var(--system-orange);
-}
 .comment-actions button.spam {
   color: var(--system-orange);
 }
@@ -952,7 +934,11 @@ h1.section-heading {
   justify-content: center;
   background: none;
   padding: 15px 20px;
+  color: var(--color-text-alpha-50);
   background: var(--color-shadow-05);
+}
+.comment-actions.secondary button.trash {
+  color: var(--system-red);
 }
 
 .reader.view .reader__following-posts {

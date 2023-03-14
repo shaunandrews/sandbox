@@ -284,7 +284,7 @@ function CommentContent({ lengthy }) {
 }
 
 function CommentDetail() {
-    const [commentStatus, setCommentStatus] = useState('pending');
+    const [commentStatus, setCommentStatus] = useState('approved');
 
     function changeStatus(status) {
         setCommentStatus(status);
@@ -355,6 +355,10 @@ function CommentDetail() {
                             <Icon name="star" />
                             <label>Like</label>
                         </button>
+                        {/* <button className="edit">
+                            <Icon name="edit" />
+                            <label>Edit</label>
+                        </button> */}
                         <button className="share">
                             <Icon name="share" />
                             <label>Share</label>
@@ -364,15 +368,16 @@ function CommentDetail() {
                     <hr />
 
                     <div className="comment-actions secondary">
+                        <button className="edit">
+                            <label>Edit</label>
+                        </button>
                         <button
                             className="unapprove"
                             onClick={() => changeStatus('pending')}
                         >
-                            {/* <Icon name="dash-circle" /> */}
                             <label>Unapprove</label>
                         </button>
                         <button className="trash">
-                            {/* <Icon name="delete" /> */}
                             <label>Trash</label>
                         </button>
                     </div>

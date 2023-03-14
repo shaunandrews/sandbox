@@ -1151,38 +1151,6 @@ h1.section-heading {
             color: var(--color-accent);
         }
 
-        &.unapprove {
-            color: var(--color-text-alpha-50);
-
-            svg {
-                fill: var(--color-text-alpha-50);
-            }
-        }
-
-        &.reply {
-            color: var(--color-accent);
-
-            svg {
-                fill: var(--color-accent);
-            }
-        }
-
-        &.like {
-            color: var(--system-orange);
-            
-            svg {
-                fill: var(--system-orange);
-            }
-        }
-
-        &.share {
-            // color: var(--color-text-alpha-50);
-
-            // svg {
-            //     fill: var(--color-text-alpha-50);
-            // }
-        }
-
         &.spam {
             color: var(--system-orange);
         }
@@ -1199,7 +1167,12 @@ h1.section-heading {
             justify-content: center;
             background: none;
             padding: 15px 20px;
+            color: var(--color-text-alpha-50);
             background: var(--color-shadow-05);
+
+            &.trash {
+                color: var(--system-red);
+            }
         }
     }
 }
