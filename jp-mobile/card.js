@@ -1,8 +1,8 @@
-function Card({ children, className, title, optionsMenu }) {
+function Card({ children, className, title, optionsMenu, onClick }) {
     return (
         <div
             className={`card ${className}`}
-            onClick={() => { console.log('Card clicked') }}
+            onClick={onClick}
         >
             {optionsMenu &&
                 <OptionsMenu

@@ -33,11 +33,11 @@ function OptionsMenu({
         };
     }, [isMenuVisible]);
 
-    function toggleMenu() {
+    function toggleMenu(event) {
+        event.stopPropagation();
         setIsMenuVisible(!isMenuVisible);
     }
 
-    // handle MenuItem click
     function handleMenuItemClick(item) {
         setIsMenuVisible(false);
         console.log(item);

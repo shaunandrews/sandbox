@@ -65,17 +65,22 @@ function DraftPost({ title, date, excerpt }) {
     )
 }
 
-function MySiteToday({ toggleCommentsView }) {
+function MySiteToday({ toggleStatsView, toggleCommentsView }) {
+
     function handleQuickLinkClick(label) {
         if (label === 'Comments') {
             toggleCommentsView(true);
         }
     }
 
+    function openStatsView() {
+        toggleStatsView(true);
+    }
+
     return (
         <div className="my-site__home">
             <Card
-                title="Today's Stats"
+                title="Today's stats"
                 className="todays-stats"
                 optionsMenu={[
                     {
@@ -83,12 +88,13 @@ function MySiteToday({ toggleCommentsView }) {
                         label: 'Hide this card',
                     },
                 ]}
+                onClick={openStatsView}
             >
                 <StatsHighlights />
             </Card>
 
             <Card
-                title="Writing Prompt"
+                title="Writing prompt"
                 className="writing-prompt"
                 optionsMenu={[
                     {
@@ -127,7 +133,10 @@ function MySiteToday({ toggleCommentsView }) {
                 <button className="writing-prompt__write">Write your response</button>
             </Card>
 
-            <div className="quick-links">
+            <Card
+                title="Quick links"
+                className="quick-links"
+            >
                 <QuickLink icon="post" label="Posts" data="82" />
                 <QuickLink icon="page" label="Pages" data="12" />
                 <QuickLink
@@ -137,7 +146,7 @@ function MySiteToday({ toggleCommentsView }) {
                     onClick={handleQuickLinkClick}
                 />
                 <QuickLink icon="media" label="Media" data="1,392" />
-            </div>
+            </Card>
 
             <Card
                 title="Drafts"
@@ -228,6 +237,52 @@ function MySiteMenu() {
     )
 }
 
+function CommentAuthor({ avatar, displayName, website, email, ip }) {
+    return (
+        <div className="comment-author">
+            {avatar && avatar}
+            <div className="comment-author__details">
+                <div className="comment-author__byline">
+                    <h3 className="comment-author__display-name">{displayName},</h3>
+                    <a className="comment-author__website" href={"https://" + website}>{website}</a>
+                </div>
+
+                <a className="comment-author__email" href="mailto:{email}">{email}</a>
+
+                {/* <p className="comment-author__ip">{ip}</p> */}
+            </div>
+        </div >
+    )
+}
+
+function RelevantPost({ postTitle }) {
+    return (
+        <div className="relevant-post">
+            <label>Relevant post</label>
+            <h3>{postTitle}</h3>
+            <Icon name="chevron-right" />
+        </div>
+    )
+}
+
+function CommentContent({ lengthy }) {
+    return (
+        <div className="comment-content">
+            <p>This is so much cooler than the random strokes of colors and stars I painted at the GM.</p>
+
+            {lengthy && (
+                <>
+                    <p>I really enjoyed reading this blog post! The information was well-researched and presented in a clear and concise manner. I appreciated the insights and analysis that you provided, and I found the examples and case studies to be particularly helpful in understanding the concepts you were discussing.</p>
+
+                    <p>One point that stood out to me was your discussion of the importance of user experience in web design. I completely agree that a website's usability and accessibility are crucial factors in its success, and I think it's important for web designers to prioritize these aspects when creating a site. I also appreciated your tips on how to improve user experience, such as using clear and consistent navigation and optimizing site speed.</p>
+
+                    <p>Overall, I thought this was a very informative and thought-provoking blog post, and I look forward to reading more of your work in the future. Thank you for sharing your insights and expertise with your readers!</p>
+                </>
+            )}
+        </div>
+    )
+}
+
 function CommentDetail() {
     const [commentStatus, setCommentStatus] = useState('pending');
 
@@ -237,65 +292,96 @@ function CommentDetail() {
 
     return (
         <div className="comment-detail">
-            <div className="author">
-                <img className="author__avatar" src="https://loremflickr.com/40/40/?lock=592" alt="Avatar" />
-                <div className="author__details">
-                    <h3 className="author__display-name">Dan Hauk</h3>
-                    <p className="author__website"><a href="https://blog.danhauk.com">blog.danhauk.com</a></p>
-                    <p className="author__email"><a href="mailto:bill.bradski@gmail.com">bill.bradski@gmail.com</a></p>
-                    <p className="author__ip">192.168.0.1</p>
-                </div>
-            </div>
+            <RelevantPost
+                postTitle="The Best Travel Destinations"
+            />
+
+            <hr />
+
+            <CommentAuthor
+                avatar={<Avatar size="48" rounded={true} />}
+                displayName="Bill Bradski"
+                website="billbradski.com"
+                email="bill.bradski@gmail.com"
+                ip="192.168.0.1"
+            />
+
+            <hr />
+
+            <CommentContent lengthy={false} />
+
             <h4 className="comment-date">Oct. 3, 2016 @ 4:20 PM</h4>
-            <div className="comment-content">
-                <p>This is so much cooler than the random strokes of colors and stars I painted at the GM.</p>
-            </div>
+
+            <hr />
+
             {commentStatus === 'pending' && (
                 <div className="comment-status pending">
-                    <h5>Pending</h5>
-                    <p>This comment is pending approval and only visible to you.</p>
                     <div className="comment-actions">
-                        <button onClick={() => changeStatus('approved')}>
+                        <button
+                            className="approve"
+                            onClick={() => changeStatus('approved')}
+                        >
                             <Icon name="check" />
                             <label>Approve</label>
                         </button>
-                        <button>
+                        <button className="spam">
                             <Icon name="spam" />
                             <label>Spam</label>
                         </button>
-                        <button>
+                        <button className="trash">
                             <Icon name="delete" />
                             <label>Trash</label>
                         </button>
                     </div>
+
+                    <div class="comment-status__current">
+                        <div className="comment-status__explanation">
+                            <h5>Pending</h5>
+                            <p>Only visible to site admins</p>
+                        </div>
+                        <Icon name="pending" />
+                    </div>
                 </div>
             )}
+
             {commentStatus === 'approved' && (
                 <div className="comment-status approved">
                     <div className="comment-actions">
-                        <button>
+                        <button className="reply">
                             <Icon name="reply" />
                             <label>Reply</label>
                         </button>
-                        <button>
+                        <button className="like">
                             <Icon name="star" />
                             <label>Like</label>
                         </button>
-                        <button>
+                        <button className="share">
                             <Icon name="share" />
                             <label>Share</label>
                         </button>
                     </div>
-                    <h5>Approved on Mar 10, 2023 @ 4:36 PM</h5>
+
+                    <hr />
+
                     <div className="comment-actions secondary">
-                        <button onClick={() => changeStatus('pending')}>
-                            <Icon name="dash-circle" />
+                        <button
+                            className="unapprove"
+                            onClick={() => changeStatus('pending')}
+                        >
+                            {/* <Icon name="dash-circle" /> */}
                             <label>Unapprove</label>
                         </button>
-                        <button>
-                            <Icon name="delete" />
+                        <button className="trash">
+                            {/* <Icon name="delete" /> */}
                             <label>Trash</label>
                         </button>
+                    </div>
+
+                    <div class="comment-status__current">
+                        <div className="comment-status__explanation">
+                            <h5>Approved on Mar 10, 2023 @ 4:36 PM</h5>
+                        </div>
+                        <Icon name="check" />
                     </div>
                 </div>
             )}
@@ -330,9 +416,9 @@ function CommentListItem({
 
 function MySiteView(props) {
     const [mySiteView, setMySiteView] = useState('today');
+    const [statsViewVisible, setStatsViewVisible] = useState(false);
     const [commentsViewVisible, setCommentsViewVisible] = useState(false);
-    const [commentViewVisible, setCommentViewVisible] = useState(false);
-
+    const [commentViewVisible, setCommentViewVisible] = useState(true);
 
     function handleMySiteViewChange(value) {
         setMySiteView(value);
@@ -404,6 +490,7 @@ function MySiteView(props) {
                 {mySiteView === 'today' && (
                     <MySiteToday
                         toggleCommentsView={setCommentsViewVisible}
+                        toggleStatsView={setStatsViewVisible}
                     />
                 )}
 
@@ -411,6 +498,85 @@ function MySiteView(props) {
                     <MySiteMenu />
                 )}
             </main>
+
+            {/* Stats Overlay */}
+            <div className={`view__overlay stats ${statsViewVisible ? 'active' : ''}`}>
+                <div className="overlay__header">
+                    <button className="view__back" onClick={() => setStatsViewVisible(false)}>
+                        <Icon name="back" />
+                        <label>Back</label>
+                    </button>
+
+                    <h1 className="section-heading">Stats</h1>
+
+                    <SegmentedControl
+                        className="view-control"
+                        options={[
+                            // { value: 'insights', label: 'Insights' },
+                            { value: 'days', label: 'Days' },
+                            { value: 'weeks', label: 'Weeks' },
+                            { value: 'months', label: 'Months' },
+                            { value: 'years', label: 'Years' },
+                        ]}
+                        value="weeks"
+                    />
+
+                    <div className="stats-date-nav">
+                        <button>
+                            <Icon name="chevron-left" />
+                        </button>
+
+                        <label>Mar 13 &ndash; Mar 19</label>
+
+                        <button>
+                            <Icon name="chevron-right" />
+                        </button>
+                    </div>
+                </div>
+
+                <div className="overlay__content">
+                    <Card
+                        title="Views & visitors"
+                        classname="views-visitors"
+                        optionsMenu={[
+                            {
+                                type: 'option',
+                                label: 'Hide this card',
+                            },
+                        ]}
+                    >
+                        <StatsChart />
+
+                        <p>Your views in the last 7-days are up <strong>10% (293 views)</strong> from the previous 7-days.</p>
+
+                        <SegmentedControl
+                            className="views-visitors-control"
+                            options={[
+                                { value: 'views', label: 'Views' },
+                                { value: 'visitors', label: 'Visitors' },
+                            ]}
+                            value="views"
+                        />
+                    </Card>
+
+                    <Card
+                        title="Posts and pages"
+                        classname="posts-pages"
+                        optionsMenu={[
+                            {
+                                type: 'option',
+                                label: 'Hide this card',
+                            },
+                        ]}
+                    >
+                        <div className="posts-pages__item">
+                            <Icon name="post" />
+                            <label>My First Blog Post</label>
+                            <span>239 views</span>
+                        </div>
+                    </Card>
+                </div>
+            </div>
 
             {/* Comments List Overlay */}
             <div className={`view__overlay comments ${commentsViewVisible ? 'active' : ''}`}>
@@ -421,7 +587,9 @@ function MySiteView(props) {
                     </button>
 
                     <h1 className="section-heading">Comments</h1>
+                </div>
 
+                <div className="overlay__content">
                     <SegmentedControl
                         className="view-control"
                         options={[
@@ -434,9 +602,7 @@ function MySiteView(props) {
                         ]}
                         value="all"
                     />
-                </div>
 
-                <div className="overlay__content">
                     <div className="comments-list">
                         <CommentListItem
                             pending={true}
@@ -500,8 +666,8 @@ function MySiteView(props) {
                     </button>
 
                     <h1 className="section-heading">Comment</h1>
-                    <h2 className="section-subheading">Scale in Tile Brush</h2>
                 </div>
+
                 <div className="overlay__content">
                     <CommentDetail />
                 </div>

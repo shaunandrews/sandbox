@@ -1,15 +1,27 @@
 function ReaderPostActions() {
     return (
-        <div className="post-actions">
-            <button className="icon-only"><Icon name="bookmark" /></button>
-            <button className="icon-only"><Icon name="repeat" /></button>
-            <button className="icon-only"><Icon name="comment" /></button>
-            <button className="icon-only"><Icon name="star" /></button>
+        <div className="reader-post__actions">
+            <button>
+                <Icon name="bookmark" />
+            </button>
+            <button>
+                <Icon name="repeat" />
+                <strong>3</strong>
+            </button>
+            <button>
+                <Icon name="comment" />
+                <strong>18</strong>
+            </button>
+            <button>
+                <Icon name="star" />
+                <strong>102</strong>
+            </button>
         </div>
     )
 }
 
 function ReaderPost({
+    postAuthor,
     avatar,
     siteTitle,
     siteUrl,
@@ -19,29 +31,71 @@ function ReaderPost({
 }) {
     return (
         <div className="reader-post">
-            <div className="reader-post__avatar">
-                {avatar}
-            </div>
+            <OptionsMenu
+                className="reader-post__options"
+                items={[
+                    {
+                        type: 'option',
+                        label: 'View site details',
+                    },
+                    {
+                        type: 'option',
+                        label: 'Share this post',
+                    },
+                    {
+                        type: 'divider',
+                    },
+                    {
+                        type: 'option',
+                        label: 'Report this post',
+                    },
+                    {
+                        type: 'option',
+                        label: 'Unfollow site',
+                    },
+                    {
+                        type: 'option',
+                        label: 'Block site',
+                    },
+                ]}
+            />
 
-            <div className="reader-post__body">
-                <div className="reader-post__site">
-                    <h2 className="reader-post__site-title">{siteTitle}</h2>
-                    {/* <p className="reader-post__site-url">{siteUrl}</p> */}
+            <div className="reader-post__header">
+                <div className="reader-post__avatar">
+                    {avatar}
                 </div>
 
-                <h3 className="reader-post__title">{title}</h3>
+                <div className="reader-post__byline">
+                    <h2 className="reader-post__site-author">
+                        <strong className="post-author">{postAuthor}</strong>, <strong className="site-title">{siteTitle}</strong>
+                    </h2>
 
+                    <p className="reader-post__site-url">{siteUrl}</p>
+                </div>
+            </div >
+
+            <div className="reader-post__body">
                 {featuredImage && (
                     <div className="reader-post__featured-image">
                         {featuredImage}
                     </div>
                 )}
 
-                <p className="reader-post__excerpt">{excerpt}</p>
-                {/* <p className="reader-post__tags">meditation, mental health, mindfulness, self-care</p> */}
+                <div className="reader-post__title-excerpt">
+                    <h3 className="reader-post__title">{title}</h3>
+
+                    <p className="reader-post__excerpt">{excerpt}</p>
+                </div>
+
+                <ol className="reader-post__tags">
+                    <li className="reader-post__tag">Meditation</li>
+                    <li className="reader-post__tag">Mental Health</li>
+                    <li className="reader-post__tag">Anxiety</li>
+                </ol>
+
                 <ReaderPostActions />
             </div>
-        </div>
+        </div >
     )
 }
 
@@ -49,6 +103,7 @@ function ReaderFollowingPosts() {
     return (
         <div className="reader__following-posts">
             <ReaderPost
+                postAuthor="Shaun Andrews"
                 avatar={<img src="https://loremflickr.com/40/40/?lock=39" height="40" width="40" alt="Avatar" />}
                 siteTitle="Sporadic Thoughts"
                 siteUrl="sporadicthoughts.com"
@@ -57,6 +112,7 @@ function ReaderFollowingPosts() {
             />
 
             <ReaderPost
+                postAuthor="Tim Smith"
                 avatar={<img src="https://loremflickr.com/40/40/" height="40" width="40" alt="Avatar" />}
                 siteTitle="The Foodie Life"
                 siteUrl="foodielife.com"
@@ -65,48 +121,31 @@ function ReaderFollowingPosts() {
                 excerpt="Thai cuisine is renowned for its bold flavors and exotic ingredients. In this post, we take a culinary journey through Thailand, sampling some of the country's most iconic dishes and exploring the unique cultural influences that have shaped the cuisine."
             />
 
-            <ReaderPost
-                avatar={<img src="https://loremflickr.com/40/40/" height="40" width="40" alt="Avatar" />}
-                siteTitle="Fitness Frenzy"
-                siteUrl="fitnessfrenzy.com"
-                featuredImage={<img src="https://loremflickr.com/300/200/" height="200" width="300" alt="Featured Image" />}
-                title="Why Strength Training is Essential for Women"
-                excerpt="Many women avoid strength training because they believe it will make them look bulky or masculine. In reality, strength training is essential for building lean muscle mass, improving bone density, and boosting metabolism. In this post, we debunk common myths about strength training and explain why every woman should incorporate it into her fitness routine."
-            />
+            <div className="reader-suggestions">
+                <h2 className="reader-suggestions__title">Posts you might like</h2>
+                <div className="reader-suggestions__list">
+                    <Card className="reader-suggestions__item">
+                        <img src="https://loremflickr.com/300/200/?lock=902" height="200" width="300" alt="Featured Image" />
+                        <h4>A post title that sounds interesting.</h4>
+                        <h5>Site Title</h5>
+                        <h6>sitetitle.com</h6>
+                    </Card>
 
-            <ReaderPost
-                avatar={<img src="https://loremflickr.com/40/40/" height="40" width="40" alt="Avatar" />}
-                siteTitle="The Tech Insider"
-                siteUrl="techinsider.com"
-                title="The Future of Virtual Reality"
-                excerpt="Virtual reality technology has come a long way in recent years, and experts predict that it will revolutionize everything from gaming and entertainment to healthcare and education. In this post, we explore the latest advancements in virtual reality and discuss the potential applications for this exciting technology."
-            />
+                    <Card className="reader-suggestions__item">
+                        <img src="https://loremflickr.com/300/200/?lock=902" height="200" width="300" alt="Featured Image" />
+                        <h4>A post title that sounds interesting.</h4>
+                        <h5>Site Title</h5>
+                        <h6>sitetitle.com</h6>
+                    </Card>
 
-            <ReaderPost
-                avatar={<img src="https://loremflickr.com/40/40/" height="40" width="40" alt="Avatar" />}
-                siteTitle="The Wanderlust Chronicles"
-                siteUrl="wanderlustchronicles.com"
-                featuredImage={<img src="https://loremflickr.com/300/200/" height="200" width="300" alt="Featured Image" />}
-                title="Discovering the Hidden Gems of Japan"
-                excerpt="Japan is known for its bustling cities and iconic landmarks, but there are also plenty of off-the-beaten-path destinations that offer a glimpse into the country's rich history and culture. In this post, we take a journey through Japan's hidden gems, from quaint mountain villages to serene temples and gardens."
-            />
-
-            <ReaderPost
-                avatar={<img src="https://loremflickr.com/40/40/" height="40" width="40" alt="Avatar" />}
-                siteTitle="Fitness and Health"
-                siteUrl="fitnessandhealth.com"
-                title="5 Effective Ways to Boost Your Metabolism"
-                excerpt="Your metabolism is responsible for converting food into energy. A higher metabolism means that you burn more calories at rest. In this article, we explore 5 effective ways to boost your metabolism and help you reach your fitness goals faster."
-            />
-
-            <ReaderPost
-                avatar={<img src="https://loremflickr.com/40/40/" height="40" width="40" alt="Avatar" />}
-                siteTitle="Travel Tales"
-                siteUrl="traveltales.com"
-                featuredImage={<img src="https://loremflickr.com/300/200/" height="200" width="300" alt="Featured Image" />}
-                title="Discovering the Wonders of Patagonia"
-                excerpt="Patagonia is a region located at the southern tip of South America, known for its stunning natural landscapes and diverse wildlife. In this article, we share our experience of exploring Patagonia and the wonders we discovered along the way."
-            />
+                    <Card className="reader-suggestions__item">
+                        <img src="https://loremflickr.com/300/200/?lock=902" height="200" width="300" alt="Featured Image" />
+                        <h4>A post title that sounds interesting.</h4>
+                        <h5>Site Title</h5>
+                        <h6>sitetitle.com</h6>
+                    </Card>
+                </div>
+            </div>
         </div>
     )
 }

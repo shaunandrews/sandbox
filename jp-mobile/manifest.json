@@ -1,7 +1,7 @@
 {
     "name": "Jetpack",
     "short_name": "Jetpack",
-    "start_url": "/sandbox/jp-mobile/",
+    "start_url": "/jp-mobile/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000"

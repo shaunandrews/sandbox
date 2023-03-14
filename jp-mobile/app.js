@@ -208,6 +208,21 @@ function AccountView(props) {
     )
 }
 
+function Avatar({ size, rounded, alt }) {
+    const className = `avatar ${rounded ? 'rounded' : ''}`;
+    const src = `https://loremflickr.com/${size}/${size}/`;
+
+    return (
+        <img
+            className={className}
+            src={src}
+            alt={alt}
+            height={size}
+            width={size}
+        />
+    );
+}
+
 function App() {
     const [currentTab, setCurrentTab] = useState('tab-home');
     const [sitesSheet, setSitesSheet] = useState(false);
