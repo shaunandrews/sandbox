@@ -283,21 +283,9 @@ function CommentContent({ lengthy }) {
     )
 }
 
-function CommentDetail() {
-    const [commentStatus, setCommentStatus] = useState('approved');
-
-    function changeStatus(status) {
-        setCommentStatus(status);
-    }
-
+function CommentDetail({ commentStatus, setCommentStatus }) {
     return (
         <div className="comment-detail">
-            <RelevantPost
-                postTitle="The Best Travel Destinations"
-            />
-
-            <hr />
-
             <CommentAuthor
                 avatar={<Avatar size="48" rounded={true} />}
                 displayName="Bill Bradski"
@@ -306,93 +294,77 @@ function CommentDetail() {
                 ip="192.168.0.1"
             />
 
-            <hr />
+            <RelevantPost
+                postTitle="Scale in Tilt Brush"
+            />
 
             <CommentContent lengthy={false} />
 
-            <h4 className="comment-date">Oct. 3, 2016 @ 4:20 PM</h4>
-
-            <hr />
+            <div className="comment-meta">
+                <h4 className="comment-date">Oct. 3, 2016 @ 4:20 PM</h4>
+                {commentStatus === 'pending' && (
+                    <label className="comment-status pending">Pending</label>
+                )}
+            </div>
 
             {commentStatus === 'pending' && (
-                <div className="comment-status pending">
-                    <div className="comment-actions">
-                        <button
-                            className="approve"
-                            onClick={() => changeStatus('approved')}
-                        >
-                            <Icon name="check" />
-                            <label>Approve</label>
-                        </button>
-                        <button className="spam">
-                            <Icon name="spam" />
-                            <label>Spam</label>
-                        </button>
-                        <button className="trash">
-                            <Icon name="delete" />
-                            <label>Trash</label>
-                        </button>
-                    </div>
-
-                    <div class="comment-status__current">
-                        <div className="comment-status__explanation">
-                            <h5>Pending</h5>
-                            <p>Only visible to site admins</p>
-                        </div>
-                        <Icon name="pending" />
-                    </div>
+                <div className="comment-actions column">
+                    <button
+                        className="approve"
+                        onClick={() => setCommentStatus('approved')}
+                    >
+                        <Icon name="check" />
+                        <label>Approve</label>
+                    </button>
+                    <button className="spam">
+                        {/* <Icon name="spam" /> */}
+                        <label>Mark as spam</label>
+                    </button>
+                    <button className="trash">
+                        {/* <Icon name="delete" /> */}
+                        <label>Move to trash</label>
+                    </button>
                 </div>
             )}
 
             {commentStatus === 'approved' && (
-                <div className="comment-status approved">
-                    <div className="comment-actions">
-                        <button className="reply">
-                            <Icon name="reply" />
-                            <label>Reply</label>
-                        </button>
-                        <button className="like">
-                            <Icon name="star" />
-                            <label>Like</label>
-                        </button>
-                        {/* <button className="edit">
-                            <Icon name="edit" />
-                            <label>Edit</label>
-                        </button> */}
-                        <button className="share">
-                            <Icon name="share" />
-                            <label>Share</label>
-                        </button>
-                    </div>
-
-                    <hr />
-
-                    <div className="comment-actions secondary">
-                        <button className="edit">
-                            <label>Edit</label>
-                        </button>
-                        <button
-                            className="unapprove"
-                            onClick={() => changeStatus('pending')}
-                        >
-                            <label>Unapprove</label>
-                        </button>
-                        <button className="trash">
-                            <label>Trash</label>
-                        </button>
-                    </div>
-
-                    <div class="comment-status__current">
-                        <div className="comment-status__explanation">
-                            <h5>Approved on Mar 10, 2023 @ 4:36 PM</h5>
-                        </div>
-                        <Icon name="check" />
-                    </div>
+                <div className="comment-actions row">
+                    <button className="reply">
+                        <Icon name="reply" />
+                        <label>Reply</label>
+                    </button>
+                    <CommentLikeButton />
+                    <button className="share">
+                        <Icon name="share" />
+                        <label>Share</label>
+                    </button>
                 </div>
             )}
         </div>
     )
 }
+
+function CommentLikeButton() {
+    const [isLiked, setIsLiked] = useState(false);
+
+    function handleLike() {
+        setIsLiked(!isLiked);
+    };
+
+    return (
+        <button className={`comment-like ${isLiked ? 'liked' : ''}`} onClick={handleLike}>
+            {isLiked && (
+                <div className="comment-like__animation">
+                    <Icon name="star-filled" />
+                </div>
+            )}
+
+            <Icon name={isLiked ? "star-filled" : "star"} />
+            <label>{isLiked ? 'Liked' : 'Like'}</label>
+        </button>
+    );
+}
+
 
 function CommentListItem({
     pending,
@@ -424,6 +396,7 @@ function MySiteView(props) {
     const [statsViewVisible, setStatsViewVisible] = useState(false);
     const [commentsViewVisible, setCommentsViewVisible] = useState(false);
     const [commentViewVisible, setCommentViewVisible] = useState(true);
+    const [commentStatus, setCommentStatus] = useState('pending');
 
     function handleMySiteViewChange(value) {
         setMySiteView(value);
@@ -431,6 +404,20 @@ function MySiteView(props) {
 
     function selectComment(comment) {
         setCommentViewVisible(true);
+    }
+
+    function getCommentMenuItems(commentStatus, setCommentStatus) {
+        const menuItems = [
+            commentStatus === "approved"
+                ? { type: "option", label: "Unapprove", onClick: () => setCommentStatus("pending") }
+                : { type: "option", label: "Approve", onClick: () => setCommentStatus("approved") },
+            { type: "option", label: "Mark as spam" },
+            { type: "option", label: "Move to trash", isScary: true },
+            { type: "divider" },
+            { type: "option", label: "Edit comment" },
+        ];
+
+        return menuItems;
     }
 
     return (
@@ -671,10 +658,20 @@ function MySiteView(props) {
                     </button>
 
                     <h1 className="section-heading">Comment</h1>
+
+                    <div className="toolbar-group">
+                        <OptionsMenu
+                            className="comment-options-menu"
+                            items={getCommentMenuItems(commentStatus, setCommentStatus)}
+                        />
+                    </div>
                 </div>
 
                 <div className="overlay__content">
-                    <CommentDetail />
+                    <CommentDetail
+                        commentStatus={commentStatus}
+                        setCommentStatus={setCommentStatus}
+                    />
                 </div>
             </div>
         </div >

@@ -1,10 +1,20 @@
-function MenuItem({ type, label, onClick }) {
+function MenuItem({ type, label, onClick, setIsMenuVisible, isScary }) {
+    const handleClick = (e) => {
+        e.stopPropagation();
+
+        if (onClick) {
+            onClick();
+        }
+
+        setIsMenuVisible(false);
+    };
+
     return (
         <>
             {type === "option" && (
                 <div
-                    className="menu-item"
-                    onClick={() => onClick(label)}
+                    className={`menu-item ${isScary ? "is-scary" : ""}`}
+                    onClick={handleClick}
                 >
                     <label>{label}</label>
                 </div>
@@ -38,11 +48,6 @@ function OptionsMenu({
         setIsMenuVisible(!isMenuVisible);
     }
 
-    function handleMenuItemClick(item) {
-        setIsMenuVisible(false);
-        console.log(item);
-    }
-
     return (
         <div className={`options-menu ${className}`}>
             <button
@@ -58,7 +63,9 @@ function OptionsMenu({
                             key={index}
                             type={item.type}
                             label={item.label}
-                            onClick={handleMenuItemClick}
+                            onClick={item.onClick}
+                            setIsMenuVisible={setIsMenuVisible}
+                            isScary={item.isScary}
                         />
                     ))}
                 </div>
