@@ -1137,7 +1137,7 @@ h1.section-heading {
         }
 
         label {
-            line-height: 30px;
+            line-height: 34px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1173,6 +1173,7 @@ h1.section-heading {
             opacity: 1;
             transform: scale(1) rotate(0deg);
         }
+
         100% {
             opacity: 0;
             transform: scale(2) rotate(15deg) translateY(-20px);
