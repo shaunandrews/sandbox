@@ -9,5 +9,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
+    border-top: 1px solid var(--color-tint-01);
+    // background: var(--color-tint-005);
     border-bottom: 1px solid var(--color-tint-01);
 }

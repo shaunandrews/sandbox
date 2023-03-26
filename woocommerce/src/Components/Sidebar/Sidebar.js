@@ -35,6 +35,7 @@ function Sidebar({
                     { [`${mode}`]: mode },
                 )}
         >
+            <div className="resize-handle" />
             <Stack
                 className="sidebar__content"
                 gap="none"
@@ -67,8 +68,6 @@ function Sidebar({
                             setIsSelected('blog');
                         }}
                     />
-                    {/* <MenuItem label="Work" icon="page" /> */}
-                    {/* <MenuItem label="About" icon="page" /> */}
                     <MenuItem label="Shop" />
                     <MenuItem label="Cart" />
                     <MenuItem label="Search" />
@@ -109,33 +108,11 @@ function Sidebar({
                     <MenuItem label="Add New" />
                 </MenuGroup>
 
-                {/* <MenuGroup
-                    label="Content"
-                    icon="content"
-                >
-                    <MenuItem label="Posts" />
-                    <MenuItem label="Comments" />
-                    <MenuItem label="Media" />
-                    <MenuItem
-                        label="Products"
-                        isSelected={isSelected === 'products'}
-                        onClick={() => {
-                            setSidebarMode('default');
-                            setCollectionMode('default');
-                            setCanvasMode('mini');
-                            setCanvasScreenName('Products');
-                            setIsSelected('products');
-                        }}
-                    />
-                    <MenuItem label="Orders" />
-                </MenuGroup> */}
-
                 <div className="menu-spacer" />
 
                 <MenuGroup
                     label="Jetpack"
                     icon="jetpack"
-                // open
                 >
                     <MenuItem label="Stats" />
                     <MenuItem label="Activity" />

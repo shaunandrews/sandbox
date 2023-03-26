@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 
 // Components
+import Icon from './Base/Icon';
 import SiteCard from './Site/SiteCard';
 
 // CSS
@@ -23,7 +24,7 @@ function Toolbar({ mode }) {
         >
             <SiteCard />
 
-            <button>More</button>
+            <Icon name="more" />
         </div>
     );
 }

@@ -8,12 +8,12 @@
     transition: var(--transition-default);
 
     &.wide {
-        right: 0;
+        right: 20px;
     }
 }
 
 .collection__header {
-    padding: 30px 30px;
+    padding: 25px 30px;
     // outline: 1px solid red;
 
     h1 {

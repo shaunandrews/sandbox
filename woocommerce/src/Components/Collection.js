@@ -24,18 +24,19 @@ function Collection({
     setCanvasScreenName,
 }) {
     return (
-        <div
+        <Stack
             className={
                 classnames(
                     "collection",
                     { [`${mode}`]: mode },
                 )}
+            gap="none"
         >
             <Stack
                 className="collection__header"
                 direction="horizontal"
             >
-                <h1>{title} ({mode})</h1>
+                <h1>{title}</h1>
 
                 <Stack
                     direction='horizontal'
@@ -48,7 +49,7 @@ function Collection({
             <div className="collection__content">
                 <List />
             </div>
-        </div>
+        </Stack>
     );
 }
 

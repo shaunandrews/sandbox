@@ -15,7 +15,7 @@
     overflow: hidden;
     border: 0.5px solid var(--color-tint-02);
     box-shadow: 0 3px 15px rgba(black, 0.25);
-    transition: var(--transition-quick);
+    transition: var(--transition-default);
 
     .canvas__content {
         display: flex;
@@ -52,6 +52,6 @@
     width: 180px;
 
     .canvas__content {
-        transform: scale(0.3);
+        // transform: scale(0.3);
     }
 }

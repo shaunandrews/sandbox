@@ -27,7 +27,7 @@ function ListItem({
                     { "is-selected": isSelected },
                 )
             }
-            // onClick={() => setIsSelected(!isSelected)}
+            onClick={() => setIsSelected(!isSelected)}
             centered
         >
             <input
@@ -39,13 +39,24 @@ function ListItem({
             <label className="wp-list__item__label">{label}</label>
             <div className="wp-list__item__variation">Size: Large</div>
             <div className="wp-list__item__status">{status}</div>
-            <div className="wp-list__item__price">$10.00</div>
+            <ListItemPrice />
             {/* <div className="wp-list__item__categories">Music, Live, 2023</div> */}
             {/* <div className="wp-list__item__created-at">2021-01-01 at 8:29 PM</div> */}
             <div className="wp-list__item__image">
                 <img src="https://picsum.photos/80/80" />
             </div>
         </Stack>
+    );
+}
+
+function ListItemPrice() {
+    return (
+        <div
+            className="wp-list__item__price"
+            onClick={() => console.log('price')}
+        >
+            $10.00
+        </div>
     );
 }
 
