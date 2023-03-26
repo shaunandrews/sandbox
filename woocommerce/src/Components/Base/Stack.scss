@@ -1,0 +1,48 @@
+.stack {
+    display: flex;
+    flex-wrap: nowrap;
+
+    &.centered.horizontal {
+        align-items: center;
+    }
+
+    &.centered.vertical {
+        justify-content: center;
+    }
+
+    &.vertical {
+        flex-direction: column;
+    }
+
+    &.horizontal {
+        flex-direction: row;
+    }
+
+    &.gap-none {
+        gap: 0;
+    }
+
+    &.gap-x-small {
+        gap: 2px;
+    }
+
+    &.gap-small {
+        gap: 5px;
+    }
+
+    &.gap-default {
+        gap: 10px;
+    }
+
+    &.gap-medium {
+        gap: 15px;
+    }
+
+    &.gap-large {
+        gap: 20px;
+    }
+
+    &.gap-x-large {
+        gap: 30px;
+    }
+}

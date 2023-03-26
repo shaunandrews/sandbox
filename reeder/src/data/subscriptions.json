@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "TechCrunch",
+        "description": "Breaking technology news, analysis, and opinions from TechCrunch.",
+        "unreadCount": 3
+    },
+    {
+        "id": 2,
+        "title": "The New York Times",
+        "description": "Breaking news, world news, and multimedia from The New York Times.",
+        "unreadCount": 0
+    },
+    {
+        "id": 3,
+        "title": "The Economist",
+        "description": "Insight and analysis on international news, politics, business, finance, science, and technology from The Economist.",
+        "unreadCount": 10
+    },
+    {
+        "id": 4,
+        "title": "National Geographic",
+        "description": "Inspiring people to care about the planet since 1888.",
+        "unreadCount": 1
+    },
+    {
+        "id": 5,
+        "title": "HuffPost",
+        "description": "Breaking news, analysis, and opinion on politics, business, world news, entertainment, and more.",
+        "unreadCount": 5
+    }
+]

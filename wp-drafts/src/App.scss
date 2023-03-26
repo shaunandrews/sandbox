@@ -1,0 +1,143 @@
+:root {
+  --color-surface: rgb(255, 255, 255);
+  --color-tint: rgba(0, 0, 0, 0.1);
+  --color-accent: rgb(155, 15, 185);
+
+  --color-border: rgba(0, 0, 0, 0.2);
+
+  --color-text: rgb(0, 0, 0);
+  --color-text-alpha-25: rgba(0, 0, 0, 0.25);
+  --color-text-alpha-50: rgba(0, 0, 0, 0.5);
+  --color-text-alpha-75: rgba(0, 0, 0, 0.75);
+
+  --color-text-reverse: rgb(255, 255, 255);
+
+  --font-size-caption: 14px;
+  --font-size-body: 16px;
+  --font-size-subheading: 18px;
+  --font-size-heading: 24px;
+  --font-size-title: 32px;
+  --font-size-display: 48px;
+
+  --spacing-1: 5px;
+  --spacing-2: 10px;
+  --spacing-3: 15px;
+  --spacing-4: 20px;
+
+  --border-radius: 10px;
+  --border-radius-inner: 5px;
+}
+
+// CSS reset
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-body);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1;
+  color: var(--color-text);
+  border: none;
+  outline: none;
+}
+
+input {
+  padding: var(--spacing-1);
+  border-radius: var(--border-radius-inner);
+}
+
+button {
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-inner);
+  background: var(--color-accent);
+  color: var(--color-text-reverse);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.authentication {
+  min-width: 300px;
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius);
+  background: var(--color-tint);
+  display: flex;
+  gap: var(--spacing-2);
+  flex-direction: column;
+}
+
+.main {
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    width: 220px;
+    background: var(--color-tint);
+
+    .sidebar-group.primary {
+      flex-grow: 1;
+    }
+  }
+
+  .details {
+    width: calc(100vw - 220px);
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+.site-info {
+  h1.site-title {
+    font-size: var(--font-size-heading);
+  }
+
+  .site-url {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-alpha-50);
+  }
+}
+
+.drafts-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.draft-list-item {
+  display: flex;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
+  cursor: pointer;
+  border-top: 0.5px solid var(--color-border);
+
+  .draft-title {
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  &.is-selected {
+    background: var(--color-accent);
+
+    .draft-title {
+      color: var(--color-text-reverse);
+    }
+  }
+
+  &:last-child {
+    border-bottom: 0.5px solid var(--color-border);
+  }
+}

@@ -1,0 +1,205 @@
+:root {
+
+  --color-scary: rgba(255, 0, 0, 1);
+  --color-selected: rgba(0, 0, 255, 1);
+  --color-accent: rgb(154, 41, 199);
+  --color-accent-label: rgb(255, 255, 255);
+
+  --color-body: rgb(255, 255, 255);
+
+  --color-tint: rgba(0, 0, 0, 0.05);
+  --color-tint-1: rgba(0, 0, 0, 0.1);
+  --color-tint-2: rgba(0, 0, 0, 0.2);
+  --color-tint-3: rgba(0, 0, 0, 0.3);
+
+  --color-border: rgba(0, 0, 0, 0.2);
+  --color-border-extra: rgba(0, 0, 0, 0.4);
+  --color-card: rgba(255, 255, 255, 1);
+
+  --color-text: rgba(0, 0, 0, 1);
+  --color-text-75: rgba(0, 0, 0, 0.75);
+  --color-text-50: rgba(0, 0, 0, 0.5);
+  --color-text-25: rgba(0, 0, 0, 0.25);
+  --color-text-reversed: rgba(255, 255, 255, 1);
+  --color-text-reversed-75: rgba(255, 255, 255, 0.75);
+  --color-text-reversed-50: rgba(255, 255, 255, 0.5);
+  --color-text-reversed-25: rgba(255, 255, 255, 0.25);
+
+  @media (prefers-color-scheme: dark) {
+    --color-body: rgb(20, 20, 20);
+
+    --color-tint: rgba(255, 255, 255, 0.05);
+    --color-tint-1: rgba(255, 255, 255, 0.1);
+    --color-tint-2: rgba(255, 255, 255, 0.2);
+    --color-tint-3: rgba(255, 255, 255, 0.3);
+
+    --color-border: rgba(255, 255, 255, 0.2);
+    --color-border-extra: rgba(255, 255, 255, 0.4);
+    --color-card: rgba(0, 0, 0, 1);
+
+    --color-text: rgba(255, 255, 255, 1);
+    --color-text-75: rgba(255, 255, 255, 0.75);
+    --color-text-50: rgba(255, 255, 255, 0.5);
+    --color-text-25: rgba(255, 255, 255, 0.25);
+    --color-text-reversed: rgba(0, 0, 0, 1);
+    --color-text-reversed-75: rgba(0, 0, 0, 0.75);
+    --color-text-reversed-50: rgba(0, 0, 0, 0.5);
+    --color-text-reversed-25: rgba(0, 0, 0, 0.25);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+}
+
+body {
+  font-size: 16px;
+  // font-family: Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif;
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+  background: var(--color-body);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.5;
+
+  &.subtext {
+    font-size: 14px;
+    color: var(--color-text-50);
+    margin-left: 55px;
+    margin-top: -10px;
+  }
+}
+
+hr,
+button,
+input,
+textarea {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: var(--color-text);
+  background: var(--color-card);
+
+  &.primary {
+    background: var(--color-accent);
+    color: var(--color-accent-label);
+  }
+
+  &.scary {
+    color: var(--color-scary);
+  }
+
+  &.icon-only {
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    label {
+      display: none;
+    }
+  }
+}
+
+svg {
+  display: block;
+}
+
+hr {
+  width: 100%;
+  height: 0;
+  margin: 30px auto;
+  border-top: 0.5px solid var(--color-border);
+}
+
+.App {
+  width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.modes {
+  // width: 100vw;
+  // display: flex;
+  // flex-direction: row;
+  // transition: transform 0.25s ease-out;
+
+  // &.is-plan {
+  //   transform: translateX(0);
+
+  //   #work,
+  //   #review {
+  //     overflow: hidden;
+  //     height: calc(100vh - 140px);
+  //     transform: scale(0.8);
+  //   }
+  // }
+
+  // &.is-work {
+  //   transform: translateX(-100vw);
+
+  //   #plan,
+  //   #review {
+  //     overflow: hidden;
+  //     height: calc(100vh - 140px);
+  //     transform: scale(0.8);
+  //   }
+  // }
+
+  // &.is-review {
+  //   transform: translateX(-200vw);
+
+  //   #plan,
+  //   #work {
+  //     overflow: hidden;
+  //     height: calc(100vh - 140px);
+  //     transform: scale(0.8);
+  //   }
+  // }
+
+  .mode {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px;
+    // min-width: 100vw;
+    // transition: all 0.2s ease-out;
+    max-width: 600px;
+  }
+}
+
+.mode-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-text-50);
+  font-size: 13px;
+}

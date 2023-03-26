@@ -1,0 +1,57 @@
+:root {
+    --canvas-margin: 20px;
+}
+
+.canvas {
+    position: absolute;
+    right: var(--canvas-margin);
+    bottom: var(--canvas-margin);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background: #fff;
+
+    border-radius: 10px;
+    overflow: hidden;
+    border: 0.5px solid var(--color-tint-02);
+    box-shadow: 0 3px 15px rgba(black, 0.25);
+    transition: var(--transition-quick);
+
+    .canvas__content {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+    }
+}
+
+.canvas.full {
+    border-radius: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.canvas.default {
+    width: calc(100vw - var(--width-sidebar) - var(--canvas-margin) - var(--canvas-margin));
+    height: calc(100vh - var(--height-toolbar) - var(--canvas-margin) - var(--canvas-margin));
+}
+
+.canvas.mini {
+    right: var(--canvas-margin);
+    bottom: var(--canvas-margin);
+    width: calc(100vw - var(--width-sidebar-wide) - var(--canvas-margin));
+    height: calc(100vh - var(--height-toolbar) - var(--canvas-margin) - var(--canvas-margin))
+}
+
+.canvas.pip {
+    right: calc(var(--canvas-margin) / 2);
+    bottom: calc(var(--canvas-margin) / 2);
+    height: 120px;
+    width: 180px;
+
+    .canvas__content {
+        transform: scale(0.3);
+    }
+}

@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "subscriptionId": 1,
+        "title": "Google’s new Pixel 4a is a $349 phone that’s actually worth buying",
+        "description": "Google’s new Pixel 4a is a $349 phone that’s actually worth buying",
+        "url": "https://techcrunch.com/2020/08/03/googles-new-pixel-4a-is-a-349-phone-thats-actually-worth-buying/",
+        "date": "2020-08-03T15:00:00.000Z"
+    },
+    {
+        "id": 2,
+        "subscriptionId": 1,
+        "title": "Tesla stock surges after company announces stock split",
+        "description": "Tesla stock surges after company announces stock split",
+        "url": "https://techcrunch.com/2020/08/11/tesla-stock-surges-after-company-announces-stock-split/",
+        "date": "2020-08-11T14:20:00.000Z"
+    },
+    {
+        "id": 3,
+        "subscriptionId": 1,
+        "title": "Apple countersues Epic, claiming breach of contract",
+        "description": "Apple countersues Epic, claiming breach of contract",
+        "url": "https://techcrunch.com/2020/09/08/apple-countersues-epic-claiming-breach-of-contract/",
+        "date": "2020-09-08T19:08:00.000Z"
+    },
+    {
+        "id": 4,
+        "subscriptionId": 2,
+        "title": "Biden Wins Presidency, Ending Four Tumultuous Years Under Trump",
+        "description": "Joseph R. Biden Jr. achieved victory offering a message of healing and unity. He will return mask-wearing and long-awaited expertise to the White House.",
+        "url": "https://www.nytimes.com/2020/11/07/us/politics/biden-election.html",
+        "date": "2020-11-07T16:02:13.000Z"
+    },
+    {
+        "id": 5,
+        "subscriptionId": 2,
+        "title": "Supreme Court Rejects Texas Suit Seeking to Subvert Election",
+        "description": "Supreme Court Rejects Texas Suit Seeking to Subvert Election",
+        "url": "https://www.nytimes.com/2020/12/11/us/politics/supreme-court-election-texas.html",
+        "date": "2020-12-11T23:09:16.000Z"
+    },
+    {
+        "id": 6,
+        "subscriptionId": 2,
+        "title": "‘I Will Shoot You’: For 11 Minutes, Parkland Shooting Victim’s Family Relives Trauma",
+        "description": "‘I Will Shoot You’: For 11 Minutes, Parkland Shooting Victim’s Family Relives Trauma",
+        "url": "https://www.nytimes.com/2020/12/11/us/parkland-shooting-lawsuit.html",
+        "date": "2020-12-11T20:56:36.000Z"
+    },
+    {
+        "id": 7,
+        "subscriptionId": 3,
+        "title": "Biden plans early legislation to offer legal status to 11 million immigrants without it.",
+        "description": "Biden plans early legislation to offer legal status to 11 million immigrants without it.",
+        "url": "https://www.economist.com/united-states/2020/11/14/biden-plans-early-legislation-to-offer-legal-status-to-11m-immigrants-without-it",
+        "date": "2020-11-14T00:00:00.000Z"
+    },
+    {
+        "id": 8,
+        "subscriptionId": 3,
+        "title": "China’s digital currency tests leap forward in 2020",
+        "description": "China’s digital currency tests leap forward in 2020",
+        "url": "https://www.economist.com/finance-and-economics/2020/11/28/chinas-digital-currency-tests-leap-forward-in-2020",
+        "date": "2020-11-28T00:00:00.000Z"
+    },
+    {
+        "id": 9,
+        "subscriptionId": 4,
+        "title": "Photos of the Week: Giant Pandas, Hanukkah Celebrations, Taylor Swift",
+        "description": "Photos of the Week: Giant Pandas, Hanukkah Celebrations, Taylor Swift",
+        "url": "https://www.nationalgeographic.com/photography/photos/photos-of-the-week-giant-pandas-hanukkah-celebrations-taylor-swift/",
+        "date": "2020-12-11T14:27:15.000Z"
+    },
+    {
+        "id": 10,
+        "subscriptionId": 5,
+        "title": "Senate Republicans acknowledge Biden won presidential election",
+        "description": "Senate Republicans acknowledge Biden won presidential election",
+        "url": "https://www.huffpost.com/entry/senate-republicans-biden-won-election_n_5fb82ab2c5b6f6adf5c84d5f",
+        "date": "2020-11-21T19:03:35.000Z"
+    },
+    {
+        "id": 11,
+        "subscriptionId": 5,
+        "title": "GOP’s top election lawyer abandons Trump campaign",
+        "description": "GOP’s top election lawyer abandons Trump campaign",
+        "url": "https://www.huffpost.com/entry/republican-lawyer-cleta-mitchell-trump_n_5fbc81a3ac5b68a66dd3502b2",
+        "date": "2020-11-09T22:32:19.000Z"
+    }
+]
