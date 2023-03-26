@@ -1,12 +1,7 @@
-.wp-list {
-    padding: 0;
-}
-
 .wp-list__item {
     background: var(--color-tint-0025);
     border-radius: 5px;
     padding: 10px 20px;
-    border: 0.5px solid transparent;
 
     &:hover {
         background: var(--color-tint-005);

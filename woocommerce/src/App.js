@@ -4,7 +4,7 @@ import classnames from 'classnames';
 // Components
 import Toolbar from './Components/Toolbar';
 import Sidebar from './Components/Sidebar/Sidebar';
-import Collection from './Components/Collection';
+import Collection from './Components/Collection/Collection';
 import Canvas from './Components/Canvas';
 
 // CSS
@@ -91,8 +91,8 @@ function Stagehand({ setSidebarMode, setCollectionMode, setCanvasMode, setCanvas
 function App() {
   const [sidebarMode, setSidebarMode] = useState('default');
   const [collectionMode, setCollectionMode] = useState('default');
-  const [canvasMode, setCanvasMode] = useState('default');
-  const [canvasScreenName, setCanvasScreenName] = useState('Home');
+  const [canvasMode, setCanvasMode] = useState('mini');
+  const [canvasScreenName, setCanvasScreenName] = useState('Products');
 
   return (
     <div className={
@@ -110,7 +110,7 @@ function App() {
       <Toolbar />
 
       <Sidebar
-        selected="home"
+        selected="products"
         mode={sidebarMode}
         setSidebarMode={setSidebarMode}
         setCollectionMode={setCollectionMode}

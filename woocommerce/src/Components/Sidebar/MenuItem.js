@@ -30,6 +30,18 @@ function MenuItem({
                     className="menu-item__icon"
                 />
             }
+            <div className="menu-item__favorite">
+                <Icon
+                    name="star-empty"
+                    size="small"
+                    className="favorite__off"
+                />
+                {/* <Icon
+                    name="star-filled"
+                    size="small"
+                    className="favorite__on"
+                /> */}
+            </div>
         </Stack>
     )
 }

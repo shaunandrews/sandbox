@@ -14,8 +14,14 @@
     border-radius: 10px;
     overflow: hidden;
     border: 0.5px solid var(--color-tint-02);
-    box-shadow: 0 3px 15px rgba(black, 0.25);
+    // box-shadow: 0 3px 10px rgba(black, 0.25);
     transition: var(--transition-default);
+
+    &:hover {
+        transform: scale(1.01);
+        border-color: var(--color-tint-08);
+        // box-shadow: 0 1px 10px rgba(black, 0.25);
+    }
 
     .canvas__content {
         display: flex;

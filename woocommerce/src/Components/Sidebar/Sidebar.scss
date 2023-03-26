@@ -76,6 +76,7 @@
 }
 
 .menu-item {
+    position: relative;
     padding: 10px 10px;
     border-radius: 5px;
     color: var(--color-tint-07);
@@ -85,8 +86,21 @@
         font-size: var(--font-size-small);
     }
 
+    .menu-item__favorite {
+        position: absolute;
+        left: -22px;
+        padding-right: 15px;
+        color: var(--color-favorite);
+        opacity: 0;
+    }
+
     &:hover {
         color: var(--color-tint-04);
+
+        .menu-item__favorite {
+            opacity: 1;
+            transition-delay: 0.8s;
+        }
     }
 
     &.selected {

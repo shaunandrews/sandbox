@@ -43,7 +43,7 @@ function Sidebar({
                 <MenuGroup
                     label="Pages"
                     icon="page"
-                    open
+                    // open
                 >
                     <MenuItem
                         label="Home"
@@ -125,6 +125,7 @@ function Sidebar({
                 <MenuGroup
                     label="WooCommerce"
                     icon="woo"
+                    open
                 >
                     <MenuItem label="Dashboard" />
                     <MenuItem label="Orders" />

@@ -1,0 +1,94 @@
+[
+    {
+        "id": 1,
+        "title": "Puffy Shirt",
+        "description": "This is a puffy shirt, like the one a pirate would wear. Or a comedian in NYC.",
+        "thumbnail": "https://picsum.photos/80/80",
+        "created_at": "2020-08-03T15:00:00.000Z",
+        "updated_at": "2020-09-03T15:00:00.000Z",
+        "author": "Shaun Andrews",
+        "category": "Clothing",
+        "basePrice": 19.99,
+        "tags": [
+            "shirts",
+            "seinfeld",
+            "funny"
+        ],
+        "rating": 4.5,
+        "gallery": [
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400"
+        ],
+        "variations": [
+            {
+                "color": "red",
+                "size": "small",
+                "price": 19.99,
+                "status": "in stock",
+                "quantity": 10
+            },
+            {
+                "color": "red",
+                "size": "medium",
+                "price": 19.99,
+                "status": "in stock",
+                "quantity": 10
+            },
+            {
+                "color": "red",
+                "size": "large",
+                "price": 19.99,
+                "status": "in stock",
+                "quantity": 10
+            },
+            {
+                "color": "blue",
+                "size": "small",
+                "price": 19.99,
+                "status": "in stock",
+                "quantity": 10
+            },
+            {
+                "color": "blue",
+                "size": "medium",
+                "price": 19.99,
+                "status": "in stock",
+                "quantity": 10
+            },
+            {
+                "color": "blue",
+                "size": "large",
+                "price": 19.99,
+                "status": "in stock",
+                "quantity": 10
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Skinny Jeans",
+        "description": "Only a really tall and skinny doofus neighter would wear these. And then get stuck in them.",
+        "thumbnail": "https://picsum.photos/80/80",
+        "created_at": "2020-08-03T15:00:00.000Z",
+        "updated_at": "2020-09-03T15:00:00.000Z",
+        "author": "Shaun Andrews",
+        "category": "Clothing",
+        "basePrice": 29.99,
+        "tags": [
+            "pants",
+            "seinfeld",
+            "funny"
+        ],
+        "rating": 3.0,
+        "gallery": [
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400",
+            "https://picsum.photos/400/400"
+        ]
+    }
+]
