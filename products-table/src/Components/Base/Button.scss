@@ -1,0 +1,22 @@
+button.button {
+    min-height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: inherit;
+    padding: 5px 10px;
+    color: inherit;
+    border-radius: var(--border-radius);
+
+    &:hover {
+        background: var(--color-shade);
+    }
+}
+
+button.button.is-type-primary {
+    background: var(--color-accent);
+    color: var(--color-text-reverse);
+}

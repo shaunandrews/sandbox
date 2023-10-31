@@ -13,10 +13,11 @@
 }
 
 .collection__header {
-    padding: 25px 20px;
+    padding: 25px 45px 25px 20px;
 
     h1 {
         flex: 1;
+        font-size: var(--font-size-xx-large);
     }
 }
 

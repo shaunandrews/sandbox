@@ -13,15 +13,14 @@ import './Collection.scss';
 Collection.defaultProps = {
     mode: 'default',
     title: 'Collection',
+    screen: 'posts',
 };
 
 function Collection({
     mode,
     title,
-    setSidebarMode,
-    setCollectionMode,
-    setCanvasMode,
-    setCanvasScreenName,
+    screen,
+    setCollectionScreen,
 }) {
     return (
         <Stack
@@ -37,44 +36,17 @@ function Collection({
                 direction="horizontal"
                 centered
             >
-                <h1>{title}</h1>
+                {screen && <h1>{screen}</h1>}
 
                 <Stack
                     direction='horizontal'
                     gap="medium"
                     className="collection__header__actions"
                 >
-                    <Icon name="more" size="small" />
+                    <Icon name="add" />
+                    <Icon name="filter" />
+                    <Icon name="more" />
                 </Stack>
-            </Stack>
-
-            <Stack
-                className="collection__controls"
-                direction="horizontal"
-                centered
-            >
-                <select>
-                    <option>Category</option>
-                    <option>Music</option>
-                    <option>Clothing</option>
-                    <option>Kitchen</option>
-                    <option>Smart Home</option>
-                </select>
-
-                <select>
-                    <option>Status</option>
-                    <option>In-stock</option>
-                    <option>Out-of-stock</option>
-                    <option>Low-stock</option>
-                </select>
-
-                <select>
-                    <option>Type</option>
-                    <option>Physical</option>
-                    <option>Virtual</option>
-                </select>
-
-                <button>Apply filters</button>
             </Stack>
             <div className="collection__content">
                 <List />

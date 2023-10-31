@@ -1,0 +1,152 @@
+:root {
+    --toolbar-height: 50px;
+    --sidebar-width: 280px;
+
+    /* Primary Colors */
+    --primary-bg: rgb(0, 25, 53);
+    /* Primary background color */
+    --primary-text: #ffffff;
+    /* Primary text color */
+
+    /* Secondary Colors */
+    --secondary-bg: rgb(0, 184, 255);
+    /* Secondary background color */
+    --secondary-text: #ffffff;
+    /* Secondary text color */
+
+    /* Accent Colors */
+    --accent-bg: #ffee00;
+    /* Accent background color */
+    --accent-text: #333333;
+    /* Accent text color */
+
+    /* Neutral Colors */
+    --neutral-bg: #f2f2f2;
+    /* Neutral background color */
+    --neutral-text: #333333;
+    /* Neutral text color */
+
+    /* Spacing Variables (numerical index-based) */
+    --spacing-1: calc(1 * var(--spacing-unit));
+    --spacing-2: calc(2 * var(--spacing-unit));
+    --spacing-3: calc(3 * var(--spacing-unit));
+    --spacing-4: calc(4 * var(--spacing-unit));
+    --spacing-5: calc(5 * var(--spacing-unit));
+
+    /* Define the base spacing unit value (can be customized) */
+    --spacing-unit: 5px;
+    /* Adjust this value as needed */
+
+    /* Radii */
+    --radii-0: 2.5px;
+    --radii-1: 5px;
+    --radii-2: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+        Arial, sans-serif;
+    background: var(--primary-bg);
+    color: var(--primary-text);
+}
+
+/* Layout */
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+    position: relative;
+}
+
+#toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+#main {
+    display: flex;
+    padding-top: var(--toolbar-height);
+}
+
+#sidebar {
+    position: sticky;
+    top: var(--toolbar-height);
+    height: calc(100vh - var(--toolbar-height));
+}
+
+#feed {
+    padding: var(--spacing-5);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+    align-items: center;
+}
+
+.feed-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-5);
+}
+
+.feed-header h2 {
+    display: inline-block;
+}
+
+.feed-header button,
+.feed-header select {
+    color: var(--primary-text);
+    font-size: 14px;
+    border-radius: var(--radii-1);
+    padding: var(--spacing-1) var(--spacing-2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* Content */
+#content {
+    /* width: calc(100% - var(--sidebar-width)); */
+    /* margin-left: var(--sidebar-width); */
+    /* overflow-y: auto; */
+    /* padding: var(--spacing-5); */
+    /* padding-top: calc(var(--toolbar-height) + var(--spacing-5)); */
+    /* position: relative; */
+}
+
+#content.post-feed {
+    /* display: flex; */
+    /* align-items: center; */
+    /* flex-direction: column; */
+    /* gap: var(--spacing-5); */
+}
+
+.post-reason {
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 480px;
+    text-align: center;
+    position: relative;
+    padding: 10px var(--spacing-4) 25px var(--spacing-4);
+    top: 35px;
+    margin-top: -15px;
+    border-radius: var(--radii-2);
+    z-index: -1;
+    line-height: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.post-reason svg,
+.post-reason img {
+    height: 14px;
+    width: 14px;
+    display: inline-block;
+}

@@ -25,9 +25,9 @@ function SiteCard({ toggleEditing }) {
             <Stack
                 gap="small"
             >
-                <h1 className="site-title">Site Name</h1>
-                {/* <label className="site-url">https://
-                    example.com</label> */}
+                <h1 className="site-title">Sporadic Thoughts</h1>
+                <label className="site-url">https://
+                    sporadicthoughts.com</label>
             </Stack>
         </Stack>
     );

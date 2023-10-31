@@ -108,6 +108,12 @@
         background: var(--color-selected);
         color: var(--color-selected-label);
     }
+
+    &.favorite {
+        .menu-item__favorite {
+            opacity: 1;
+        }
+    }
 }
 
 .menu-spacer {

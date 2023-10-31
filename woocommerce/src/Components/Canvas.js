@@ -3,6 +3,8 @@ import classnames from 'classnames';
 
 // Components
 import Preview from './Preview/Preview';
+import Icon from './Base/Icon';
+import Stack from './Base/Stack';
 
 // CSS
 import './Canvas.scss';
@@ -13,7 +15,7 @@ Canvas.defaultProps = {
     screenName: 'Canvas',
 };
 
-function Canvas({ mode, screenName, onClick }) {
+function Canvas({ mode, setMode, screenName, onClick }) {
     return (
         <div
             className={
@@ -25,6 +27,16 @@ function Canvas({ mode, screenName, onClick }) {
         >
             <div className="canvas__content">
                 <Preview screenName={screenName} />
+                <Stack
+                    direction="horizontal"
+                    gap="medium"
+                    className="canvas__controls"
+                >
+                    <Icon name="pip" size="medium" onClick={() => setMode('pip')} />
+                    <Icon name="mini" size="medium" onClick={() => setMode('mini')} />
+                    <Icon name="aspect-ratio" size="medium" onClick={() => setMode('default')} />
+                    <Icon name="full" size="medium" onClick={() => setMode('full')} />
+                </Stack>
             </div>
         </div>
     );

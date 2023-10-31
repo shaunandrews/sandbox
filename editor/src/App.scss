@@ -1,0 +1,102 @@
+:root {
+  --border-radius: 5px;
+
+  --color-dark: rgb(17, 17, 17);
+  --color-shade-005: rgba(17, 17, 17, 0.05);
+  --color-shade-01: rgba(17, 17, 17, 0.1);
+  --color-shade-02: rgba(17, 17, 17, 0.2);
+  --color-shade-03: rgba(17, 17, 17, 0.3);
+  --color-shade-04: rgba(17, 17, 17, 0.4);
+  --color-shade-05: rgba(17, 17, 17, 0.5);
+  --color-shade-06: rgba(17, 17, 17, 0.6);
+  --color-shade-07: rgba(17, 17, 17, 0.7);
+  --color-shade-08: rgba(17, 17, 17, 0.8);
+
+  --color-light: rgb(255, 255, 255);
+  --color-highlight-005: rgba(255, 255, 255, 0.05);
+  --color-highlight-01: rgba(255, 255, 255, 0.1);
+  --color-highlight-02: rgba(255, 255, 255, 0.2);
+  --color-highlight-03: rgba(255, 255, 255, 0.3);
+  --color-highlight-04: rgba(255, 255, 255, 0.4);
+  --color-highlight-05: rgba(255, 255, 255, 0.5);
+  --color-highlight-06: rgba(255, 255, 255, 0.6);
+  --color-highlight-07: rgba(255, 255, 255, 0.7);
+  --color-highlight-08: rgba(255, 255, 255, 0.8);
+
+  --color-surface: var(--color-light);
+
+  --color-text: black;
+  --color-text-reverse: white;
+
+  --color-accent: rgb(174, 16, 206);
+  --color-select: rgb(22, 75, 246);
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  * {
+    box-sizing: border-box;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  .app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.toolbar {
+  justify-content: space-between;
+  padding-right: 5px;
+  position: relative;
+  border-bottom: 1px solid var(--color-shade);
+
+  .toolbar__site,
+  .toolbar__actions {
+    position: relative;
+    z-index: 1;
+  }
+
+  .toolbar__site {
+    background: var(--color-shade);
+
+    img {
+      display: block;
+      transition: all 0.2s ease-out;
+    }
+
+    &:hover img {
+      border-radius: var(--border-radius);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      transform: scale(0.8);
+    }
+  }
+
+  .toolbar__document {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.main {
+  flex-grow: 1;
+  align-items: stretch;
+}
+
+.canvas {
+  flex-grow: 1;
+}

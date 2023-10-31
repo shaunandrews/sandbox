@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "title": "My First Blog Post",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec ultricies lacinia, nisl nisl aliquet nunc, eget auctor urna nulla quis leo. Duis eleifend dui vel ligula consectetur, id pulvinar nisl bibendum. Proin maximus nunc id neque congue, vel efficitur lorem volutpat.",
+        "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "date": "2022-03-20T15:00:00.000Z",
+    }
+]

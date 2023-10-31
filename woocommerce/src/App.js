@@ -91,6 +91,7 @@ function Stagehand({ setSidebarMode, setCollectionMode, setCanvasMode, setCanvas
 function App() {
   const [sidebarMode, setSidebarMode] = useState('default');
   const [collectionMode, setCollectionMode] = useState('default');
+  const [collectionScreen, setCollectionScreen] = useState('products');
   const [canvasMode, setCanvasMode] = useState('mini');
   const [canvasScreenName, setCanvasScreenName] = useState('Products');
 
@@ -100,12 +101,12 @@ function App() {
         "wordpress",
       )
     }>
-      <Stagehand
+      {/* <Stagehand
         setSidebarMode={setSidebarMode}
         setCollectionMode={setCollectionMode}
         setCanvasMode={setCanvasMode}
         setCanvasScreenName={setCanvasScreenName}
-      />
+      /> */}
 
       <Toolbar />
 
@@ -116,26 +117,25 @@ function App() {
         setCollectionMode={setCollectionMode}
         setCanvasMode={setCanvasMode}
         setCanvasScreenName={setCanvasScreenName}
+        setCollectionScreen={setCollectionScreen}
       />
 
       <Collection
         title="Products"
         mode={collectionMode}
-        setSidebarMode={setSidebarMode}
-        setCollectionMode={setCollectionMode}
-        setCanvasMode={setCanvasMode}
-        setCanvasScreenName={setCanvasScreenName}
+        screen={collectionScreen}
       />
 
       <Canvas
         mode={canvasMode}
+        setMode={setCanvasMode}
         screenName={canvasScreenName}
-        onClick={() => {
-          if (canvasMode === 'pip' && canvasScreenName === 'Products') {
-            setCollectionMode('default');
-            setCanvasMode('mini');
-          }
-        }}
+        // onClick={() => {
+        //   if (canvasMode === 'pip' && canvasScreenName === 'Products') {
+        //     setCollectionMode('default');
+        //     setCanvasMode('mini');
+        //   }
+        // }}
       />
     </div>
   );

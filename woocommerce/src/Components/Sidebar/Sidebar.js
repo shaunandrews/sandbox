@@ -22,6 +22,7 @@ function Sidebar({
     selected,
     setSidebarMode,
     setCollectionMode,
+    setCollectionScreen,
     setCanvasMode,
     setCanvasScreenName,
 }) {
@@ -41,9 +42,32 @@ function Sidebar({
                 gap="none"
             >
                 <MenuGroup
+                    label="Favorites"
+                    icon="star-filled"
+                    open
+                >
+                    <MenuItem label="Drafts" />
+                    <MenuItem
+                        label="Products"
+                        isSelected={isSelected === 'products'}
+                        onClick={() => {
+                            setSidebarMode('default');
+                            setCollectionMode('wide');
+                            setCollectionScreen('Products');
+                            setCanvasMode('pip');
+                            setCanvasScreenName('Products');
+                            setIsSelected('products');
+                        }}
+                    />
+                    <MenuItem label="Orders" />
+                </MenuGroup>
+
+                <div className="menu-spacer" />
+
+                <MenuGroup
                     label="Pages"
                     icon="page"
-                    // open
+                // open
                 >
                     <MenuItem
                         label="Home"
@@ -77,8 +101,18 @@ function Sidebar({
                     label="Posts"
                     icon="post"
                 >
-                    <MenuItem label="All" />
-                    <MenuItem label="Drafts" />
+                    <MenuItem label="All"
+                        isSelected={isSelected === 'all'}
+                        onClick={() => {
+                            setSidebarMode('default');
+                            setCollectionMode('wide');
+                            setCollectionScreen('All posts');
+                            setCanvasMode('pip');
+                            setCanvasScreenName('All');
+                            setIsSelected('all');
+                        }}
+                    />
+                    <MenuItem label="Drafts" isFavorite={true} />
                     <MenuItem label="Pending" />
                     <MenuItem label="Scheduled" />
                     <MenuItem label="Published" />
@@ -125,7 +159,6 @@ function Sidebar({
                 <MenuGroup
                     label="WooCommerce"
                     icon="woo"
-                    open
                 >
                     <MenuItem label="Dashboard" />
                     <MenuItem label="Orders" />
@@ -133,6 +166,7 @@ function Sidebar({
                     <MenuItem
                         label="Products"
                         isSelected={isSelected === 'products'}
+                        isFavorite={true}
                         onClick={() => {
                             setSidebarMode('default');
                             setCollectionMode('wide');
@@ -147,7 +181,29 @@ function Sidebar({
                     <MenuItem label="Reports" />
                 </MenuGroup>
 
+                <MenuGroup
+                    label="Yoast SEO"
+                    icon="yoast"
+                >
+                    <MenuItem label="Dashboard" />
+                    <MenuItem label="General" />
+                    <MenuItem label="Search Appearance" />
+                    <MenuItem label="Social" />
+                    <MenuItem label="Tools" />
+                    <MenuItem label="Premium" />
+                </MenuGroup>
+
                 <div className="menu-spacer fill" />
+
+                <MenuGroup
+                    label="Legacy Items"
+                    icon="legacy"
+                >
+                    <MenuItem label="Feedbacks" />
+                    <MenuItem label="Esoteric Carousel Plugin" />
+                </MenuGroup>
+
+                <div className="menu-spacer" />
 
                 <MenuGroup
                     label="Configure"

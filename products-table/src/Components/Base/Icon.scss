@@ -1,0 +1,29 @@
+.icon {
+    display: inline-block;
+
+    svg {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    &.default {
+        width: 20px;
+        height: 20px;
+    }
+
+    &.small {
+        width: 15px;
+        height: 15px;
+    }
+
+    &.medium {
+        width: 30px;
+        height: 30px;
+    }
+
+    &.large {
+        width: 40px;
+        height: 40px;
+    }
+}

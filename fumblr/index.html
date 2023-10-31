@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fumblr</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div id="app">
+        <fumblr-toolbar></fumblr-toolbar>
+
+        <div id="main">
+            <fumblr-sidebar></fumblr-sidebar>
+
+            <div id="feed">
+                <header class="feed-header">
+                    <div class="current-view">
+                        <h2>Following</h2>
+                        <button>Manage</button>
+                    </div>
+                    <div class="options">
+                        <select>
+                            <option>Column</option>
+                            <option>Grid</option>
+                            <option>Full Screen</option>
+                        </select>
+                    </div>
+                </header>
+
+                <fumblr-post-ribbon></fumblr-post-ribbon>
+
+                <fumblr-post avatar-src="images/avatar-2.jpg" username="galactickohipot"
+                    media-src="images/young-witch.webp"
+                    content-text="an animation loop I had as a WIP on my PC for aaaaaages. I decided to finish it finally... It still has issues here and there but I find it cute enough."
+                    data-tags="animation,2d animation,witch,OC,oc art,i really don't want to spend too much time on this one,my art"
+                    notes-count="1,232">
+                </fumblr-post>
+
+                <div class="post-reason">
+                    <svg-loader data-icon="refresh-double"></svg-loader>
+                    Rebloged by <img src="images/avatar-2.jpg" height="16" width="16" />
+                    <strong>@galactickohipot</strong>
+                </div>
+                <fumblr-post avatar-src="images/avatar-1.jpg" username="someone" media-src="images/pumpkins.webp"
+                    content-text="an animation loop I had as a WIP on my PC for aaaaaages. I decided to finish it finally... It still has issues here and there but I find it cute enough."
+                    data-tags="halloweeen, animation, cute" notes-count="1,232">
+                </fumblr-post>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

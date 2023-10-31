@@ -2,8 +2,26 @@
     border-radius: 5px;
 }
 
-.site-title {}
+.site-card {
+    padding: 10px 15px;
+    border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
 
-.site-url {
-    color: var(--color-tint-04);
+    .site-url {
+        display: none;
+        color: var(--color-tint-04);
+        font-size: var(--font-size-small);
+    }
+
+    &:hover {
+        background: var(--color-tint-005);
+
+        .site-title {
+            font-size: var(--font-size-small);
+        }
+        .site-url {
+            display: block;
+        }
+    }
 }

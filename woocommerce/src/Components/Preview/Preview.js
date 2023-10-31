@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Components
 import Stack from '../Base/Stack';
@@ -21,7 +21,7 @@ function PreviewHeader({ screenName }) {
                 centered
             >
                 <img src="https://picsum.photos/50" alt="Logo" />
-                <h1>Site Name</h1>
+                <h1>Sporadic Thoughts</h1>
             </Stack>
 
             <Stack
@@ -43,21 +43,69 @@ function PreviewHeader({ screenName }) {
     );
 }
 
+function PreviewProduct({ title, price }) {
+    return (
+        <Stack
+            // direction="horizontal"
+            className="preview-product"
+        >
+            <img src="https://picsum.photos/200" alt="Product" />
+            {/* <Stack> */}
+                <h2>{title}</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl nec ultricies lacinia, nisl nisl aliquet nunc, eget a</p>
+                <label>${price}</label>
+                <button>Add to cart</button>
+            {/* </Stack> */}
+        </Stack>
+    );
+}
+
 function Preview({ screenName }) {
+    // function magicResize() {
+    //     const preview = document.querySelector('.preview');
+    //     const previewWidth = preview.offsetWidth;
+    //     const previewHeight = preview.offsetHeight;
+
+    //     const canvas = document.querySelector('.canvas');
+    //     const canvasWidth = canvas.offsetWidth;
+    //     const canvasHeight = canvas.offsetHeight;
+
+    //     var scale = Math.min(
+    //         canvasWidth / previewWidth,
+    //         canvasHeight / previewHeight
+    //     );
+
+    //     console.log(scale);
+    // }
+
+    // useEffect(() => {
+    //     magic();
+    // }, []);
+
     return (
         <div className="preview">
-            {/* If screenName is Home or Blog show the Header */}
-            {(screenName === 'Home' || screenName === 'Blog') &&
-                <PreviewHeader screenName={screenName} />
-            }
+            <PreviewHeader screenName={screenName} />
 
             {screenName === "Products" && (
                 <div className="preview__content">
                     <h1>Products</h1>
+                    <Stack
+                        direction="horizontal"
+                        gap="medium"
+                        centered
+                    >
+                        <PreviewProduct
+                            title="Puffy Shirt"
+                            price="19.99"
+                        />
+                        <PreviewProduct
+                            title="Skinny Jeans"
+                            price="29.99"
+                        />
+                    </Stack>
                 </div>
             )}
 
-            {/* display only if screeName === Home */}
             {screenName === 'Home' && (
                 <div className="preview__content">
                     <h1>Home</h1>

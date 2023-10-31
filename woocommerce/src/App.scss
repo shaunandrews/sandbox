@@ -100,6 +100,7 @@ textarea {
   list-style: none;
   border: none;
   outline: none;
+  background: none;
 }
 
 body {
@@ -107,23 +108,23 @@ body {
   color: var(--color-text);
 }
 
-.stagehand {
-  position: absolute;
-  z-index: 10000;
-  right: 5px;
-  bottom: 5px;
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
+// .stagehand {
+//   position: absolute;
+//   z-index: 10000;
+//   right: 5px;
+//   bottom: 5px;
+//   display: flex;
+//   flex-direction: row;
+//   gap: 5px;
 
-  display: none;
+//   display: none;
 
-  button {
-    font-size: 12px;
-    padding: 2px 4px;
-    border-radius: 5px;
-  }
-}
+//   button {
+//     font-size: 12px;
+//     padding: 2px 4px;
+//     border-radius: 5px;
+//   }
+// }
 
 .wordpress {
   position: relative;
