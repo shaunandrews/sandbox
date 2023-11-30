@@ -1,0 +1,206 @@
+[
+    {
+        "title": "The Secrets of the JFK Assassination Archive",
+        "sourceName": "The New York Times",
+        "sourceURL": "https://www.nytimes.com/2021/11/11/magazine/jfk-assassination-archive.html",
+        "sourceImage": "./images/source.png",
+        "author": "Scott Sayare",
+        "time": "Nov 11, 2023 @ 12:33 PM",
+        "media": [
+            {
+            "src": "./images/item-1.jpg",
+            "alt": "The Secrets of the JFK Assassination Archive"
+            },
+            {
+            "src": "./images/item-2.jpg",
+            "alt": "The Secrets of the JFK Assassination Archive"
+            }
+        ],
+        "pullquote": "How a dogged journalist proved that the CIA lied about Oswald and Cuba — and spent decades covering it up.",
+        "bodyText": "In 1988, in an elevator at a film festival in Havana, the director Oliver Stone was handed a copy of On the Trail of the Assassins, a newly published account of the murder of President John F. Kennedy. Stone admired Kennedy with an almost spiritual intensity and viewed his death on November 22, 1963 — 60 years ago this month — as a hard line in American history: the “before” hopeful and good; the “after” catastrophic. Yet he had never given much thought to the particulars of the assassination. “I believed that Lee Oswald shot the president,” he said. “I had no problem with that.” On the Trail of the Assassins, written by the Louisiana appellate judge Jim Garrison, proposed something darker. In 1963, Garrison had been district attorney of New Orleans, Oswald's home in the months before the killing. He began an investigation and had soon traced the contours of a vast government conspiracy orchestrated by the CIA; Oswald was the “patsy” he famously claimed to be. Stone read Garrison's book three times, bought the film rights, and took them to Warner Bros. “I was hot at the time,” Stone told me. “I could write my own ticket, within reason.” The studio gave him $40 million to make a movie."
+    },
+    {
+        "title": "AI Revolution in the Tech Industry",
+        "sourceName": "The Washington Post",
+        "sourceURL": "https://www.washingtonpost.com/2023/11/12/ai-revolution-tech-industry/",
+        "sourceImage": "./images/source-2.png",
+        "author": "Jane Doe",
+        "time": "Nov 12, 2023 @ 10:00 AM",
+        "media": [
+            {
+                "src": "./images/item-3.jpg",
+                "alt": "AI Revolution in the Tech Industry"
+            },
+            {
+                "src": "./images/item-4.jpg",
+                "alt": "AI Revolution in the Tech Industry"
+            },
+            {
+                "src": "./images/item-5.jpg",
+                "alt": "AI Revolution in the Tech Industry"
+            }
+        ],
+        "pullquote": "How AI is transforming the tech industry and what to expect in the future.",
+        "bodyText": "Artificial Intelligence (AI) has been a game changer in the tech industry. From automating mundane tasks to predicting complex patterns, AI is revolutionizing the way we interact with technology. The rise of AI has also led to significant advancements in machine learning and data analysis, paving the way for a new era of innovation. As we move forward, we can expect AI to play an even bigger role in our lives, transforming everything from healthcare to transportation. The future of AI is exciting and full of possibilities, and it's clear that we're just scratching the surface of what this technology can do."
+    },
+    {
+        "title": "Climate Change and Its Impact on Polar Bears",
+        "sourceName": "National Geographic",
+        "sourceURL": "https://www.nationalgeographic.com/environment/article/climate-change-impact-polar-bears",
+        "sourceImage": "./images/source.png",
+        "author": "Jane Smith",
+        "time": "Nov 12, 2023 @ 10:15 AM",
+        "media": [
+            {
+                "src": "./images/item-3.jpg",
+                "alt": "Polar Bear in the Arctic"
+            },
+            {
+                "src": "./images/item-4.jpg",
+                "alt": "Melting Ice in the Arctic"
+            }
+        ],
+        "pullquote": "As temperatures rise, polar bears face increasing challenges for survival in the Arctic.",
+        "bodyText": "Polar bears, the iconic symbols of the Arctic, are in grave danger due to the effects of climate change. Rising temperatures have led to the rapid melting of sea ice, which is essential for polar bear hunting and survival. This article explores the critical impact of climate change on polar bears and the urgent need for conservation efforts to protect these majestic creatures."
+    },
+    {
+        "title": "The Art of Japanese Tea Ceremony",
+        "sourceName": "Japan Times",
+        "sourceURL": "https://www.japantimes.co.jp/life/2023/11/12/food/japanese-tea-ceremony/",
+        "sourceImage": "./images/source.png",
+        "author": "Yuki Tanaka",
+        "time": "Nov 12, 2023 @ 3:45 PM",
+        "media": [
+            {
+                "src": "./images/item-5.jpg",
+                "alt": "Japanese Tea Ceremony"
+            },
+            {
+                "src": "./images/item-6.jpg",
+                "alt": "Traditional Japanese Tea Set"
+            }
+        ],
+        "pullquote": "Discover the ancient traditions and cultural significance of the Japanese tea ceremony.",
+        "bodyText": "The Japanese tea ceremony, known as 'chanoyu' or 'sado,' is a centuries-old ritual deeply rooted in Japanese culture. It is not just about brewing and serving tea; it represents harmony, respect, purity, and tranquility. This article provides insights into the art of the Japanese tea ceremony, its history, and its enduring cultural significance."
+    },
+    {
+        "title": "Exploring the Wonders of the Amazon Rainforest",
+        "sourceName": "National Geographic",
+        "sourceURL": "https://www.nationalgeographic.com/environment/article/exploring-wonders-amazon-rainforest",
+        "sourceImage": "./images/source.png",
+        "author": "Carlos Rodriguez",
+        "time": "Nov 13, 2023 @ 9:30 AM",
+        "media": [
+            {
+                "src": "./images/item-7.jpg",
+                "alt": "Amazon Rainforest Canopy"
+            },
+            {
+                "src": "./images/item-8.jpg",
+                "alt": "Colorful Birds of the Amazon"
+            }
+        ],
+        "pullquote": "Dive into the rich biodiversity and breathtaking landscapes of the Amazon rainforest.",
+        "bodyText": "The Amazon rainforest, often referred to as the 'Lungs of the Earth,' is one of the most biodiverse and captivating ecosystems on our planet. In this article, we embark on a journey deep into the heart of the Amazon to explore its lush greenery, diverse wildlife, and the critical role it plays in maintaining global ecological balance."
+    },
+    {
+        "title": "The Rise of Artificial Intelligence in Healthcare",
+        "sourceName": "TechCrunch",
+        "sourceURL": "https://techcrunch.com/2023/11/13/ai-healthcare-rise/",
+        "sourceImage": "./images/source.png",
+        "author": "Emily Johnson",
+        "time": "Nov 13, 2023 @ 2:00 PM",
+        "media": [
+            {
+                "src": "./images/item-9.jpg",
+                "alt": "Doctor and AI Robot"
+            },
+            {
+                "src": "./images/item-10.jpg",
+                "alt": "AI in Medical Diagnosis"
+            }
+        ],
+        "pullquote": "Explore the transformative impact of artificial intelligence on the healthcare industry.",
+        "bodyText": "Artificial intelligence (AI) is revolutionizing healthcare by enhancing diagnostic accuracy, streamlining administrative tasks, and enabling personalized treatment plans. This article delves into the rapid rise of AI in healthcare, showcasing real-world examples of how AI-powered technologies are changing the landscape of medicine and patient care."
+    },
+    {
+        "title": "The Marvels of Space Exploration: Journey to the Stars",
+        "sourceName": "NASA",
+        "sourceURL": "https://www.nasa.gov/space-exploration-marvels",
+        "sourceImage": "./images/source.png",
+        "author": "Astronaut Jane Davis",
+        "time": "Nov 14, 2023 @ 8:45 AM",
+        "media": [
+            {
+                "src": "./images/item-11.jpg",
+                "alt": "Space Shuttle Launch"
+            },
+            {
+                "src": "./images/item-12.jpg",
+                "alt": "Astronaut Floating in Space"
+            }
+        ],
+        "pullquote": "Embark on a cosmic journey and explore the wonders of our universe.",
+        "bodyText": "Space exploration has captivated the human imagination for generations. Join us on an extraordinary journey through the cosmos, from the thrill of rocket launches to the serene beauty of distant galaxies. Discover the latest breakthroughs in space science and technology that are expanding our understanding of the universe."
+    },
+    {
+        "title": "The Culinary Delights of Mediterranean Cuisine",
+        "sourceName": "Food & Wine Magazine",
+        "sourceURL": "https://www.foodandwine.com/mediterranean-cuisine-delights",
+        "sourceImage": "./images/source.png",
+        "author": "Maria Rodriguez",
+        "time": "Nov 14, 2023 @ 12:30 PM",
+        "media": [
+            {
+                "src": "./images/item-13.jpg",
+                "alt": "Mediterranean Feast"
+            },
+            {
+                "src": "./images/item-14.jpg",
+                "alt": "Fresh Mediterranean Ingredients"
+            }
+        ],
+        "pullquote": "Savor the flavors of the Mediterranean with its exquisite cuisine and culinary traditions.",
+        "bodyText": "The Mediterranean region is renowned for its delectable cuisine, characterized by fresh ingredients, bold flavors, and timeless recipes. In this culinary journey, we explore the Mediterranean's rich gastronomic heritage, from mouthwatering dishes to the cultural significance of food and dining in the Mediterranean way of life."
+    },
+    {
+        "title": "Unveiling the Mysteries of Ancient Egypt's Pyramids",
+        "sourceName": "National Geographic",
+        "sourceURL": "https://www.nationalgeographic.com/history/ancient-egypt-pyramids-mysteries",
+        "sourceImage": "./images/source.png",
+        "author": "Dr. Sarah Thompson",
+        "time": "Nov 15, 2023 @ 11:00 AM",
+        "media": [
+            {
+                "src": "./images/item-15.jpg",
+                "alt": "Pyramids of Giza"
+            },
+            {
+                "src": "./images/item-16.jpg",
+                "alt": "Hieroglyphs in the Pyramids"
+            }
+        ],
+        "pullquote": "Unlock the enigmatic secrets of Egypt's iconic pyramids and their historical significance.",
+        "bodyText": "The pyramids of Egypt have long fascinated archaeologists, historians, and explorers. Join us on a journey back in time to the age of the pharaohs as we unravel the mysteries surrounding the construction, purpose, and symbolism of these magnificent structures. Discover the hidden chambers, ancient hieroglyphs, and the enduring legacy of the pyramids."
+    },
+    {
+        "title": "The World of Electric Vehicles: Driving Toward a Sustainable Future",
+        "sourceName": "Electric Car News",
+        "sourceURL": "https://www.electriccarnews.com/sustainable-ev-future",
+        "sourceImage": "./images/source.png",
+        "author": "John Anderson",
+        "time": "Nov 15, 2023 @ 3:15 PM",
+        "media": [
+            {
+                "src": "./images/item-17.jpg",
+                "alt": "Electric Car on the Road"
+            },
+            {
+                "src": "./images/item-18.jpg",
+                "alt": "Charging Electric Vehicle"
+            }
+        ],
+        "pullquote": "Explore the revolution in transportation with electric vehicles and their environmental impact.",
+        "bodyText": "Electric vehicles (EVs) are rapidly changing the automotive industry and the way we think about transportation. Dive into the world of EVs and their role in reducing carbon emissions, improving air quality, and driving us toward a sustainable future. Learn about the latest innovations, charging infrastructure, and the growing popularity of EVs worldwide."
+    }
+]

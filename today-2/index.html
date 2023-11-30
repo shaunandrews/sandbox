@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Today</title>
+    <script src="./dexie.js"></script>
+    <style>
+      /* Colors */
+      :root {
+        --color-text: #333333;
+        --color-background: #efefef;
+        --color-background-rgb: 239, 239, 239;
+        --color-surface: #ffffff;
+        --color-border: #dddddd;
+        --color-hr: rgba(0, 0, 0, 0.05);
+        --color-interactable: rgba(0, 0, 0, 0.025);
+        --color-interactable-hover: rgba(0, 0, 0, 0.15);
+        --color-spot: rgba(124, 53, 255, 1);
+        --color-spot-rgb: 124, 53, 255;
+        --color-spot-text: #ffffff;
+      }
+
+      /* Dark Mode Colors */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-text: #ffffff;
+          --color-background: #010101;
+          --color-background-rgb: 1, 1, 1;
+          --color-surface: #161616;
+          --color-border: #333333;
+          --color-hr: rgba(255, 255, 255, 0.05);
+          --color-interactable: rgba(255, 255, 255, 0.075);
+          --color-interactable-hover: rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      /* Simple Reset
+      ------------------------------ */
+      * {
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      ul {
+        margin: 0;
+      }
+
+      fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        margin: 0;
+        font-family: "New York", Times, "Times New Roman", Georgia, serif;
+        font-size: 18px;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+        color: var(--color-text);
+        background-color: var(--color-background);
+      }
+
+      /* Typography
+      ------------------------------ */
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      button,
+      input,
+      textarea,
+      select {
+        font-family: inherit;
+        font-size: 1em;
+      }
+
+      .sectionHeading {
+        font-size: 0.8em;
+        opacity: 0.5;
+        text-transform: uppercase;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      button {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      /* HTML Elements
+      ------------------------------ */
+      hr {
+        margin: 2.5px 0;
+        display: block;
+        border: none;
+        height: 1px;
+        background: var(--color-hr);
+      }
+
+      hr.spacer {
+        background: transparent;
+        flex-grow: 1;
+      }
+
+      button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.9em;
+        background: var(--color-interactable);
+        color: var(--color-spot);
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+
+      button.primary {
+        background: var(--color-spot);
+        color: var(--color-spot-text);
+      }
+
+      button:hover {
+        border-color: var(--color-interactable-hover);
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 10px 15px;
+        border: 1px solid var(--color-border);
+        border-radius: 5px;
+        background: var(--color-surface);
+        color: var(--color-text);
+      }
+
+      /* Links
+      ------------------------------ */
+      a {
+        color: var(--color-spot);
+      }
+
+      /* Toggle
+      ------------------------------ */
+      .is-hidden {
+        display: none;
+      }
+
+      /* Vertically Stacked Elements
+      ------------------------------ */
+      .vStack {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .vStack > * {
+        width: 100%;
+      }
+
+      /* vStack.center should vertically center children */
+      .vStack.center {
+        flex-grow: 1;
+        justify-content: center;
+      }
+
+      /* Horizontally Stacked Elements
+      ------------------------------ */
+      .hStack {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+      }
+
+      .hStack.fill-width > * {
+        flex: 1;
+      }
+
+      .hStack.centered {
+        justify-content: center;
+      }
+
+      .hStack.equal {
+        justify-content: space-between;
+      }
+
+      .hStack.equal > * {
+        flex: 1;
+      }
+
+      /* Main App Element
+      ------------------------------ */
+      #app {
+        width: 100vw;
+        margin: 0;
+      }
+
+      #appModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(var(--color-background-rgb), 0.1);
+        backdrop-filter: blur(30px);
+      }
+
+      #appModal .modalContainer {
+        margin: 100px auto;
+        max-width: 360px;
+        padding: 20px;
+        background: var(--color-surface);
+        gap: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Navigation 
+      ------------------------------ */
+      #navigation {
+        position: sticky;
+        top: 0;
+        min-height: 100vh;
+        width: 200px;
+        padding: 20px;
+        gap: 10px;
+        /* background: var(--color-surface); */
+        border-right: 1px solid var(--color-border);
+      }
+
+      #navigation button {
+        background: transparent;
+        text-align: right;
+        border: none;
+        color: var(--color-text);
+        opacity: 0.5;
+      }
+
+      #navigation button:hover {
+        opacity: 0.75;
+      }
+
+      #navigation button.is-active {
+        color: var(--color-spot);
+        font-weight: bold;
+        opacity: 1;
+      }
+
+      #navigation #search {
+      }
+
+      #navigation #search input {
+        width: 100%;
+        border: none;
+        font-size: 1em;
+        color: var(--color-text);
+        padding: 10px;
+        border-radius: 5px;
+        background: var(--color-interactable);
+      }
+
+      /* Functions
+      ------------------------------ */
+      #functions {
+        padding: 40px;
+        width: calc(100vw - 200px);
+      }
+
+      .function {
+        display: none;
+      }
+
+      .function.is-active {
+        display: flex;
+      }
+
+      .functionHeader {
+        gap: 15px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .functionHeader h1 {
+        font-size: 3em;
+        line-height: 1;
+      }
+
+      .functionHeader p {
+        opacity: 0.5;
+        font-size: 1.25em;
+        line-height: 1;
+      }
+
+      /* Concierge
+      ------------------------------ */
+      #concierge {
+        gap: 40px;
+        align-items: flex-start;
+      }
+
+      /* Goals
+      ------------------------------ */
+      #goals {
+        gap: 40px;
+        align-items: flex-start;
+      }
+
+      #goalsAdd {
+        max-width: 360px;
+        gap: 15px;
+        padding: 20px;
+        background: var(--color-surface);
+        border-radius: 15px;
+        transition: all 0.2s ease-out;
+      }
+
+      #goalsAddFocusDate {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      #goalsAdd input,
+      #goalsAdd textarea,
+      #goalsAdd select {
+        width: 100%;
+        display: block;
+      }
+
+      #goalsAdd fieldset {
+        gap: 10px;
+      }
+
+      /* Focus Picker */
+      .focusPicker {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        position: relative;
+        border: 1px solid var(--color-border);
+        background: var(--color-background);
+        border-radius: 5px;
+      }
+
+      .focusPickerValue {
+        position: relative;
+        z-index: 1;
+        flex-grow: 1;
+        font-size: 0.8em;
+        text-align: center;
+        padding: 8px 15px;
+        cursor: pointer;
+      }
+
+      .focusPickerSelectionIndicator {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 33.3%;
+        border-radius: 5px;
+        background: var(--color-surface);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        margin: auto 0;
+        transition: all 0.1s linear;
+      }
+
+      .focusPicker.is-this-week .focusPickerSelectionIndicator {
+        left: 0%;
+      }
+
+      .focusPicker.is-next-week .focusPickerSelectionIndicator {
+        left: 33.3%;
+      }
+
+      .focusPicker.is-long-term .focusPickerSelectionIndicator {
+        left: 66.6%;
+      }
+
+      .focusPicker.is-this-week .focusPickerValueThisWeek,
+      .focusPicker.is-next-week .focusPickerValueNextWeek,
+      .focusPicker.is-long-term .focusPickerValueLongTerm {
+        /* font-weight: bold; */
+        color: var(--color-spot);
+        cursor: default;
+      }
+
+      /* Settings
+      ------------------------------ */
+      .color-option {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .color-box {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <template id="templateFunctionNavigation">
+      <div id="navigation" class="vStack centered">
+        <!-- 
+            TODO: Implement some sort of basic, global search.
+         -->
+        <!-- <div id="search">
+          <input type="text" placeholder="Search" />
+        </div> -->
+
+        <div id="navPrimary" class="vStack center">
+          <button id="navConcierge" class="navButton is-active">Concierge</button>
+          <button id="navGoals" class="navButton">Goals</button>
+          <button id="navNotes" class="navButton">Notes</button>
+          <button id="navReminders" class="navButton">Reminders</button>
+        </div>
+
+        <button id="navSettings" class="navButton">Settings</button>
+      </div>
+    </template>
+
+    <template id="templateFunctionHeader">
+      <div class="functionHeader vStack">
+        <h1 class="functionHeaderTitle"></h1>
+        <p class="functionHeaderDescription"></p>
+      </div>
+    </template>
+
+    <template id="templateGoal">
+      <div class="goal vStack">
+        <h3 class="goalTitle"></h3>
+        <p class="goalDescription"></p>
+        <ul class="goalMeta">
+          <li>Focus date: <time class="goalFocusDate"></time></li>
+          <li>Due date: <time class="goalDueDate"></time></li>
+        </ul>
+      </div>
+    </template>
+
+    <template id="templateReminder">
+      <div class="reminder vStack">
+        <h3 class="reminderTitle"></h3>
+        <p class="reminderDescription"></p>
+      </div>
+    </template>
+
+    <div id="app" class="hStack">
+      <function-navigation></function-navigation>
+
+      <div id="functions">
+        <div id="concierge" class="function vStack">
+          <function-header title="Concierge" description="What you need, when you want it."></function-header>
+
+          <div id="conciergeToday">
+            <h2 class="sectionHeading">Today, <span id="currentDateTime"></span></h2>
+            <p id="conciergeTodayGreeting"><strong>Good morning, Shaun!</strong> It's Monday, and last week was Thanksgiving in the US. Here's a few things to keep in mind today&hellip;</p>
+            <ul id="conciergeTodayCatchup">
+              <li>
+                <p>Your calendar today is clear, but you have 6 events thoughout this week.</p>
+              </li>
+              <li>
+                <p>After you check-in with the team, you should focus on <strong class="connection">Sunsetting Post+</strong>. Your progress indicates that an announcement is planned to launch today.</p>
+              </li>
+            </ul>
+          </div>
+
+          <div id="conciergeStandup">
+            <h2 class="sectionHeading">Standup</h2>
+            <p>Did you do anything since we last spoke? Anything new you need to add?</p>
+            <input type="text" placeholder="Send an update, add an event, " />
+          </div>
+
+          <!-- <div id="prompt">
+            <h3 id="promptPlaceholder">What do you want to do today?</h3>
+            <div id="promptEditor" contenteditable="true"></div>
+          </div> -->
+
+          <!-- <div id="this-week" class="vStack">
+            <h2 class="sectionHeading">This week's goal</h2>
+            <p>I want to really nail down the branding for the <a class="linkProject" href="./project/premium-product/">Premium Product</a> project. I also need to do some <a class="linkProject" href="./project/library-gardening/">Library Gardening</a> and spruce up the post component.</p>
+          </div> -->
+
+          <!-- <div id="updates" class="vStack">
+            <h2 class="sectionHeading">Previous updates</h2>
+            <ul class="vStack">
+              <li>Continued work on the new <a class="linkProject" href="./project/premium-product/">Premium Product</a> project. You've previously mentioned that you wanted to publish that <a class="linkEvent" href="./events/next-week/">next week</a>.</li>
+              <li>You attended <a class="linkEvent" href="./events/this-week/">a few meetings</a>, and worked through an <a class="linkEvent" href="#">incident report</a> with your coworker Jane.</li>
+            </ul>
+          </div> -->
+        </div>
+
+        <div id="goals" class="function is-active vStack">
+          <function-header title="Goals" description="Define and work towards larger things over time."></function-header>
+
+          <button id="goalsAddToggle" class="primary" onclick="goalsAddShow()">Add a New Goal</button>
+
+          <div class="notice">
+            <p>[ ! ]&nbsp;&nbsp;One goal is overdue.</p>
+          </div>
+
+          <div id="goalsThisWeek" class="vStack">
+            <h3 class="sectionHeading">This Week</h3>
+            <goal-item title="Sunsetting Post+" description="Tumblr is removing the Post+ feature. I need to help with messaging and updating the interface to accomodate the change." focus-date="2023-11-27T09:00:00-05:00" due-date="2024-01-02T09:00:00-05:00"></goal-item>
+            <goal-item title="Tumblr Premium" description="A brand new product that replaces Ad-Free with a bundle or features, including: Ad-Free, a new badge, early access to new features, a monthly Blaze, and monthly gifts in TumblrMart." focus-date="2023-11-27T09:00:00-05:00" due-date="2023-12-01T17:00:00-05:00"></goal-item>
+          </div>
+
+          <!-- <div id="goalsPlanning" class="hStack equal"> -->
+          <div id="goalsNextWeek">
+            <h3 class="sectionHeading">Next week</h3>
+            <goal-item title="Avatar Accessories" description="Tumblr is looking to offer some very basic accessories for purchase that users can use to customize their avatars. I need to design the initial specifications, and help the Subscriptions Team work towards an implementation." focus-date="2023-12-05T09:00:00-05:00" due-date="2023-12-07T17:00:00-05:00"></goal-item>
+          </div>
+
+          <div id="goalsLater">
+            <h3 class="sectionHeading">Long-term</h3>
+            <goal-item title="TumblrMart" description="I want to improve TumblrMart's overall look/feel, but more importantly improve conversions for purchases."></goal-item>
+          </div>
+          <!-- </div> -->
+        </div>
+
+        <div id="reminders" class="function vStack">
+          <function-header title="Reminders" description="Never forget an important event."></function-header>
+
+          <reminder-item title="Fix my SSH/Proxy access" description="I need to get my SSH and Proxy access fixed. I can't access the VPN without it."></reminder-item>
+          <reminder-item title="Get a coach" description="I need to get a coach to help me with my career."></reminder-item>
+        </div>
+
+        <div id="notes" class="function vStack">
+          <function-header title="Notes" description="Keep track of what you've done."></function-header>
+
+          <div id="notesAdd">
+            <h2 class="sectionHeading">Add a new note</h2>
+            <input id="notesAddInput" type="text" placeholder="What do you want to do?" />
+            <button id="notesAddButton">Add</button>
+          </div>
+
+          <div class="note">
+            <h3 class="noteDatetime">Today, 8:41 AM</h3>
+            <p>Made some more headway on the landing page design, and share my latest on Slack for some off the hip feedback.</p>
+          </div>
+
+          <div class="note">
+            <h3 class="noteDatetime">Yesterday, 4:51 PM</h3>
+            <p>Had a great meeting with the team about the new Premium Product project. We're going to start working on the branding next week.</p>
+          </div>
+
+          <div class="note">
+            <h3 class="noteDatetime">Yesterday, 10:23 AM</h3>
+            <p>Worked on the landing page design for the new Premium Product project. I'm not sure if I'm happy with it yet, but I'll share it with the team tomorrow.</p>
+          </div>
+
+          <div class="note">
+            <h3 class="noteDatetime">2d ago</h3>
+            <p>Head down in Figma working on some gardening for the Design Library..</p>
+          </div>
+
+          <div class="note">
+            <h3 class="noteDatetime">3d ago</h3>
+            <p>Been going back-and-forth with the devs about <span>#Premium Product Launch</span> plan.</p>
+          </div>
+        </div>
+
+        <div id="settings" class="function vStack">
+          <function-header title="Settings" description="Make it your own."></function-header>
+
+          <div id="themePicker" class="hStack">
+            <label class="color-option">
+              <input type="radio" name="accent-color" value="blue" checked />
+              <span class="color-box" style="background-color: blue"></span>
+              Blue
+            </label>
+            <label class="color-option">
+              <input type="radio" name="accent-color" value="red" />
+              <span class="color-box" style="background-color: red"></span>
+              Red
+            </label>
+            <label class="color-option">
+              <input type="radio" name="accent-color" value="green" />
+              <span class="color-box" style="background-color: green"></span>
+              Green
+            </label>
+            <label class="color-option">
+              <input type="radio" name="accent-color" value="yellow" />
+              <span class="color-box" style="background-color: yellow"></span>
+              Yellow
+            </label>
+            <label class="color-option">
+              <input type="radio" name="accent-color" value="purple" />
+              <span class="color-box" style="background-color: purple"></span>
+              Purple
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="appModal" class="is-hidden">
+      <div id="modalGoalAdd" class="modalContainer vStack">
+        <h2 class="sectionHeading">Add a New Goal</h2>
+
+        <!-- <fieldset id="goalsAddDetails" class="vStack"> -->
+        <input id="goalAddTitle" type="text" placeholder="Title" required />
+        <textarea id="goalAddDescription" rows="6" placeholder="Description" required></textarea>
+        <!-- </fieldset> -->
+
+        <fieldset id="goalsAddFocus" class="vStack">
+          <div class="focusPicker is-next-week hStack">
+            <span class="focusPickerSelectionIndicator"></span>
+            <span class="focusPickerValue focusPickerValueThisWeek" onclick="goalsAddFocusSet('this-week')">This Week</span>
+            <span class="focusPickerValue focusPickerValueNextWeek" onclick="goalsAddFocusSet('next-week')">Next Week</span>
+            <span class="focusPickerValue focusPickerValueLongTerm" onclick="goalsAddFocusSet('long-term')">Long Term</span>
+          </div>
+          <!-- <small>This is used to determine when to bring this goal to your attention.</small> -->
+        </fieldset>
+
+        <hr />
+
+        <!-- <fieldset id="goalAddDueDate" class="vStack">
+              <label>Due Date (optional):</label>
+              <input type="date" placeholder="Due Date" />
+            </fieldset> -->
+
+        <button id="goalsAddButton" class="primary" onclick="goalsAddCreate()">Add Goal</button>
+        <button id="goalsAddCancelButton" onclick="goalsAddHide()">Cancel</button>
+      </div>
+    </div>
+
+    <script>
+      // Database: Declare the database
+      // ------------------------------
+      const db = new Dexie("today");
+
+      // Database: Define the schema
+      // ------------------------------
+      db.version(1).stores({
+        goals: "++id, title, description, focus, dueDate",
+      });
+
+      // Component: Function Navigation
+      // ------------------------------
+      class FunctionNavigation extends HTMLElement {
+        constructor() {
+          super();
+
+          // Grab the template
+          const template = document.getElementById("templateFunctionNavigation");
+          const content = document.importNode(template.content, true);
+
+          // Append the template directly to the component
+          this.appendChild(content);
+
+          // Add click event listeners to navigation buttons
+          this.querySelectorAll(".navButton").forEach((button) => {
+            button.addEventListener("click", this.onNavButtonClick.bind(this));
+          });
+        }
+
+        onNavButtonClick(event) {
+          // Remove 'is-active' class from all buttons
+          this.querySelectorAll(".navButton").forEach((button) => {
+            button.classList.remove("is-active");
+          });
+
+          // Add 'is-active' class to clicked button
+          event.currentTarget.classList.add("is-active");
+
+          // Dispatch a custom event with the ID of the target function
+          const targetFunctionId = event.currentTarget.id.replace("nav", "").toLowerCase();
+          this.dispatchEvent(
+            new CustomEvent("functionChange", {
+              detail: { targetFunctionId },
+              bubbles: true,
+            })
+          );
+        }
+      }
+
+      customElements.define("function-navigation", FunctionNavigation);
+
+      // Listen for the functionChange event
+      document.addEventListener("functionChange", (e) => {
+        const { targetFunctionId } = e.detail;
+        document.querySelectorAll(".function").forEach((func) => {
+          func.classList.remove("is-active");
+        });
+
+        const activeFunction = document.getElementById(targetFunctionId);
+        if (activeFunction) {
+          activeFunction.classList.add("is-active");
+        }
+
+        // Save to localStorage
+        localStorage.setItem("activeFunction", targetFunctionId);
+      });
+
+      // Load the active function from localStorage
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedFunction = localStorage.getItem("activeFunction");
+
+        if (savedFunction) {
+          const buttonToClick = document.querySelector(`#nav${savedFunction.charAt(0).toUpperCase() + savedFunction.slice(1)}`);
+          if (buttonToClick) {
+            buttonToClick.click();
+          }
+        }
+      });
+
+      // Component: Function Header
+      // ------------------------------
+      class FunctionHeader extends HTMLElement {
+        static get observedAttributes() {
+          return ["title", "description"]; // Add more attributes as needed
+        }
+
+        constructor() {
+          super();
+
+          // Grab the template
+          const template = document.getElementById("templateFunctionHeader");
+          const content = document.importNode(template.content, true);
+
+          // Append the template directly to the component
+          this.appendChild(content);
+
+          // Initialize default state
+          this.titleElement = this.querySelector(".functionHeaderTitle"); // Assuming these classes exist in your template
+          this.descriptionElement = this.querySelector(".functionHeaderDescription");
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+          switch (name) {
+            case "title":
+              this.titleElement.textContent = newValue;
+              break;
+            case "description":
+              this.descriptionElement.textContent = newValue;
+              break;
+          }
+        }
+      }
+
+      customElements.define("function-header", FunctionHeader);
+
+      // Component: Goal (single)
+      // ------------------------------
+      class Goal extends HTMLElement {
+        static get observedAttributes() {
+          return ["title", "description", "due-date", "focus-date"];
+        }
+
+        constructor() {
+          super();
+
+          // Grab the template
+          const template = document.getElementById("templateGoal");
+          const content = document.importNode(template.content, true);
+
+          // Append the template directly to the component
+          this.appendChild(content);
+
+          // Initialize default state
+          this.titleElement = this.querySelector(".goalTitle");
+          this.descriptionElement = this.querySelector(".goalDescription");
+          this.focusDateElement = this.querySelector(".goalFocusDate");
+          this.dueDateElement = this.querySelector(".goalDueDate");
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+          switch (name) {
+            case "title":
+              this.titleElement.textContent = newValue;
+              break;
+            case "description":
+              this.descriptionElement.textContent = newValue;
+              break;
+            case "focus-date":
+              this.focusDateElement.textContent = this.calculateFocusDateLabel(newValue);
+              break;
+            case "due-date":
+              this.dueDateElement.textContent = new Date(newValue).toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              });
+              break;
+          }
+        }
+
+        calculateFocusDateLabel(dateString) {
+          const focusDate = new Date(dateString);
+          focusDate.setHours(0, 0, 0, 0); // Normalize the time part to start of the day
+
+          const now = new Date();
+          now.setHours(0, 0, 0, 0); // Normalize the current time to start of the day
+
+          const startOfWeek = this.getStartOfWeek(now);
+          const endOfWeek = new Date(startOfWeek.getTime() + 6 * 24 * 60 * 60 * 1000); // End of the current week
+          const startOfNextWeek = new Date(endOfWeek.getTime() + 1 * 24 * 60 * 60 * 1000); // Start of the next week
+
+          if (focusDate >= startOfWeek && focusDate <= endOfWeek) {
+            return "This Week";
+          } else if (focusDate >= startOfNextWeek && focusDate < new Date(startOfNextWeek.getTime() + 7 * 24 * 60 * 60 * 1000)) {
+            return "Next Week";
+          } else if (focusDate < startOfWeek) {
+            const weeksAgo = Math.ceil((startOfWeek - focusDate) / (7 * 24 * 60 * 60 * 1000));
+            return `Overdue (${weeksAgo} week${weeksAgo > 1 ? "s" : ""} ago)`;
+          } else {
+            const weeksLater = Math.ceil((focusDate - startOfNextWeek) / (7 * 24 * 60 * 60 * 1000));
+            return `Later (${weeksLater} week${weeksLater > 1 ? "s" : ""})`;
+          }
+        }
+
+        getStartOfWeek(date) {
+          const day = date.getDay();
+          const diff = date.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is Sunday
+          return new Date(date.setDate(diff));
+        }
+      }
+
+      customElements.define("goal-item", Goal);
+
+      // Function: goalsAddShow()
+      // This function shows the modal for adding a new goal.
+      function goalsAddShow() {
+        const modal = document.querySelector("#appModal");
+        modal.classList.remove("is-hidden");
+
+        const modalContainer = document.querySelector("#modalGoalAdd");
+        modalContainer.classList.add("is-active");
+      }
+
+      // Function: goalsAddHide()
+      // This function hides the modal for adding a new goal.
+      function goalsAddHide() {
+        const modal = document.querySelector("#appModal");
+        modal.classList.add("is-hidden");
+
+        const modalContainer = document.querySelector("#modalGoalAdd");
+        modalContainer.classList.remove("is-active");
+      }
+
+      // Function: goalsAddFocusSet()
+      // This function sets the focus value when adding a new goal.
+      function goalsAddFocusSet(focus) {
+        const focusPicker = document.querySelector("#goalsAddFocus .focusPicker");
+        focusPicker.classList.remove("is-this-week", "is-next-week", "is-long-term");
+        focusPicker.classList.add(`is-${focus}`);
+
+        const focusPickerSelectedValue = document.querySelector("#goalsAddFocus .focusPickerValue.focusPickerSelectedValue");
+      }
+
+      // Function: goalsAddCreate()
+      // This function validates the inputs, creates a new Goal using IndexedDB, and then hides the modal.
+      function goalsAddCreate() {
+        const title = document.querySelector("#goalAddTitle").value;
+        const description = document.querySelector("#goalAddDescription").value;
+        const focus = document.querySelector("#goalsAddFocus .focusPicker").classList.contains("is-this-week") ? "this-week" : document.querySelector("#goalsAddFocus .focusPicker").classList.contains("is-next-week") ? "next-week" : "long-term";
+
+        // Add the new goal to the db
+        db.goals.add({
+          title,
+          description,
+          focus,
+        });
+      }
+
+      // Component: Reminder (single)
+      // ------------------------------
+      class Reminder extends HTMLElement {
+        static get observedAttributes() {
+          return ["title", "description"];
+        }
+
+        constructor() {
+          super();
+
+          // Grab the template
+          const template = document.getElementById("templateReminder");
+          const content = document.importNode(template.content, true);
+
+          // Append the template directly to the component
+          this.appendChild(content);
+
+          // Initialize default state
+          this.titleElement = this.querySelector(".reminderTitle");
+          this.descriptionElement = this.querySelector(".reminderDescription");
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+          switch (name) {
+            case "title":
+              this.titleElement.textContent = newValue;
+              break;
+            case "description":
+              this.descriptionElement.textContent = newValue;
+              break;
+          }
+        }
+      }
+
+      customElements.define("reminder-item", Reminder);
+
+      // Current Date and Time
+      // ------------------------------
+      function formatDateTime() {
+        const now = new Date();
+
+        // Formatting the date part
+        const dateOptions = { year: "numeric", month: "short", day: "numeric" };
+        const formattedDate = now.toLocaleDateString("en-US", dateOptions);
+
+        // Formatting the time part
+        const timeOptions = { hour: "2-digit", minute: "2-digit", hour12: true };
+        const formattedTime = now.toLocaleTimeString("en-US", timeOptions);
+
+        // Concatenating date and time with '@'
+        const formattedDateTime = `${formattedDate} @ ${formattedTime}`;
+
+        document.getElementById("currentDateTime").textContent = formattedDateTime;
+      }
+
+      // Call the function to update the date and time
+      formatDateTime();
+
+      // Optional: Update every 30 seconds
+      setInterval(formatDateTime, 30000);
+    </script>
+  </body>
+</html>

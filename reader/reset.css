@@ -1,0 +1,61 @@
+/* reset.css */
+/* box-sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set font size and line height to a consistent value */
+body {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Remove default button styles */
+button,
+select {
+    background: none;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Remove underlines from links */
+a {
+    text-decoration: none;
+}
+
+/* Ensure images are not resized by default */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Additional reset styles can be added as needed */

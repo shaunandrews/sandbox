@@ -1,0 +1,84 @@
+:root {
+  --spacing-unit: 10px;
+
+  /* Border */
+  --border-radius-05: calc(0.5 * var(--spacing-unit));
+  --border-radius-1: var(--spacing-unit);
+
+  /* Spacing */
+  --spacing-05: calc(0.5 * var(--spacing-unit));
+  --spacing-1: calc(1 * var(--spacing-unit));
+  --spacing-2: calc(2 * var(--spacing-unit));
+  --spacing-3: calc(3 * var(--spacing-unit));
+  --spacing-4: calc(4 * var(--spacing-unit));
+  --spacing-5: calc(5 * var(--spacing-unit));
+}
+
+body {
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#app {
+}
+
+#navigation {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  gap: var(--spacing-2);
+  align-items: center;
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+#content {
+  position: relative;
+  /* padding: 50px; */
+  /* padding-top: 100px; */
+  /* height: 100vh; */
+  /* width: 100vw; */
+  /* overflow: hidden; */
+}
+
+#stream {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  /* max-width: 800px; */
+  margin: auto;
+  margin-top: 48.5px;
+  left: 0;
+}
+
+
+/* 
+#full {
+  background: yellow;
+  left: 100vw;
+}
+
+#stream,
+#full {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  padding: 80px 50px;
+  overflow-y: auto;
+  transition: 0.3s ease-in-out;
+}
+
+.full-view #stream {
+  left: -100vw;
+}
+
+.full-view #full {
+  left: 0;
+}
+*/

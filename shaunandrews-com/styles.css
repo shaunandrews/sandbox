@@ -1,0 +1,105 @@
+:root {
+  /* Colors */
+  --background: #1e1e1e;
+  --text: #efefef;
+
+  /* Border */
+  --border-radius: 10px;
+
+  /* Spacing */
+  --spacing-unit: 5px;
+  --spacing-1: calc(1 * var(--spacing-unit));
+  --spacing-2: calc(2 * var(--spacing-unit));
+  --spacing-3: calc(3 * var(--spacing-unit));
+  --spacing-4: calc(4 * var(--spacing-unit));
+  --spacing-5: calc(5 * var(--spacing-unit));
+}
+
+body {
+  color: var(--text);
+  font-size: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: var(--background);
+}
+
+#app {
+  display: flex;
+  position: relative;
+}
+
+#about {
+}
+
+#about p {
+  line-height: 180%;
+  margin-bottom: var(--spacing-3);
+}
+
+#focus {
+  background: url("./images/shaun.png") no-repeat center left;
+  background-size: cover;
+  padding: var(--spacing-5);
+  min-width: 45vw;
+  height: 100vh;
+  transition: background-position 20s linear;
+  /* transition-delay: 1s; */
+}
+
+#focus:hover {
+    background-position: center right;
+}
+
+#content {
+  height: 100vh;
+  overflow: auto;
+  padding: var(--spacing-5);
+}
+
+#work {
+}
+
+#work h2 {
+}
+
+.works {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--spacing-5);
+}
+
+.work-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  /* padding: var(--spacing-5); */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.work-item:hover {
+  transform: scale(1.075) rotate(2.5deg);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;
+  z-index: 1;
+}
+
+.work-item:hover:nth-child(odd) {
+  transform: scale(1.075) rotate(2.5deg);
+}
+
+.work-item:hover:nth-child(even) {
+  transform: scale(1.075) rotate(-2.5deg);
+}
+
+.work-item__preview {
+  height: 160px;
+  object-fit: cover;
+}
+
+.work-item__details {
+  padding: var(--spacing-3);
+}

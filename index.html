@@ -1,86 +1,101 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Sandbox</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        /* A basic CSS reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+      /* A basic CSS reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        body {
-            background: white;
-            color: #111;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            font-size: 18px;
+      body {
+        background: white;
+        color: #111;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-size: 18px;
 
-            /* Center the body element within the browser window */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        /* Center the body element within the browser window */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
 
-        }
+      body.dark-mode {
+        background: #111;
+        color: #fff;
+      }
 
-        body.dark-mode {
-            background: #111;
-            color: #fff;
-        }
+      a {
+        color: rgb(250, 14, 132);
+        /* display: inline-block; */
+        border-radius: 1px;
+        /* padding: 5px 0; */
+      }
 
-        a {
-            color: rgb(250, 14, 132);
-            /* display: inline-block; */
-            border-radius: 1px;
-            /* padding: 5px 0; */
-        }
+      a:hover {
+        text-decoration: none;
+        /* --surface-color: rgba(255, 255, 255, 0.95); */
+        /* background: var(--surface-color); */
+        /* box-shadow: 0 0 0 5px var(--surface-color); */
+      }
 
-        a:hover {
-            text-decoration: none;
-            /* --surface-color: rgba(255, 255, 255, 0.95); */
-            /* background: var(--surface-color); */
-            /* box-shadow: 0 0 0 5px var(--surface-color); */
-        }
+      h1 {
+        font-size: 40px;
+      }
 
-        h1 {
-            font-size: 40px;
-        }
+      p {
+      }
 
-        p {}
+      ul {
+        list-style-type: none;
+      }
 
-        ul {
-            list-style-type: none;
-        }
-
-        li {
-            margin: 10px;
-        }
+      li {
+        margin: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <img src="./sandbox-toys.png" width="300" style="border-radius: 10px;" />
+  <body>
+    <img src="./sandbox-toys.png" width="300" style="border-radius: 10px" />
     <h1>Shaun's Sandbox</h1>
     <p>This is where I play with code and design.</p>
     <ul>
-        <li><a href="./jp-mobile/">JP Mobile</a></li>
-        <li><a href="./today/">Today.</a></li>
-        <li><a href="./image-gallery/">image-gallery</a></li>
-        <li><a href="./mobile-blaze/">mobile-blaze</a></li>
-        <li><a href="./my-site/">my-site</a></li>
+      <li><a href="./today-2/">Today (Take 2)</a></li>
+      <li><a href="./reader/">Reader (Take 2)</a></li>
+      <li><a href="./fumblr/">Fumblr</a></li>
+      <li><a href="./media-libary/">Media Library</a></li>
+      <li><a href="./products-table/">Products Table</a></li>
+      <li><a href="./reeder/">Reeder</a></li>
+      <li><a href="./shaunandrews-com/">ShaunAndrews.com</a></li>
+      <li><a href="./the-order/">The Order</a></li>
+      <li><a href="./todo/">ToDo</a></li>
+      <li><a href="./tumblr-premium/">Tumblr Premium</a></li>
+      <li><a href="./weekly/">Weekly</a></li>
+      <li><a href="./woocommerce/">WooCommerce</a></li>
+      <li><a href="./wp-drafts/">WP Drafts</a></li>
+      <li><a href="./jp-mobile/">JP Mobile</a></li>
+      <li><a href="./today/">Today.</a></li>
+      <li><a href="./image-gallery/">image-gallery</a></li>
+      <li><a href="./mobile-blaze/">mobile-blaze</a></li>
+      <li><a href="./my-site/">my-site</a></li>
     </ul>
     <script>
-        const container = document.querySelector('body');
+      const container = document.querySelector("body");
 
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            container.classList.add('dark-mode');
-        }
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        container.classList.add("dark-mode");
+      }
     </script>
-</body>
-
+  </body>
 </html>
