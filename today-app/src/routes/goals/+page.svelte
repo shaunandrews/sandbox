@@ -1,18 +1,28 @@
 <script>
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { addGoal, deleteGoal, getAllGoals } from '$lib/db.js';
+    import { goals } from '$lib/stores/goalsStore';
+	import { addGoal, deleteGoal } from '$lib/db.js';
 	import VerticalStack from '$lib/VerticalStack.svelte';
 	import HorizontalStack from '$lib/HorizontalStack.svelte';
 	import Wayfinder from '$lib/Wayfinder.svelte';
-	import FocusPicker from '$lib/FocusPicker.svelte';
-	import DueDatePicker from '$lib/DueDatePicker.svelte';
+	import Goal from './Goal.svelte';
+	import FocusPicker from './FocusPicker.svelte';
+	import DueDatePicker from './DueDatePicker.svelte';
 
 	// Goal Creation
 	let title = '';
 	let description = '';
 	let focusDate = '';
 	let dueDate = '';
+
+	function toggleGoalCreation() {
+		// Toggle the body .is-modal class
+		document.body.classList.toggle('is-modal');
+
+		// Add a class to the #goals-create element
+		const goalCreate = document.getElementById('goal-create');
+		goalCreate.classList.toggle('is-hidden');
+	}
 
 	async function handleSubmit() {
 		const goal = { title, description, focusDate, dueDate };
@@ -31,7 +41,14 @@
 		await loadGoals();
 	}
 
-    // Goal Deletion
+	// Close the goal creation form when the Escape key is pressed
+	function onKeyDown(event) {
+		if (event.key === 'Escape') {
+			toggleGoalCreation();
+		}
+	}
+
+	// Goal Deletion
 	async function handleDelete(id) {
 		try {
 			await deleteGoal(id);
@@ -42,20 +59,11 @@
 		}
 	}
 
-	// Goal Listing
-	let goals = writable([]);
-
-	async function loadGoals() {
-		try {
-			const allGoals = await getAllGoals();
-			goals.set(allGoals);
-		} catch (error) {
-			console.error('Error loading goals:', error);
-		}
-	}
-
 	onMount(() => {
-		loadGoals();
+		window.addEventListener('keydown', onKeyDown);
+		return () => {
+			window.removeEventListener('keydown', onKeyDown);
+		};
 	});
 </script>
 
@@ -67,31 +75,32 @@
 	/>
 </svelte:head>
 
-<Wayfinder title="Goals" description="Define projects and outcomes" />
+<Wayfinder
+    title="Goals"
+    description="Define projects and outcomes"
+    primaryAction={toggleGoalCreation}
+    primaryActionLabel="New goal"
+/>
 
 <div id="goal-list">
-	{#if $goals.length > 0}
-		{#each $goals as goal}
-			<VerticalStack>
-				<h2>{goal.title}</h2>
-				<p>{goal.description}</p>
-				<HorizontalStack>
-					<p>Focus Date: {goal.focusDate}</p>
-					<span>&nbsp;&nbsp;&bull;&nbsp;&nbsp;</span>
-					<p>Due Date: {goal.dueDate}</p>
-					<button class="mini" on:click={() => handleDelete(goal.id)}>Delete</button>
-				</HorizontalStack>
-			</VerticalStack>
-		{/each}
-	{:else}
-		<p>No goals to display.</p>
-	{/if}
+	<VerticalStack gap="20px">
+		{#if $goals.length > 0}
+			{#each $goals as goal}
+				<Goal {goal} />
+			{/each}
+		{:else}
+			<p>No goals to display.</p>
+		{/if}
+	</VerticalStack>
 </div>
 
-<form id="goal-create" on:submit|preventDefault={handleSubmit}>
+<form id="goal-create" class="is-hidden" on:submit|preventDefault={handleSubmit}>
 	<VerticalStack gap="10px">
 		<header>
-			<h2>Create a new goal</h2>
+			<HorizontalStack>
+				<h2>Create a new goal</h2>
+				<button class="mini" on:click={toggleGoalCreation}>Cancel</button>
+			</HorizontalStack>
 		</header>
 
 		<input type="text" id="title" placeholder="Goal name&hellip;" bind:value={title} required />
@@ -104,18 +113,34 @@
 
 		<footer>
 			<HorizontalStack gap="20px" align="center">
-				<button type="submit">Add goal</button>
-				<DueDatePicker on:dueDateSelected={(e) => (dueDate = e.detail)} />
 				<FocusPicker on:focusDateSelected={(e) => (focusDate = e.detail)} />
+				<DueDatePicker on:dueDateSelected={(e) => (dueDate = e.detail)} />
+				<button type="submit">Add goal</button>
 			</HorizontalStack>
 		</footer>
 	</VerticalStack>
 </form>
 
 <style>
-	form {
+	/* Goal Listing */
+	#goal-list {
+	}
+
+	/* Goal Creation */
+	#goal-create {
 		background: var(--color-surface);
-		padding: 15px;
+		padding: 20px;
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: all 0.15s ease-in-out;
+	}
+
+	#goal-create.is-hidden {
+		transform: translateY(200px);
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	header h2 {

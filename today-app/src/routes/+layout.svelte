@@ -1,14 +1,25 @@
 <script>
-	import { nukeDB } from '$lib/db.js';
+	import { onMount } from 'svelte';
+	import { nukeDB, getAllGoals } from '$lib/db.js';
+	import { goals } from '$lib/stores/goalsStore';
 	import Header from '../lib/Header.svelte';
 	import './reset.css';
 	import './styles.css';
+
+	onMount(async () => {
+		try {
+			const allGoals = await getAllGoals();
+			goals.set(allGoals); // Initialize the store with the goals from the database
+			console.log(allGoals);
+		} catch (error) {
+			console.error('Error loading goals:', error);
+		}
+	});
 
 	async function handleNukeDB() {
 		try {
 			const message = await nukeDB();
 			console.log(message);
-			// Additional logic after clearing the database (e.g., updating UI)
 		} catch (error) {
 			console.error(error);
 		}

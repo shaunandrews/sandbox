@@ -54,6 +54,8 @@ export function nukeDB() {
   });
 }
 
+// Goals
+// -----
 // Add a goal
 export function addGoal(goal) {
   return openDB().then((db) => {
@@ -111,6 +113,32 @@ export function getAllGoals() {
   });
 }
 
+// Fetch a goal by id
+export function getGoal(id) {
+  return openDB().then((db) => {
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['goals'], 'readonly');
+      const store = transaction.objectStore('goals');
+      const numericId = Number(id); // Ensure the id is numeric
+      const request = store.get(numericId);
+
+      request.onsuccess = () => {
+        if (request.result) {
+          resolve(request.result);
+        } else {
+          reject('Goal not found.'); // Handle case where result is not found
+        }
+      };
+
+      request.onerror = () => {
+        reject('Error fetching the goal.');
+      };
+    });
+  });
+}
+
+// Notes
+// -----
 // Add a note
 export function addNote(note) {
     return openDB().then((db) => {
