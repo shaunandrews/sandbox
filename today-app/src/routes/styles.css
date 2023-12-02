@@ -13,11 +13,13 @@
 }
 
 body {
-	font-family: system-ui, sans-serif;
-	font-weight: normal;
-	font-size: 18px;
 	background: var(--color-background);
 	color: var(--color-text);
+}
+
+body.is-modal #scrim {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 a {

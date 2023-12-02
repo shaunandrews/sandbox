@@ -1,11 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { addNote, getAllNotes, getAllGoals } from '$lib/db.js';
+	import { notes } from '$lib/stores/notesStore';
+	import { goals } from '$lib/stores/goalsStore';
+	import { addNote } from '$lib/db.js';
 	import VerticalStack from '$lib/VerticalStack.svelte';
 	import Wayfinder from '$lib/Wayfinder.svelte';
-
 	import DevNotes from '$lib/DevNotes.svelte';
+
+	onMount(() => {});
 
 	// Note Creation
 	let body = '';
@@ -16,51 +18,25 @@
 		try {
 			const id = await addNote(note);
 			console.log(`Added note with id ${id}`);
+
+			// Update the goals store
+			notes.update((currentNotes) => {
+				return [
+					...currentNotes,
+					{
+						...note,
+						id
+					}
+				];
+			});
+
+			// Reset form after submission
 			body = '';
 			goalID = '';
-
-			// Optimistically update the notes store with the new note
-			notes.update((currentNotes) => [
-				...currentNotes,
-				{ id, body, goalID, goalTitle: goalsMap.get(goalID) || 'No Goal' }
-			]);
-
-			// Don't need to call loadData() here if the notes store is updated
-			// await loadData(); // Consider removing this line if it's not needed
 		} catch (error) {
 			console.error('Failed to add note', error);
 		}
 	}
-
-	// Data
-	let goals = writable([]);
-	let goalsMap = new Map();
-	let notes = writable([]);
-
-	async function loadData() {
-		try {
-			const allGoals = await getAllGoals();
-			goals.set(allGoals);
-
-			// Update the goalsMap
-			goalsMap = new Map(allGoals.map((goal) => [goal.id, goal.title]));
-
-			// Fetch all notes and enrich them with goal titles
-			const allNotes = await getAllNotes(); // Make sure this line is uncommented
-			const enrichedNotes = allNotes.map((note) => ({
-				...note,
-				goalTitle: goalsMap.get(note.goalID) || 'No Goal'
-			}));
-
-			notes.set(enrichedNotes);
-		} catch (error) {
-			console.error('Error loading data:', error);
-		}
-	}
-
-	onMount(() => {
-		loadData();
-	});
 </script>
 
 <svelte:head>
@@ -77,7 +53,10 @@
 	{#if $notes.length > 0}
 		{#each $notes as note}
 			<VerticalStack>
-				<p><strong>{note.goalTitle}</strong> • {note.body}</p>
+				<p>
+					<strong>{note.goalID}</strong> •
+					{note.body}
+				</p>
 			</VerticalStack>
 		{/each}
 	{:else}

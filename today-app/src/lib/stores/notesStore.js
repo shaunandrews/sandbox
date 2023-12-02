@@ -1,2 +1,2 @@
 import { writable } from 'svelte/store';
-export const goals = writable([]);
+export const notes = writable([]);

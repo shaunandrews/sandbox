@@ -1,23 +1,31 @@
 <script>
-	import { page, onMount } from '$app/stores';
-	import { getGoal } from '$lib/db.js';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { goals } from '$lib/stores/goalsStore';
+	import Wayfinder from '$lib/Wayfinder.svelte';
+	import Goal from '../Goal.svelte';
 
-	let id = $page.params.id;
-	let goal;
+	// Get the current goal ID from the URL, and make sure it's a number (not a string)!
+	$: goalId = Number($page.params.id);
 
-	onMount(async () => {
-		try {
-			goal = await getGoal(id);
-		} catch (error) {
-			console.error('Failed to load goal:', error);
-			// Handle error (e.g., show a message to the user)
-		}
-	});
+	// Find the goal from the store
+	$: goal = $goals.find((g) => g.id === goalId);
+
+	// All goals button
+	function gotoAllGoals() {
+		goto('/goals');
+	}
 </script>
 
+<Wayfinder
+	title="Goal Details"
+	description="Focus on one goal."
+	primaryActionLabel="All goals"
+	primaryAction={gotoAllGoals}
+/>
+
 {#if goal}
-	<h1>{goal.title}</h1>
-	<p>{goal.description}</p>
+	<Goal {goal} />
 {:else}
-	<p>Loading goal...</p>
+	<p>Goal not found.</p>
 {/if}
