@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { marked } from 'marked';
 	import { notes } from '$lib/stores/notesStore';
 	import { goals } from '$lib/stores/goalsStore';
 	import { addNote } from '$lib/db.js';
@@ -37,6 +38,10 @@
 			console.error('Failed to add note', error);
 		}
 	}
+
+	function parseMarkdown(markdown) {
+		return marked(markdown);
+	}
 </script>
 
 <svelte:head>
@@ -53,11 +58,11 @@
 	{#if $notes.length > 0}
 		{#each $notes as note}
 			<VerticalStack>
-				<p>
-					<strong>{note.goalID}</strong> •
-					{note.body}
-				</p>
+				<h3>{note.goalID}</h3>
+				{@html parseMarkdown(note.body)}
+				<!-- <div>{note.body}</div> -->
 			</VerticalStack>
+			<hr />
 		{/each}
 	{:else}
 		<p>No notes to display.</p>

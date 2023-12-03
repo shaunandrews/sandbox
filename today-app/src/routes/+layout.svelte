@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { nukeDB, getAllGoals, getAllNotes } from '$lib/db.js';
+	import { getAllGoals, getAllNotes } from '$lib/db.js';
 	import { goals } from '$lib/stores/goalsStore';
 	import { notes } from '$lib/stores/notesStore';
 	import Header from '../lib/Header.svelte';
@@ -19,17 +19,6 @@
 			console.error('Error loading goals or notes:', error);
 		}
 	});
-
-	async function handleNukeDB() {
-		try {
-			const message = await nukeDB();
-			console.log(message);
-		} catch (error) {
-			console.error(error);
-		}
-	}
-
-	// Clicking anywhere on the scrim 
 </script>
 
 <div class="app">
@@ -40,7 +29,6 @@
 	</main>
 
 	<div id="scrim"></div>
-	<!-- <button on:click={handleNukeDB}>Nuke Database</button> -->
 </div>
 
 <style>

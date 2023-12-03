@@ -34,26 +34,6 @@ export function openDB() {
   });
 }
 
-// Clear the database
-export function nukeDB() {
-  return openDB().then((db) => {
-    return new Promise((resolve, reject) => {
-      const transaction = db.transaction(db.objectStoreNames, 'readwrite');
-      transaction.oncomplete = () => {
-        resolve('Database cleared');
-      };
-      transaction.onerror = () => {
-        reject('Error clearing the database.');
-      };
-
-      // Loop through all object stores and clear them
-      Array.from(db.objectStoreNames).forEach(storeName => {
-        transaction.objectStore(storeName).clear();
-      });
-    });
-  });
-}
-
 // Goals
 // -----
 // Add a goal

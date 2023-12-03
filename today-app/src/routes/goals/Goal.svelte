@@ -8,6 +8,7 @@
 	import HorizontalStack from '$lib/HorizontalStack.svelte';
 	import VerticalStack from '$lib/VerticalStack.svelte';
 	import FocusWeek from '$lib/FocusWeek.svelte';
+	import DueDate from '$lib/DueDate.svelte';
 	import QuickNote from '../notes/QuickNote.svelte';
 
 	$: isGoalDetailPage =
@@ -59,16 +60,13 @@
 
 <div class="goal">
 	<VerticalStack gap="10px">
-		<HorizontalStack align="center" gap="10px">
-			<FocusWeek focusDate={goal.focusDate} />
-
-			<!-- 
-                TODO: Due date should only display if they have values.
-                TODO: There should be a class applied for an upcoming due date (5 or less days agao), a current due day (due today), and a past due date (overdue).
-                TODO: This is using a hard-coded value for now. It should be replaced with the actual value from the database: {goal.dueDate}
-            -->
-			<div class="goal-due-date">Due on Dec 12 (2 days!)</div>
-		</HorizontalStack>
+		<!-- Only render the HorizontalStack if there is either a focusDate or a dueDate -->
+		{#if goal.focusDate || goal.dueDate}
+			<HorizontalStack align="center" gap="10px">
+				<FocusWeek focusDate={goal.focusDate} />
+				<DueDate dueDate={goal.dueDate} />
+			</HorizontalStack>
+		{/if}
 
 		{#if isGoalDetailPage}
 			<h2>{goal.title}</h2>
