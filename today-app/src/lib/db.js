@@ -1,4 +1,7 @@
-// src/lib/db.js
+// Deprecated IndexedDB code
+// DONT USE ME
+//
+//
 export const dbName = 'TodayAppDB';
 
 // Database version

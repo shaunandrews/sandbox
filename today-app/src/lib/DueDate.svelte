@@ -32,3 +32,10 @@
 {#if formattedDueDate}
     <div class="goal-due-date">{formattedDueDate}</div>
 {/if}
+
+<style>
+    .goal-due-date {
+        font-size: 0.8em;
+        color: #666;
+    }
+</style>

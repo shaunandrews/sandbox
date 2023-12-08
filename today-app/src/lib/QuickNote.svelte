@@ -1,6 +1,6 @@
 <script>
 	import { notes } from '$lib/stores/notesStore';
-	import { addNote } from '$lib/db.js';
+	import { addNote } from '$lib/database.js';
 
 	export let goalID;
 	let body = '';
@@ -8,7 +8,10 @@
 
 	async function handleAddNote() {
 		if (hasContent && goalID) {
-			const note = { body, goalID };
+			const note = {
+				body,
+				goal_id: goalID
+			};
 			try {
 				await addNote(note);
 				notes.update((currentNotes) => {

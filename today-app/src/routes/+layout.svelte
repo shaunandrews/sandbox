@@ -1,20 +1,15 @@
 <script>
 	import { onMount } from 'svelte';
-	import { getAllGoals, getAllNotes } from '$lib/db.js';
-	import { goals } from '$lib/stores/goalsStore';
-	import { notes } from '$lib/stores/notesStore';
-	import Header from '../lib/Header.svelte';
+	import { fetchGoals, fetchNotes } from '$lib/database.js';
+	import Header from '$lib/Header.svelte';
 	import './reset.css';
 	import './typography.css';
 	import './styles.css';
 
 	onMount(async () => {
 		try {
-			const allGoals = await getAllGoals();
-			goals.set(allGoals);
-
-			const allNotes = await getAllNotes();
-			notes.set(allNotes);
+			await fetchGoals();
+			await fetchNotes();
 		} catch (error) {
 			console.error('Error loading goals or notes:', error);
 		}
@@ -27,24 +22,4 @@
 	<main>
 		<slot />
 	</main>
-
-	<div id="scrim"></div>
 </div>
-
-<style>
-	.app {
-		padding: 20px;
-	}
-
-	#scrim {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: rgba(0, 0, 0, 0.75);
-		opacity: 0;
-		pointer-events: none;
-		transition: all 0.15s ease-in-out;
-	}
-</style>

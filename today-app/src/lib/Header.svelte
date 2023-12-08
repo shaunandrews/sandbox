@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import HorizontalStack from '$lib/HorizontalStack.svelte';
 </script>
 
 <header>
@@ -19,24 +20,39 @@
 </header>
 
 <style>
-	nav ol {
+	nav {
+		z-index: 1;
+		position: fixed;
+		right: 0;
+		bottom: 40px;
+		left: 0;
 		display: flex;
-		list-style: none;
-		padding: 0;
-		margin: 0;
 		justify-content: center;
 	}
 
-	nav a {
+	ol {
+		display: flex;
+		background: rgba(255,255,255,0.5);
+		padding: 2px;
+		box-shadow: 0 1px 3px 1px rgba(0,0,0,0.1);
+		border-radius: 30px;
+		overflow: hidden;
+		backdrop-filter: blur(10px);
+	}
+
+	a {
 		display: block;
-		padding: 10px 20px
+		border-radius: 30px;
+		padding: 10px 20px;
+		text-decoration: none;
+		color: black;
 	}
 
-	nav a:hover {
-		background: #eee;
-	}
-
-	nav li[aria-current='page'] a {
-		background: var(--shade-05);
+	li[aria-current='page'] a {
+		text-decoration: none;
+		color: white;
+		font-weight: bold;
+		background: black;
+		cursor: default;
 	}
 </style>
