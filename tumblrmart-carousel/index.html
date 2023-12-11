@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tumblrmart Carousel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .carousel {
+            height: 190px;
+            max-width: 393px;
+            margin: auto;
+            background: linear-gradient(to bottom, #FFD51C, #CF1B60);
+        }
+
+        .carousel-images {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            outline: 1px dotted purple;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding:  0 40px;
+        }
+
+        .carousel-images > img {
+            display: block;
+            height: 140px;
+            scroll-snap-align: start;
+            scroll-margin: 40px;
+            outline: 1px dotted white;
+        }
+
+        /*
+        .carousel-pager {}
+
+        .carousel-pager li {
+            height: 8px;
+            width: 8px;
+            background: white;
+            border-radius: 8px;
+        }
+        */
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="carousel-images">
+            <img src="aries.png" alt="Aries">
+            <img src="taurus.png" alt="Taurus">
+            <img src="gemini.png" alt="Gemini">
+            <img src="cancer.png" alt="Cancer">
+            <img src="leo.png" alt="Leo">
+            <img src="virgo.png" alt="Virgo">
+            <img src="libra.png" alt="Libra">
+            <img src="scorpio.png" alt="Scorpio">
+            <img src="sagittarius.png" alt="Sagittarius">
+            <img src="capricorn.png" alt="Capricorn">
+            <img src="aquarius.png" alt="Aquarius">
+            <img src="pisces.png" alt="Pisces">
+        </div>
+        <!-- <ol class="carousel-pager">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol> -->
+    </div>
+</body>
+</html>
