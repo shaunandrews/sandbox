@@ -1,0 +1,498 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 16px;
+	max-width: 100%;
+	list-style: none;
+}
+
+fieldset {
+	border: none;
+}
+
+.hidden {
+	display: none !important;
+}
+
+body {
+    background: #001A35;
+}
+
+.views {
+	display: flex;
+	gap: 20px;
+	height: 100vh;
+    max-height: 850px;
+	padding: 20px;
+}
+
+.view {
+	display: flex;
+	flex-direction: column;
+	min-width: 400px;
+	width: 400px;
+    background: white;
+	/* Weird widths, I know, but this forces views to scroll horizontally right now. */
+	border-radius: 10px;
+	overflow: auto;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	/* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+}
+
+.view header {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	padding: 20px;
+	text-align: center;
+	background: rgba(255, 255, 255, 0.25);
+	backdrop-filter: blur(10px);
+}
+
+#product-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+}
+
+#product-list .product {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 10px;
+	border-top: 0.5px solid rgba(0, 0, 0, 0.25);
+	/* border-radius: 15px; */
+	transition: all 0.1s ease-in-out;
+}
+
+#product-list .product:hover {
+	/* background: rgba(0, 0, 0, 0.05); */
+	cursor: pointer;
+}
+
+#product-list .product-thumbnail {
+	height: 80px;
+	width: 80px;
+	border-radius: 10px;
+	border: 0.5px solid rgba(0, 0, 0, 0.25);
+	transition: all 0.1s ease-in-out;
+}
+
+#product-list .product:hover .product-thumbnail {
+	border: 2px solid rgba(0, 0, 0, 0.75);
+}
+
+#product-list .product-details {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+#product-list .product-tagline {
+	opacity: 0.5;
+}
+
+#product-list .product-price {
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	padding: 5px 10px;
+	border-radius: 15px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Grid */
+#product-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	gap: 10px;
+	padding: 10px;
+}
+
+#product-grid .product {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+#product-grid .product-type {
+	position: absolute;
+	top: 1.5px;
+	left: 1.5px;
+	z-index: 1;
+	font-size: 10px;
+	text-transform: uppercase;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 4px;
+	padding: 2px 4px;
+}
+
+#product-grid .product-thumbnail {
+	border-radius: 5px;
+	transition: all 0.1s ease-in-out;
+}
+
+#product-grid .product:nth-child(odd):hover .product-thumbnail {
+	transform: scale(1.05) rotate(2deg);
+}
+
+#product-grid .product:nth-child(even):hover .product-thumbnail {
+	transform: scale(1.05) rotate(-2deg);
+}
+
+#product-grid .product-title {
+	font-size: 14px;
+	font-weight: normal;
+	opacity: 0.5;
+}
+
+#product-grid .product:hover .product-title {
+	opacity: 1;
+}
+
+/* Product Grid Mixed */
+/* showcases one full-width product, followed by a 50-50 split of two products, and then a 3-column grid of the remainder. */
+#product-grid-mixed {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 15px;
+}
+
+#product-grid-mixed .product {
+	flex-basis: calc(25% - 10px);
+	position: relative;
+	text-align: center;
+	transition: all 0.1s ease-in-out;
+}
+
+#product-grid-mixed .product:hover {
+	cursor: pointer;
+	transform: scale(1.075);
+}
+
+#product-grid-mixed .product-thumbnail {
+	border-radius: 10px;
+}
+
+#product-grid-mixed .product-banner {
+	display: none;
+	border-radius: 10px;
+}
+
+#product-grid-mixed .product-title {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+#product-grid-mixed .product-type {
+	display: none;
+}
+
+/* The first product is shown full-width */
+#product-grid-mixed .product:nth-child(1) {
+	min-width: calc(100% - 10px);
+}
+
+#product-grid-mixed .product:nth-child(1) .product-title {
+	position: absolute;
+	bottom: 10px;
+	left: 70px;
+	font-size: 16px;
+	padding: 5px 10px;
+	border-radius: 8px;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* The second and third products are half-width */
+#product-grid-mixed .product:nth-child(2),
+#product-grid-mixed .product:nth-child(3) {
+	min-width: calc(50% - 10px);
+}
+
+#product-grid-mixed .product:nth-child(1) .product-thumbnail,
+#product-grid-mixed .product:nth-child(2) .product-thumbnail,
+#product-grid-mixed .product:nth-child(3) .product-thumbnail {
+	display: none;
+}
+
+#product-grid-mixed .product:nth-child(1) .product-banner,
+#product-grid-mixed .product:nth-child(2) .product-banner,
+#product-grid-mixed .product:nth-child(3) .product-banner {
+	display: block;
+}
+
+/* Product Detail */
+.product-detail {
+	position: relative;
+}
+
+.product-detail .detail__header {
+	position: sticky;
+	top: 0;
+	right: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	padding: 15px 20px;
+	gap: 20px;
+	background: white;
+}
+
+.product-detail .detail__title {
+	flex-grow: 1;
+}
+
+.product-detail .detail__hero {
+	min-height: 200px;
+	width: 100%;
+	overflow-x: auto;
+	display: flex;
+	gap: -10px;
+	padding: 20px 60px;
+	align-items: center;
+    background: rgba(0,0,0,0.1);
+}
+
+.product-detail .detail__hero img {
+	display: block;
+    max-height: 60%;
+    opacity: 0.5;
+    transform: scale(0.8);
+}
+
+.product-detail .detail__hero img.current {
+    opacity: 1;
+    max-height: 100%;
+}
+
+.product-detail .detail__body {
+	flex-grow: 1;
+	padding: 20px;
+}
+
+.product-detail .detail__body h3,
+.product-detail .detail__body p,
+.product-detail .detail__body li {
+    margin-bottom: 15px;
+}
+
+.product-detail .detail__body ul {
+    margin-left: 15px;
+}
+
+.product-detail .detail__body hr {
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    height: 1px;
+    margin: 25px 0
+}
+
+.product-detail .detail__body li {
+    list-style: circle;
+}
+
+.product-detail footer {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	padding: 8px 20px 20px 20px;
+	border-radius: 20px 20px 0 0;
+	/* background: rgba(0,0,0,0.75); */
+	/* border: 1px solid rgba(0, 0, 0, 0.1); */
+	background: rgba(255, 255, 255, 0.75);
+	box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(10px);
+	/* color: white; */
+}
+
+.product-detail .detail__drag-handle {
+	width: 50px;
+	height: 5px;
+	margin: auto auto 5px auto;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
+}
+
+.purchase-type {
+    width: 50%;
+    margin: auto;
+	/* background: rgba(0, 0, 0, 0.1); */
+	display: flex;
+	position: relative;
+	border-radius: 10px;
+	background: white;
+	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.075) inset;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	transition: all 0.1s ease-in-out;
+}
+
+.purchase-type:hover {
+	transform: scale(1.0125);
+}
+
+.purchase-type__indicator {
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	left: 2px;
+	width: calc(50% - 4px);
+	background: black;
+	border-radius: 6px;
+    transition: all 0.075s ease-in-out;
+}
+
+.buy .purchase-type__indicator {
+	left: 2px;
+}
+
+.gift .purchase-type__indicator {
+	left: calc(50% + 2px);
+}
+
+.purchase-type__buy,
+.purchase-type__gift {
+	width: 50%;
+}
+
+.purchase-type__buy input,
+.purchase-type__gift input {
+    display: none;
+}
+
+.purchase-type__buy label,
+.purchase-type__gift label {
+	display: block;
+	text-align: center;
+	padding: 8px 10px;
+	position: relative;
+	z-index: 1;
+}
+
+.purchase-type__buy:has(input:checked) label,
+.purchase-type__gift:has(input:checked) label {
+	font-weight: bold;
+	color: white;
+}
+
+.blog-picker {
+	border-radius: 10px;
+	padding: 11px;
+	padding-left: 15px;
+	position: relative;
+	background: rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	transition: all 0.1s ease-in-out;
+}
+
+.blog-picker:hover {
+	transform: scale(1.01);
+	background: rgba(0, 0, 0, 0.125);
+}
+
+.blog-picker .blog-name {
+	flex-grow: 1;
+}
+
+.blog-picker .blog-avatar {
+	display: block;
+	height: 24px;
+	width: 24px;
+	border-radius: 5px;
+	transition: all 0.075s ease-in-out;
+}
+
+.blog-picker:hover .blog-avatar {
+	transform: scale(1.25);
+}
+
+.blog-picker select {
+	opacity: 0;
+	cursor: pointer;
+	display: block;
+	height: 100%;
+	width: 100%;
+	/* background: transparent; */
+	border: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+/* Price Options */
+.price {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+
+.price li label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 11px;
+	padding-left: 15px;
+	background: rgba(0, 0, 0, 0.1);
+	transition: all 0.1s ease-in-out;
+}
+
+.price li label:hover {
+	background: rgba(0, 0, 0, 0.125);
+	transform: scale(1.01);
+}
+
+.price li label:has(input:checked) {
+	background: rgb(220, 240, 255);
+	box-shadow: 0 0 0 2px blue inset;
+}
+
+.price li:first-child label {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.price li:last-child label {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.price .price-value {
+	flex-grow: 1;
+}
+
+.price li label:has(input:checked) .price-value {
+	font-weight: bold;
+}
+
+.price input {
+	height: 24px;
+	width: 24px;
+}
+
+/* Primary Button */
+button.primary {
+	background: blue;
+	color: white;
+	border: none;
+	border-radius: 30px;
+	padding: 15px 20px;
+	transition: all 0.1s ease-in-out;
+}
+
+button.primary:hover {
+	cursor: pointer;
+	transform: scale(1.0125);
+	background: rgb(0, 60, 255);
+}

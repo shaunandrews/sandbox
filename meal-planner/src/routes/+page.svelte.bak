@@ -1,0 +1,178 @@
+<script context="module">
+	export async function load({ fetch }) {
+		const response = await fetch("/api/meals");
+		if (response.ok) {
+			console.log("Loaded meals.", meals);
+			const meals = await response.json();
+			return { props: { meals } };
+		} else {
+			console.error("Could not load meals.");
+			return { props: { meals: [] } };
+		}
+	}
+</script>
+
+<script>
+	import Meal from "$lib/Meal.svelte";
+	import Suggestion from "$lib/Suggestion.svelte";
+	import Button from "$lib/Button.svelte";
+	import NewMeal from "$lib/NewMeal.svelte";
+	import UserMention from "$lib/UserMention.svelte";
+	import PastMeal from "$lib/PastMeal.svelte";
+
+	export let meals;
+
+	let newMealDescription = "";
+
+	async function addNewMeal() {
+		const response = await fetch("/api/meals", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ description: newMealDescription })
+		});
+
+		if (response.ok) {
+			console.log("New meal added.");
+			const meal = await response.json();
+			meals = [...meals, meal];
+			newMealDescription = "";
+		} else {
+			console.error("Could not add new meal.", response);
+		}
+	}
+</script>
+
+<header>
+	<h1>What's for dinner?</h1>
+	<div class="eater">
+		<UserMention user="Jackson" />
+		<Button>Switch</Button>
+	</div>
+</header>
+
+<!-- 
+<div class="meals">
+	<PastMeal assignedDate="Tue Dec 19" description="Taco's!" img="/8.png" />
+	<span class="divider" />
+	<Meal isToday={true} assignedDate="Wed Dec 20" description="Beef and Broccoli with Rice" img="/1.png" />
+	<span class="divider" />
+	<Meal assignedDate="Thu Dec 21" description="Moroccan Chicken Thighs with Zucchini, Carrots, and Onion" img="/2.png" />
+	<Meal assignedDate="Fri Dec 22" description="Roasted Pork with Potatoes and Carrots served with Garden Salad" img="/3.png" />
+	<Meal assignedDate="Sat Dec 23" description="Baked Chicken with Black Beans and Rice" img="/4.png" />
+	<Meal assignedDate="Sun Dec 24" description="Smoke Baby Back Ribs, Mac and Cheese, Stuffed Mushrooms, and Asparagus" img="/5.png" />
+	<Meal assignedDate="Mon Dec 25" description="Eggs Over-Easy with Sausage Links" img="/6.png" />
+</div>
+-->
+
+<form class="new-suggestion" on:submit|preventDefault={addNewMeal}>
+	<input type="text" bind:value={newMealDescription} placeholder="Suggest a meal" />
+	<Button type="submit" emoji="🍽️">Plate this!</Button>
+</form>
+
+<div class="grid">
+	{#if typeof meals !== 'undefined' && meals !== null}
+		{#each meals as meal}
+			<Suggestion description={meal.description} img={meal.img || "/default.png"} user={meal.author || "Unknown"} />
+		{/each}
+	{:else}
+		<p class="blank-slate">No meal suggestions yet. Be the first to suggest one!</p>
+	{/if}
+</div>
+
+<!-- 
+<div class="grid">
+	<Suggestion description="spaghetti & meatballs" img="/7.png" user="Jackson" />
+	<Suggestion description="chicken alfredo" user="Jackson" />
+	<Suggestion description="meatloaf with veggies" user="Amy" />
+	<Suggestion description="ribeye with carrots and side salad" user="Shaun" />
+	<Suggestion description="chicken parmesan" user="Mason" />
+	<Suggestion description="chicken fajitas" user="Tyler" />
+</div>
+
+
+<div class="list">
+	<NewMeal title="Quinoa Salad with Mixed Greens" description="Combine cooked quinoa with a mix of spinach, arugula, cherry tomatoes, cucumbers, and avocado. Toss with a lemon vinaigrette and top with a sprinkle of feta cheese for a Mediterranean touch." primaryIngredient="Quinoa, its like rice (but actually a seed!)" />
+	<NewMeal title="Chicken and Rice Soup" description="Combine cooked quinoa with a mix of spinach, arugula, cherry tomatoes, cucumbers, and avocado. Toss with a lemon vinaigrette and top with a sprinkle of feta cheese for a Mediterranean touch." primaryIngredient="Chicken broth and veggies." />
+	<NewMeal title="Vegetable Lasagna" description="Layer whole wheat lasagna noodles with a mixture of roasted vegetables (zucchini, eggplant, peppers), part-skim ricotta, and marinara sauce. Top with mozzarella and bake until bubbly." primaryIngredient="Pasta and veggies." />
+	<NewMeal title="Baked Salmon with Roasted Brussels Sprouts" description="Oven-baked salmon fillets with a honey-mustard glaze, served with roasted Brussels sprouts and sweet potatoes." primaryIngredient="Salmon, a pink, flaky fish." />
+</div>
+-->
+
+
+<style>
+	header {
+		display: flex;
+		align-items: center;
+		padding: 20px;
+		padding-left: 40px;
+	}
+
+	header h1 {
+		flex-grow: 1;
+	}
+
+	.eater {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.meals {
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		gap: 20px;
+		padding: 40px;
+		scroll-padding: 40px;
+		align-items: flex-start;
+		background: rgba(0, 0, 0, 0.05);
+	}
+
+	.meals::-webkit-scrollbar {
+		display: none;
+	}
+
+	.divider {
+		flex-shrink: 0;
+		width: 6px;
+		height: 80px;
+		border-radius: 30px;
+		margin: auto;
+		background: rgba(0, 0, 0, 0.15);
+	}
+
+	.new-suggestion {
+		display: flex;
+		align-items: center;
+		padding: 5px;
+		margin: 40px;
+		border-radius: 10px;
+		gap: 5px;
+		border: 0.5px solid rgba(0, 0, 0, 0.1);
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+	}
+
+	.new-suggestion input {
+		background: white;
+		padding-left: 20px;
+		display: block;
+		width: 70%;
+		height: 55px;
+		border-radius: 5px;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 20px;
+		padding: 40px;
+		padding-top: 0;
+	}
+
+	.list {
+		padding: 40px;
+		padding-top: 0;
+	}
+</style>

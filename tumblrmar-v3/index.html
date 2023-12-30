@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>TumblrMart</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<div class="views">
+			<div class="view home hidden">
+				<header>
+					<h1>List</h1>
+				</header>
+
+				<ol id="product-list"></ol>
+			</div>
+
+			<div class="view home-grid hidden">
+				<header>
+					<h1>Grid</h1>
+				</header>
+
+				<ol id="product-grid"></ol>
+			</div>
+
+			<div class="view home-grid-mixed hidden">
+				<header>
+					<h1>Mixed</h1>
+				</header>
+
+				<ol id="product-grid-mixed"></ol>
+			</div>
+
+			<div class="view product-detail">
+				<div class="detail__header">
+					<h1 class="detail__title">The President's Shoelaces</h1>
+					<button>Close</button>
+				</div>
+
+				<div class="detail__hero">
+					<img class="current" src="/images/the-presidents-shoelaces/badge.svg" alt="The President's Shoelaces" height="167" width="172" />
+					<img src="/images/the-presidents-shoelaces/situ.png" alt="The President's Shoelaces" height="55" width="208" />
+				</div>
+
+				<div class="detail__body">
+					<p>If you know, you know&mdash;but whatever you do, do <em>not</em> tell The President. If you know the secret code, this is the badge for you.</p>
+                    <hr />
+                    <h3>About this badge</h3>
+					<ul>
+						<li><p>This is a Tumblr badge, and will appear near your username across Tumblr.com and the Tumblr apps.</p></li>
+						<li>
+							<p>You can control the display and order of badges from your <a href="#">blog settings</a>.</p>
+						</li>
+						<li><p>People can hover or tap on your badge to see more details.</p></li>
+					</ul>
+				</div>
+
+				<footer>
+					<div class="detail__drag-handle"></div>
+
+					<div class="purchase-type buy">
+						<div class="purchase-type__indicator"></div>
+						<div class="purchase-type__buy">
+							<label>
+								Buy
+								<input name="purchase-type-1" value="buy" type="radio" checked />
+							</label>
+						</div>
+						<div class="purchase-type__gift">
+							<label>
+								Gift
+								<input name="purchase-type-1" value="gift" type="radio" />
+							</label>
+						</div>
+					</div>
+
+					<fieldset class="blog-picker">
+						<div class="blog-name">shaunandrews</div>
+						<img class="blog-avatar" src="/images/avatar.png" alt="Avatar" height="24" width="24" />
+						<select>
+							<option>shaunandrews</option>
+							<option>jacksonandtyle</option>
+							<option>pokenprod</option>
+							<option>spendly</option>
+							<option>upstateinteractive</option>
+						</select>
+					</fieldset>
+
+					<!-- <ol class="price">
+						<li>
+							<label>
+								<div class="price-value">$5.99</div>
+								<input name="price" type="radio" checked />
+							</label>
+						</li>
+					</ol> -->
+
+					<button class="primary">Purchase for $5.99</button>
+				</footer>
+			</div>
+
+			<div class="view product-detail multiple-prices">
+				<div class="detail__header">
+					<h1 class="detail__title">Tumblr Supporter</h1>
+					<button>Close</button>
+				</div>
+
+				<div class="detail__hero">
+					<img class="current" src="/images/tumblr-supporter/Steel.svg" alt="1 month of support, Steel" height="150" width="150" />
+					<img src="/images/tumblr-supporter/Copper.svg" alt="3 months of support, Steel" height="150" width="150" />
+					<img src="/images/tumblr-supporter/Gold.svg" alt="6 months of support, Steel" height="150" width="150" />
+					<img src="/images/tumblr-supporter/Platinum.svg" alt="12 months of support, Steel" height="150" width="150" />
+					<img src="/images/tumblr-supporter/Oil-slick.svg" alt="2 years of support, Steel" height="150" width="150" />
+				</div>
+
+				<div class="detail__body">
+					<p>Keep Tumblr's engines oiled and running with these loyalty badges.</p>
+                    <hr />
+                    <h3>About this badge</h3>
+					<ul>
+						<li><p>This is a Tumblr badge, and will appear near your username across Tumblr.com and the Tumblr apps.</p></li>
+						<li>
+							<p>You can control the display and order of badges from your <a href="#">blog settings</a>.</p>
+						</li>
+						<li><p>People can hover or tap on your badge to see more details.</p></li>
+					</ul>
+				</div>
+
+				<footer>
+					<div class="detail__drag-handle"></div>
+
+                    <div class="purchase-type buy">
+						<div class="purchase-type__indicator"></div>
+						<div class="purchase-type__buy">
+							<label>
+								Buy
+								<input name="purchase-type-2" value="buy" type="radio" checked />
+							</label>
+						</div>
+						<div class="purchase-type__gift">
+							<label>
+								Gift
+								<input name="purchase-type-2" value="gift" type="radio" />
+							</label>
+						</div>
+					</div>
+
+					<fieldset class="blog-picker">
+						<div class="blog-name">shaunandrews</div>
+						<img class="blog-avatar" src="/images/avatar.png" alt="Avatar" height="24" width="24" />
+						<select>
+							<option>shaunandrews</option>
+							<option>jacksonandtyle</option>
+							<option>pokenprod</option>
+							<option>spendly</option>
+							<option>upstateinteractive</option>
+						</select>
+					</fieldset>
+
+					<ol class="price">
+						<li>
+							<label>
+								<div class="price-value">$2.99/mo</div>
+								<input name="price" type="radio" checked />
+							</label>
+						</li>
+						<li>
+							<label>
+								<div class="price-value">$29.99/yr</div>
+								<input name="price" type="radio" />
+							</label>
+						</li>
+					</ol>
+
+					<button class="primary">Continue to payment</button>
+				</footer>
+			</div>
+		</div>
+
+		<script src="/scripts.js"></script>
+	</body>
+</html>

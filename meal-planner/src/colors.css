@@ -1,0 +1,26 @@
+:root {
+    --shade: #111111;
+    --shade-0: rgba(0, 0, 0, 0.025);
+    --shade-1: rgba(0, 0, 0, 0.1);
+    --shade-2: rgba(0, 0, 0, 0.25);
+    --shade-3: rgba(0, 0, 0, 0.5);
+    --shade-4: rgba(0, 0, 0, 0.75);
+
+    --light: #ffffff;
+    --light-1: rgba(255, 255, 255, 0.1);
+    --light-2: rgba(255, 255, 255, 0.25);
+    --light-3: rgba(255, 255, 255, 0.5);
+    --light-4: rgba(255, 255, 255, 0.75);
+
+    --background: var(--light);
+    --text: var(--shade);
+    --border: var(--shade-1);
+    --surface var(--shade-0);
+
+    @media (prefers-color-scheme: dark) {
+        --background: var(--shade);
+        --text: var(--light);
+        --border: var(--light-1);
+    }
+}
+

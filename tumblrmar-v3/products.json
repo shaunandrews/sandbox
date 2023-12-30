@@ -1,0 +1,155 @@
+[
+    {
+        "productType": "badge",
+        "title": "The President&#8217;s Shoelaces",
+        "tagline": "Stole &#8217;em from The President.",
+        "description": "If you know, you know&mdash;but whatever you do, do <em>not</em> tell The President. If you know the secret code, this is the badge for you.",
+        "price": "$5.99",
+        "banner": "/images/the-presidents-shoelaces/banner.png",
+        "thumbnail": "/images/the-presidents-shoelaces/thumbnail.png",
+        "badge": "/images/the-presidents-shoelaces/badge.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "The Color of the&nbsp;Sky",
+        "tagline": "Do you love it?",
+        "description": "If you're here, you probably like the color of the sky. And if you spend many happy hours staring skywards, this is the badge for you.",
+        "price": "$5.99",
+        "banner": "/images/the-color-of-the-sky/banner.png",
+        "thumbnail": "/images/the-color-of-the-sky/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Fashionista",
+        "tagline": "A badge that's always the pinnacle of style.",
+        "description": "If you've got it, flaunt it. And if you've got a passion for all things à la mode, this badge will suit you just nicely.",
+        "price": "$5.99",
+        "banner": "/images/fashionista/banner.png",
+        "thumbnail": "/images/fashionista/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Playlist",
+        "tagline": "A badge for Tumblr's music-loving community.",
+        "description": "Do you have a playlist for all seasons? Tracks you can't wait to release? Bands whose songs you know by heart? Then this is the badge for you.",
+        "price": "$5.99",
+        "banner": "/images/playlist/banner.png",
+        "thumbnail": "/images/playlist/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Shutterbug",
+        "tagline": "For those who live life through a lens.",
+        "description": "This is for those who collect moments, and not things. It’s more than an icon: it's a Tumblr ethos for every photography lover.",
+        "price": "$5.99",
+        "banner": "/images/shutterbug/banner.png",
+        "thumbnail": "/images/shutterbug/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Literary",
+        "tagline": "For lovers of the written word.",
+        "description": "For the erudite. For the articulate. For the lucid of thought and phrase. For the eloquent, and the fluent. If you enjoy using words as much as reading them, then this is the badge for thee.",
+        "price": "$3.99",
+        "banner": "/images/literary/banner.png",
+        "thumbnail": "/images/literary/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Visionary",
+        "tagline": "A shiny badge for aritists on Tumblr.",
+        "description": "For the painters, illustrators, graphic designers, digital artists - if you are a visionary in your art of the visual, this will sit nicely on your blog. You can activate this badge from your blog settings.",
+        "price": "$5.99",
+        "banner": "/images/visionary/banner.png",
+        "thumbnail": "/images/visionary/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "game",
+        "title": "Horse Friend",
+        "tagline": "Get busy scoopin', or get busy dyin'.",
+        "description": "They heart, they poop, they die. It's the circle of life. Buy Tumblr Horse Friend to enjoy for a month.",
+        "price": "$7.99",
+        "banner": "/images/horse-friend/banner.png",
+        "thumbnail": "/images/horse-friend/thumbnail.png",
+        "purchaseType": "timed",
+        "purchaseTypeDurations": ["1 day", "1 week", "1 month", "1 year"]
+    },
+    {
+        "productType": "badge",
+        "title": "Crab Checkmark",
+        "tagline": "It's crab time.",
+        "description": "They're back! Turn your Tumblr into a crustacean nation and display these very important crab checkmarks on your blog.",
+        "price": "$7.99",
+        "banner": "/images/crab-checkmark/banner.png",
+        "thumbnail": "/images/crab-checkmark/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Goncharov Enthusiast",
+        "tagline": "For the discerning collector.",
+        "description": "Tick tock. Can you hear the solemn bells? Think of this badge as a quiet, knowing nod to other connoisseurs of the greatest mafia movie never made.",
+        "price": "$3.99",
+        "banner": "/images/goncharov-enthusiast/banner.png",
+        "thumbnail": "/images/goncharov-enthusiast/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "game",
+        "title": "Dashboard Crabs",
+        "tagline": "Crabs! Crabs everywhere! Catch 'em all.",
+        "description": "They're back from the island! Tumblr Dashboard Crabs. Once activated, they'll be available for 24 hours. This widget adds a crab button. Once pressed, pixelated crabs spawn, which click-clack around your screen.",
+        "price": "$2.99",
+        "banner": "/images/dashboard-crabs/banner.png",
+        "thumbnail": "/images/dashboard-crabs/thumbnail.png",
+        "purchaseType": "timed",
+        "purchaseTypeDurations": ["1 day"]
+    },
+    {
+        "productType": "badge",
+        "title": "Coppy",
+        "tagline": "Certifies a Coppy-protected blog.",
+        "description": "Our beloved office assistant protects your URL from shameless pretenders, liars, and snakes. No warranties.",
+        "price": "$3.99",
+        "banner": "/images/coppy/banner.png",
+        "thumbnail": "/images/coppy/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Important Blue Internet Checkmarks",
+        "tagline": "You can never be too important for the internet.",
+        "description": "This is not a verification status; it's an Important Blue Internet Checkmark, which in 2023 is just as legit. Purchase today and get two blue checkmarks for the price of one!** ** The Important Blue Internet Checkmark is non-refundable. Also on July 29, Crabs Day, the Important Blue Internet Checkmarks may look like a bunch of crabs! 🦀",
+        "price": "$7.99",
+        "banner": "/images/important-blue-internet-checkmarks/banner.png",
+        "thumbnail": "/images/important-blue-internet-checkmarks/thumbnail.png",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Important Rainbow Internet Checkmarks",
+        "tagline": "Important just got colorful.",
+        "description": "Many want it, few can get it. On Tumblr, it's available for everyone. Purchase today and get two checkmarks for the price of one!** Now available in rainbow! Be a colorful person on the internet by displaying rainbow checkmarks next to your blog name. ** The Important Rainbow Internet Checkmark is non-refundable. Also on July 29, Crabs Day, the Important Rainbow Internet Checkmarks may look like a bunch of crabs! 🦀",
+        "price": "$7.99",
+        "banner": "/images/important-rainbow-internet-checkmarks/banner.gif",
+        "thumbnail": "/images/important-rainbow-internet-checkmarks/thumbnail.gif",
+        "purchaseType": "one-time"
+    },
+    {
+        "productType": "badge",
+        "title": "Important Babylonion Checkmark",
+        "tagline": "Get coppery!",
+        "description": "This would've been an easy way to become the most important person in all of Babylon. But now, you can become a coppery Babylonian on Tumblr!",
+        "price": "$7.99",
+        "banner": "/images/important-babylonian-checkmark/banner.png",
+        "thumbnail": "/images/important-babylonian-checkmark/thumbnail.png",
+        "purchaseType": "one-time"
+    }
+]
