@@ -1,0 +1,24 @@
+<svg width="393" height="268" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#a)">
+        <g filter="url(#b)">
+            <path class="spotlight-path-1" d="m-121.713-102.019 414.328 240.495-110.574 129.963-303.754-370.458Z" fill="url(#c)" fill-opacity=".23"/>
+        </g>
+        <g filter="url(#d)">
+            <path class="spotlight-path-2" d="m36.264-162.496 304.407 361.081-45.829 34.115L36.265-162.496Z" fill="url(#e)" fill-opacity=".12"/>
+        </g>
+    </g>
+    <defs>
+    <linearGradient id="c" x1="-121.713" y1="-102.019" x2="237.328" y2="203.458" gradientUnits="userSpaceOnUse">
+        <stop offset=".302" stop-color="#fff"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="e" x1="36.264" y1="-162.496" x2="317.757" y2="215.642" gradientUnits="userSpaceOnUse">
+        <stop offset=".302" stop-color="#fff"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="b" x="-151.503" y="-131.808" width="473.907" height="430.037" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+        <feGaussianBlur stdDeviation="14.895" result="effect1_foregroundBlur_514_1581"/>
+    </filter>
+    <filter id="d" x="6.475" y="-192.286" width="363.986" height="454.775" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="14.895" result="effect1_foregroundBlur_514_1581"/></filter><clipPath id="a"><path fill="#fff" d="M0 0h393v268H0z"/></clipPath></defs></svg>

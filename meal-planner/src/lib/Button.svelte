@@ -4,6 +4,7 @@
 	export let checked = false;
 	export let classNames = "";
 	export let mini = false;
+	export let secondary = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -11,7 +12,7 @@
 		dispatch("click", event);
 	}
 
-	$: classNames = `${checked ? "checked" : ""} ${mini ? "mini" : ""}`;
+	$: classNames = `${checked ? "checked" : ""} ${mini ? "mini" : ""} ${secondary ? "secondary" : ""}`;
 </script>
 
 <button class={classNames} on:click={handleClick}>
@@ -26,19 +27,22 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		flex-grow: 1;
 		gap: 10px;
-		padding: 5px;
+		padding: 0 10px;
 		border-radius: 5px;
-		border: 1px solid transparent;
+		background: var(--button-resting);
 		cursor: pointer;
-		background: var(--surface);
-		color: var(--text);
+		color: var(--button-resting-text);
 		transition: all 0.1s ease-in-out;
 	}
 
+	button.secondary {
+		background: var(--button-secondary-resting);
+		color: var(--button-secondary-resting-text);
+	}
+
 	button:hover {
-		border-color: var(--border);
+		border-color: var(--border-hovered);
 	}
 
 	button span {
@@ -49,7 +53,7 @@
 	}
 
 	button:hover span {
-		transform: scale(1.5) rotate(10deg);
+		transform: scale(1.25) rotate(15deg);
 	}
 
 	/* Buttons can often acts like a toggle, switching a "checked" class on and off. */

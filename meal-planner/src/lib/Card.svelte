@@ -3,9 +3,10 @@
 	export let gap = "0";
 	export let className = "";
 	export let padding = "0";
+	export let flexBasis = "350px";
 </script>
 
-<div class={`${stack} ${className}`} style={`--gap: ${gap}; padding: ${padding};`}>
+<div class={`${stack} ${className}`} style={`--gap: ${gap}; padding: ${padding}`}>
 	<slot />
 </div>
 
@@ -18,7 +19,6 @@
 		overflow: hidden;
 		flex-shrink: 0;
 		height: auto;
-		flex-basis: 350px;
 		border: 1px solid var(--border);
 		transition: all 0.1s ease-in-out;
 	}
@@ -39,6 +39,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--gap);
+		align-items: first baseline
 	}
 
 	.hStack {

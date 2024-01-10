@@ -1,26 +1,48 @@
 :root {
-    --shade: #111111;
-    --shade-0: rgba(0, 0, 0, 0.025);
-    --shade-1: rgba(0, 0, 0, 0.1);
-    --shade-2: rgba(0, 0, 0, 0.25);
-    --shade-3: rgba(0, 0, 0, 0.5);
-    --shade-4: rgba(0, 0, 0, 0.75);
+	--shade: #111111;
+	--shade-0: rgba(0, 0, 0, 0.025);
+	--shade-1: rgba(0, 0, 0, 0.1);
+	--shade-2: rgba(0, 0, 0, 0.25);
+	--shade-3: rgba(0, 0, 0, 0.5);
+	--shade-4: rgba(0, 0, 0, 0.75);
 
-    --light: #ffffff;
-    --light-1: rgba(255, 255, 255, 0.1);
-    --light-2: rgba(255, 255, 255, 0.25);
-    --light-3: rgba(255, 255, 255, 0.5);
-    --light-4: rgba(255, 255, 255, 0.75);
+	--light: #ffffff;
+    --light-0: rgba(255, 255, 255, 0.025);
+	--light-1: rgba(255, 255, 255, 0.1);
+	--light-2: rgba(255, 255, 255, 0.25);
+	--light-3: rgba(255, 255, 255, 0.5);
+	--light-4: rgba(255, 255, 255, 0.75);
 
-    --background: var(--light);
-    --text: var(--shade);
-    --border: var(--shade-1);
-    --surface var(--shade-0);
+	--background: var(--light);
+    --background-semi: var(--light-4);
+	--text: var(--shade);
+	--border: var(--shade-1);
+	--border-hovered: var(--shade-2);
+	--border-focused: blue;
+	--divider: var(--shade-4);
+	--surface: var(--shade-0);
+	--button-resting: var(--shade);
+	--button-resting-text: var(--light);
+    --button-secondary-resting: var(--shade-0);
+    --button-secondary-resting-text: var(--shade-4);
+	--input-resting: var(--shade-0);
+	--input-hovered: var(--shade-1);
+	--input-focused: var(--light);
 
-    @media (prefers-color-scheme: dark) {
-        --background: var(--shade);
-        --text: var(--light);
-        --border: var(--light-1);
-    }
+	@media (prefers-color-scheme: dark) {
+		--background: var(--shade);
+        --background-semi: var(--shade-4);
+		--text: var(--light);
+		--border: var(--light-1);
+		--border-hovered: var(--light-3);
+		--divider: var(--light-4);
+		--surface: var(--light-2);
+		--button-resting: var(--light);
+		--button-resting-text: var(--shade);
+        --button-secondary-resting: var(var(--light-0);
+        --button-secondary-resting-text: var(--light-4);
+		--input-resting: var(--light-2);
+		--input-hovered: var(--light-1);
+		--input-focused: var(--shade);
+	}
 }
-

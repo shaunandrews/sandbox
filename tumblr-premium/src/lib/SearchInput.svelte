@@ -1,0 +1,65 @@
+<script>
+    let searchInput;
+
+    function focusOnInput() {
+        if (searchInput) {
+            searchInput.focus();
+        }
+    }
+</script>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="search" on:click={focusOnInput}>
+	<svg class="icon" width="17" height="17" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<g clip-path="url(#a)">
+			<path
+				d="M2.035 6.921c0-2.671 2.274-4.857 4.908-4.857 2.754 0 4.91 2.186 4.91 4.857 0 2.672-2.156 4.858-4.91 4.858-2.633 0-4.908-2.186-4.908-4.858Zm14.246 7.772-3.71-3.764c.837-1.093 1.317-2.55 1.317-4.008C13.888 3.157 10.774 0 6.943 0 3.113 0 0 3.157 0 6.921c0 3.765 3.112 6.922 6.943 6.922 1.318 0 2.635-.486 3.712-1.093l3.95 3.886c.24.243.6.364.958.364.36 0 .718-.121.959-.364.239-.243.478-.607.478-.972 0-.364-.36-.607-.719-.971Z"
+			/>
+		</g>
+		<defs>
+			<clipPath id="a">
+				<path fill="#fff" d="M0 0h17v17H0z" />
+			</clipPath>
+		</defs>
+	</svg>
+	<input bind:this={searchInput} type="text" placeholder="Search Tumblr" />
+</div>
+
+<style>
+	.search {
+        flex-grow: 1;
+		display: flex;
+		gap: 10px;
+		background: var(--color-input);
+		padding: 10px 15px;
+		border-radius: 20px;
+        cursor: text;
+		transition: all 0.05s ease-out;
+	}
+
+	.search:focus-within {
+		background: var(--color-input-focus);
+        box-shadow: 0 0 0 2px var(--color-accent) inset;
+	}
+
+	input {
+		background: transparent;
+		border: none;
+		outline: none;
+	}
+
+	input::placeholder {
+		color: var(--color-surface-text);
+		opacity: 0.75;
+	}
+
+	input:focus::placeholder {
+		opacity: 1;
+	}
+
+    .icon {
+        fill: var(--color-surface-text);
+        opacity: 0.75;
+    }
+</style>
