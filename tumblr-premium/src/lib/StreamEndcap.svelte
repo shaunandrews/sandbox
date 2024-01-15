@@ -3,7 +3,7 @@
 </script>
 
 <div class="stream-endcap">
-	<SectionHeading>Roll the dice</SectionHeading>
+	<SectionHeading>Trending tags</SectionHeading>
 	<div class="carousel">
 		<div class="tag">
 			<span>#zelda</span>
@@ -29,17 +29,17 @@
 <style>
 	.stream-endcap {
 		/* margin-left: 20px; */
-		padding: 20px;
-		padding-right: 0;
-		background: rgba(0,0,0,0.25);
+		padding: 0 20px;
+		/* padding-right: 0; */
+		/* background: rgba(0,0,0,0.25); */
 	}
 
 	.carousel {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10px;
-		padding: 0 20px;
-		margin-left: -20px;
+		/* padding: 0 20px; */
+		/* margin-left: -20px; */
 	}
 
 	.carousel > div {

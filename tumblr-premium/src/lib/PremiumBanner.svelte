@@ -16,23 +16,25 @@
 </script>
 
 {#if !$isPremium}
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="banner {type}" on:click={openModal} style="margin: 0 {marginHorizontal};">
-	<div class="graphic">
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="banner {type}" on:click={openModal} style="margin: 0 {marginHorizontal};">
+		<div class="graphic">
+			<PremiumTMark size="small" />
+			<!--
 		{#if graphic === 'diamond'}
 			<PremiumDiamond size="medium" />
 		{:else if graphic === 'tmark'}
 			<PremiumTMark />
-			<!-- <img src="/premium/t-mark-parts/t-mark.svg" alt="Premium" /> -->
 		{/if}
+		-->
+		</div>
+		<p>Get ad-free browsing and early access to new features with Tumblr&nbsp;Premium.</p>
+		<GoPremiumButton />
+		<div class="spotlights">
+			<PremiumSpotlights />
+		</div>
 	</div>
-	<p>Get ad-free browsing and early access to new features with Tumblr&nbsp;Premium.</p>
-	<GoPremiumButton />
-	<div class="spotlights">
-		<PremiumSpotlights />
-	</div>
-</div>
 {/if}
 
 <style>
@@ -51,17 +53,16 @@
 	}
 
 	.banner:hover {
-		border: 1px solid rgba(255, 255, 255, 0.125);
-		/* transform: scale(1.0125); */
+		border: 1px solid rgba(255, 255, 255, 0.25);
 	}
 
 	.spotlights {
-		opacity: 0.75;
+		opacity: 0.25;
 		transition: all 0.2s ease-in-out;
 	}
 
 	.banner:hover .spotlights {
-		opacity: 1;
+		opacity: 0.5;
 	}
 
 	.banner.stacked {
@@ -116,18 +117,5 @@
 
 	.banner.badge:hover p {
 		opacity: 1;
-	}
-
-	.banner.badge button {
-		width: 100%;
-		text-align: center;
-		font-weight: 600;
-		color: #7c5cff;
-		background: #7d5cff2f;
-	}
-
-	.banner.badge:hover button {
-		background: #7c5cff;
-		color: white;
 	}
 </style>

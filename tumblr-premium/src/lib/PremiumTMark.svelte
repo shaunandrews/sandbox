@@ -1,9 +1,12 @@
-<div class="premium-t-mark">
-	<svg class="t-mark" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+<script>
+	export let size = 'default';
+</script>
+
+<div class="premium-t-mark {size}">
+	<svg class="t-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 		<path
 			id="background"
 			d="M71.225 26.207a2 2 0 0 1 2 2v13.335a2 2 0 0 1-.986 1.725l-11.823 6.946v9.793c0 2.456.607 3.687 1.29 4.338.185.176.395.33.635.464.714.396 1.74.635 3.172.635h6.216a2 2 0 0 1 2 2v14.062a2 2 0 0 1-.987 1.724l-14.457 8.495a2 2 0 0 1-1.013.276H45.553c-1.81 0-3.566-.152-5.242-.472a22.327 22.327 0 0 1-2.722-.695c-3.71-1.207-6.876-3.399-9.094-6.728-2.208-3.314-3.379-7.607-3.379-12.869V52.037H17.5a2 2 0 0 1-2-2V38.54a2 2 0 0 1 .987-1.724l9.355-5.497c3.276-3.633 4.877-8.45 5.159-12.95a2 2 0 0 1 .983-1.599L46.44 8.276A2 2 0 0 1 47.454 8h10.962a2 2 0 0 1 2 2v16.207h10.81Zm-12.809 2V10H47.454l-14.457 8.495c-.31 4.939-2.095 10.33-5.883 14.396l-9.614 5.65v11.496h9.617v21.2c0 9.937 4.418 15.523 11.092 17.694.795.259 1.623.47 2.478.633 1.538.293 3.168.436 4.867.436h11.718l14.457-8.495V67.443h-6.216c-1.627 0-3.028-.267-4.144-.887a5.088 5.088 0 0 1-1.042-.763c-1.228-1.17-1.91-3.03-1.91-5.787V49.07l12.808-7.527V28.207H58.416Z"
-			fill="#fff"
 		/>
 		<path
 			id="bottom-left"
@@ -23,14 +26,7 @@
 		/>
 	</svg>
 
-	<svg
-		class="sparkles"
-		width="100"
-		height="100"
-		viewBox="0 0 100 100"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-	>
+	<svg class="sparkles" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 		<path
 			d="M41.486 58.113C41.486 65.3814 38.8366 71.5564 32.7954 71.5564C38.8366 71.5564 41.486 77.7314 41.486 84.9997C41.486 77.7314 44.1354 71.5564 50.1766 71.5564C44.1354 71.5564 41.486 65.3814 41.486 58.113Z"
 			fill="currentColor"
@@ -51,9 +47,19 @@
 
 <style>
 	.premium-t-mark {
-		height: 100px;
-		width: 100px;
+		height: 80px;
+		width: 80px;
 		position: relative;
+	}
+
+	.premium-t-mark.small {
+		height: 50px;
+		width: 50px;
+	}
+
+	.premium-t-mark.large {
+		height: 120px;
+		width: 120px;
 	}
 
 	svg {
@@ -67,33 +73,34 @@
 	.spark1,
 	.spark2,
 	.spark3 {
-		animation: pulse 2s linear infinite;
-		transform-origin: 32px 58px;
+		/* display: none; */
+		fill: yellow;
+		animation: pulse 8s linear infinite;
+	}
+
+	.spark1 {
+		transform-origin: 40px 65px;
 	}
 
 	.spark2 {
-		animation-delay: 1s;
-		transform-origin: 56px 38px;
+		animation-delay: 2s;
+		transform-origin: 55px 38px;
 	}
 
 	.spark3 {
-		animation-delay: 2s;
-		transform-origin: 28px 26px;
+		animation-delay: 4s;
+		transform-origin: 35px 35px;
 	}
 
 	@keyframes pulse {
 		0% {
-			transform: scale(1.5);
-			/* opacity: 0.1; */
+			transform: scale(1.25);
 		}
 		50% {
-			transform: scale(1.5);
-			/* opacity: 1; */
-			/* fill: yellow; */
+			transform: scale(1.5) rotate(15deg);
 		}
 		100% {
-			transform: scale(1.5);
-			/* opacity: 0.1; */
+			transform: scale(1.25);
 		}
 	}
 
@@ -102,10 +109,29 @@
 	#left-under,
 	#right-under,
 	#bottom-left {
-		fill: #C6B7F8;
+		fill: #c6b7f8;
+		animation: phase 2s linear infinite;
+	}
+
+	@keyframes phase {
+		0% {
+			fill: #62d4ff;
+		}
+		40% {
+			fill: #c6b7f8;
+		}
+		80% {
+			fill: #ffa0f8;
+		}
+		100% {
+			fill: #62d4ff;
+		}
 	}
 
 	#surface {
-		fill: #BDE8FC;
+		/* fill: #7C5CFF; */
+		fill: white;
+		stroke: rgba(0, 0, 0, 0.5);
+		stroke-width: 2.5px;
 	}
 </style>

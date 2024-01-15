@@ -9,6 +9,7 @@
 	import PremiumPerksButton from '$lib/PremiumPerksButton.svelte';
 	import MobileHeader from '$lib/MobileHeader.svelte';
 	import MobileTabBar from '$lib/MobileTabBar.svelte';
+	import GoPremiumButton from '$lib/GoPremiumButton.svelte';
 	import Modal from '$lib/Modal.svelte';
 	import DevTools from '$lib/DevTools.svelte';
 
@@ -88,12 +89,13 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
+		align-items: center;
 	}
 
 	#global footer button {
 		width: 100%;
 		border-radius: 30px;
-		padding: 12px 20px;
+		padding: 10px 20px;
 		font-size: 1em;
 		background: var(--color-accent);
 	}

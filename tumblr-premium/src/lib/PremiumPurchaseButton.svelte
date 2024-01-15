@@ -1,25 +1,38 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { modalStore } from './modalStore.js';
 	import PremiumDiamond from '$lib/PremiumDiamond.svelte';
-	export let term = "yearly";
+	import GoPremiumButton from '$lib/GoPremiumButton.svelte';
+
+	export let term = 'yearly';
+
 	let monthlyPrice = 6.99;
 	let yearlyPrice = 69.99;
-	let yearlyPricePerMonth = (yearlyPrice / 12).toFixed(2);5
+	let yearlyPricePerMonth = (yearlyPrice / 12).toFixed(2);
+	5;
+
+	function redirectToCheckout() {
+		modalStore.close();
+		goto('/checkout/');
+	}
 </script>
 
 <section>
 	{#if term === 'yearly'}
 		<h3>
-			<strike>${monthlyPrice}</strike> <strong>${yearlyPricePerMonth}</strong> / month billed annually for ${yearlyPrice}
+			<strike>${monthlyPrice}</strike> <strong>${yearlyPricePerMonth}</strong> / month billed
+			annually for ${yearlyPrice}
 		</h3>
 	{:else}
 		<h3>
 			<strong>${monthlyPrice}</strong> / month
 		</h3>
 	{/if}
-	<a class="button" href="/checkout/">
-		<PremiumDiamond />
-		<span>Get premium now!</span>
-	</a>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div on:click={redirectToCheckout}>
+		<GoPremiumButton label="Get premium now" size="big" />
+	</div>
 	<p>
 		Subscriptions renew automatically. Taxes may apply. Ad-Free excludes certain promotional
 		content. <a href="/">Learn&nbsp;more</a>
@@ -49,28 +62,6 @@
 	strong {
 		color: white;
 		font-size: 1.25em;
-	}
-
-	a.button {
-		text-decoration: none;
-		background: #7c5cff;
-		border-top: 1px solid rgba(255, 255, 255, 0.5);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.75);
-		box-shadow: inset 0 0 10px 5px rgba(255, 255, 255, 0.1);
-
-		font-size: 1.125em;
-		font-weight: 600;
-		color: black;
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.125);
-		padding: 15px 35px;
-		line-height: 1.25;
-		border-radius: 60px;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 10px;
-		cursor: pointer;
 	}
 
 	p {

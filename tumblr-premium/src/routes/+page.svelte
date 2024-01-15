@@ -135,7 +135,7 @@
 	#stream {
 		flex-grow: 0;
 		flex-shrink: 0;
-		min-width: 580px;
+		width: 580px;
 		max-width: calc(100% - 300px);
 		display: flex;
 		flex-direction: column;

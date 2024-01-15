@@ -1,16 +1,19 @@
 <script>
 	import PremiumDiamond from '$lib/PremiumDiamond.svelte';
+	export let size = 'default';
+	export let label = 'Go Premium';
 </script>
 
-<button>
+<button class={size}>
 	<PremiumDiamond size="small" />
-	<span>Go&nbsp;Premium</span>
+	<span>{label}</span>
 </button>
 
 <style>
 	button {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: 10px;
 		text-decoration: none;
 		text-wrap: nowrap;
@@ -22,15 +25,19 @@
 		box-shadow: none;
 		font-size: 0.85em;
 		text-decoration: none;
+		cursor: pointer;
 		text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-		border: 1px solid transparent;
-		border-top: 1px solid rgba(255, 255, 255, 0.4);
-		box-shadow: inset 0 0 10px 5px rgba(255, 255, 255, 0.1);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 		transition: all 0.2s ease-in-out;
 	}
 
 	button:hover {
-		border: 1px solid rgba(255, 255, 255, 0.75);
-		box-shadow: inset 0 0 10px 5px rgba(255, 255, 255, 0);
+		background: #8364fc;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+	}
+
+	button.big {
+		font-size: 1.125em;
+		padding: 15px 35px;
 	}
 </style>

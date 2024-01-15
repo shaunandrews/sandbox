@@ -35,7 +35,6 @@
 
 	.modal-content {
 		position: relative;
-		/* max-width: 95vw; */
 		max-height: 95vh;
 		overflow: auto;
 		box-shadow:
@@ -53,9 +52,17 @@
 
 	.modal-close {
 		position: absolute;
-		top: 0;
-		right: 0;
+		top: 5px;
+		right: 5px;
 		z-index: 100;
-		background: red;
+		padding: 10px 15px;
+		border-radius: 10px;
+		color: white;
+		background: rgba(0,0,0,0.5);
+		transition: all 0.1s ease-in-out;
+	}
+
+	.modal-close:hover {
+		background: rgba(0,0,0,0.75);
 	}
 </style>

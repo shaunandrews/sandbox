@@ -85,16 +85,10 @@
 	}
 
 	.column.features {
+		position: relative;
 		max-width: 440px;
 		color: black;
 		overflow: hidden;
-		background: radial-gradient(
-			100% 250% at 25% 10%,
-			rgba(208, 239, 255, 1) 0%,
-			rgba(255, 231, 246, 1) 33%,
-			rgba(211, 193, 248, 1) 75%,
-			rgba(156, 232, 255, 1) 100%
-		);
 
 		@media screen and (max-width: 900px) {
 			max-width: 100%;
@@ -102,6 +96,73 @@
 			backdrop-filter: blur(10px);
 			-webkit-backdrop-filter: blur(10px);
 			color: inherit;
+		}
+	}
+
+	.column.features > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.column.features:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: -1;
+		height: 100%;
+		width: 100%;
+		background: radial-gradient(
+			100% 250% at 25% 10%,
+			rgba(208, 239, 255, 1) 0%,
+			rgba(255, 231, 246, 1) 33%,
+			rgba(211, 193, 248, 1) 75%,
+			rgba(156, 232, 255, 1) 100%
+		);
+		animation: test 5s ease-in-out infinite;
+	}
+
+	@keyframes test {
+		0% {
+			transform: scale(1.75) rotate(0deg);
+		}
+		50% {
+			transform: scale(2.5) rotate(50deg);
+		}
+		100% {
+			transform: scale(1.75) rotate(0deg);
+		}
+	}
+
+	@keyframes diamondFlow {
+		0% {
+			background: radial-gradient(
+				100% 250% at 25% 10%,
+				rgba(208, 239, 255, 1) 0%,
+				rgba(255, 231, 246, 1) 33%,
+				rgba(211, 193, 248, 1) 75%,
+				rgba(156, 232, 255, 1) 100%
+			);
+		}
+		50% {
+			outline: 1px solid red;
+			background: radial-gradient(
+				100% 250% at 25% 10%,
+				rgba(156, 232, 255, 1) 0%,
+				rgba(208, 239, 255, 1) 33%,
+				rgba(255, 231, 246, 1) 75%,
+				rgba(211, 193, 248, 1) 100%
+			);
+		}
+		100% {
+			background: radial-gradient(
+				100% 250% at 25% 10%,
+				rgba(208, 239, 255, 1) 0%,
+				rgba(255, 231, 246, 1) 33%,
+				rgba(211, 193, 248, 1) 75%,
+				rgba(156, 232, 255, 1) 100%
+			);
 		}
 	}
 </style>
