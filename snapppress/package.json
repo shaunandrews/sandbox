@@ -3,6 +3,7 @@
   "productName": "SnappPress",
   "version": "0.0.1",
   "description": "Share screenshots using your WordPress site.",
+  "icon": "assets/snappress.icns",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -30,6 +31,7 @@
   "license": "GPL-2.0-or-later",
   "dependencies": {
     "axios": "^1.7.5",
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "form-data": "^4.0.0"
   }
 }
