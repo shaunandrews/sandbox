@@ -3,13 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>SnapPress Settings</title>
-    <link rel="stylesheet" href="index.css" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
-    />
+    <link rel="stylesheet" href="settings.css" />
   </head>
   <body>
+    <div id="close-icon">✖</div>
     <h1>SnapPress Settings</h1>
     <form id="settings-form">
       <label for="wordpress-url">WordPress URL:</label>
@@ -18,10 +15,10 @@
       <label for="wordpress-username">WordPress Username:</label>
       <input type="text" id="wordpress-username" required>
       
-      <label for="wordpress-password">WordPress Application Password:</label>
+      <label for="wordpress-password">WordPress Password:</label>
       <input type="password" id="wordpress-password" required>
       
-      <button type="submit">Save Settings</button>
+      <button type="submit">Save and Close</button>
     </form>
     <script src="settings.js"></script>
   </body>

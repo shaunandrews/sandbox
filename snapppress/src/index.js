@@ -1,9 +1,15 @@
-const { app, BrowserWindow, ipcMain, desktopCapturer, clipboard } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  desktopCapturer,
+  clipboard,
+} = require("electron");
 const fs = require("fs");
 const pathModule = require("path");
 const axios = require("axios");
 const FormData = require("form-data");
-const Store = require('electron-store');
+const Store = require("electron-store");
 
 const store = new Store();
 
@@ -20,7 +26,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: pathModule.join(__dirname, '../assets/snappress.icns'),
+    icon: pathModule.join(__dirname, "../assets/snappress.icns"),
     webPreferences: {
       preload: pathModule.join(__dirname, "preload.js"),
       contextIsolation: true, // Change this to true
@@ -55,7 +61,7 @@ const createSettingsWindow = () => {
 
   settingsWindow.loadFile(pathModule.join(__dirname, "settings.html"));
 
-  settingsWindow.on('closed', () => {
+  settingsWindow.on("closed", () => {
     settingsWindow = null;
   });
 };
@@ -110,8 +116,13 @@ ipcMain.handle("save-screenshot", async (event, dataURL) => {
 });
 
 ipcMain.handle("upload-to-wordpress", async (event, filePath) => {
-  const settings = store.get('settings');
-  if (!settings || !settings.wordpressUrl || !settings.wordpressUsername || !settings.wordpressPassword) {
+  const settings = store.get("settings");
+  if (
+    !settings ||
+    !settings.wordpressUrl ||
+    !settings.wordpressUsername ||
+    !settings.wordpressPassword
+  ) {
     return { success: false, error: "WordPress settings are not configured" };
   }
 
@@ -125,7 +136,11 @@ ipcMain.handle("upload-to-wordpress", async (event, filePath) => {
       {
         headers: {
           ...formData.getHeaders(),
-          Authorization: "Basic " + Buffer.from(`${settings.wordpressUsername}:${settings.wordpressPassword}`).toString("base64"),
+          Authorization:
+            "Basic " +
+            Buffer.from(
+              `${settings.wordpressUsername}:${settings.wordpressPassword}`
+            ).toString("base64"),
         },
       }
     );
@@ -138,12 +153,12 @@ ipcMain.handle("upload-to-wordpress", async (event, filePath) => {
 });
 
 ipcMain.handle("save-settings", async (event, settings) => {
-  store.set('settings', settings);
+  store.set("settings", settings);
   return true;
 });
 
 ipcMain.handle("get-settings", async () => {
-  return store.get('settings');
+  return store.get("settings");
 });
 
 // Add this new IPC handler at the end of the file
@@ -152,6 +167,18 @@ ipcMain.handle("copy-to-clipboard", (event, text) => {
 });
 
 // Add this new IPC handler
-ipcMain.on('open-settings', () => {
+ipcMain.on("open-settings", () => {
   createSettingsWindow();
+});
+
+ipcMain.on("close-settings", () => {
+  if (settingsWindow) {
+    settingsWindow.close();
+  }
+});
+
+// Add the new IPC handler for capturing a specific area
+ipcMain.handle("capture-screen-area", async (event, bounds) => {
+  const sources = await desktopCapturer.getSources({ types: ['screen'] });
+  return { sourceId: sources[0].id, bounds };
 });
