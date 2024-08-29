@@ -52,10 +52,21 @@ document
             wpLink.textContent = "View on WordPress";
             wpLink.target = "_blank";
             preview.appendChild(wpLink);
+
+            // Copy the URL to clipboard
+            await window.electronAPI.copyToClipboard(uploadResult.mediaUrl);
+            
+            const clipboardMsg = document.createElement("p");
+            clipboardMsg.textContent = "Image URL copied to clipboard!";
+            clipboardMsg.style.color = "green";
+            preview.appendChild(clipboardMsg);
           } else {
             console.error("Failed to upload to WordPress:", uploadResult.error);
             const errorP = document.createElement("p");
             errorP.textContent = `Failed to upload to WordPress: ${uploadResult.error}`;
+            if (uploadResult.error === "WordPress settings are not configured") {
+              errorP.textContent += " Please configure your WordPress settings.";
+            }
             errorP.style.color = "red";
             preview.appendChild(errorP);
           }
@@ -67,3 +78,7 @@ document
       console.error("Error capturing screenshot:", error);
     }
   });
+
+document.getElementById("settings-icon").addEventListener("click", () => {
+  window.electronAPI.openSettings();
+});

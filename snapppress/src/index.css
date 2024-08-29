@@ -12,3 +12,11 @@ body {
   display: block;
   margin-bottom: 10px;
 }
+
+#settings-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}

@@ -1,17 +1,23 @@
-const { app, BrowserWindow, ipcMain, desktopCapturer } = require("electron");
+const { app, BrowserWindow, ipcMain, desktopCapturer, clipboard } = require("electron");
 const fs = require("fs");
 const pathModule = require("path");
 const axios = require("axios");
 const FormData = require("form-data");
+const Store = require('electron-store');
+
+const store = new Store();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
+let mainWindow;
+let settingsWindow;
+
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     icon: pathModule.join(__dirname, '../assets/snappress.icns'),
@@ -29,11 +35,37 @@ const createWindow = () => {
   mainWindow.webContents.openDevTools();
 };
 
+const createSettingsWindow = () => {
+  if (settingsWindow) {
+    settingsWindow.focus();
+    return;
+  }
+
+  settingsWindow = new BrowserWindow({
+    width: 500,
+    height: 400,
+    parent: mainWindow,
+    modal: true,
+    webPreferences: {
+      preload: pathModule.join(__dirname, "preload.js"),
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+  });
+
+  settingsWindow.loadFile(pathModule.join(__dirname, "settings.html"));
+
+  settingsWindow.on('closed', () => {
+    settingsWindow = null;
+  });
+};
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+  // createSettingsWindow();
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
@@ -78,17 +110,22 @@ ipcMain.handle("save-screenshot", async (event, dataURL) => {
 });
 
 ipcMain.handle("upload-to-wordpress", async (event, filePath) => {
+  const settings = store.get('settings');
+  if (!settings || !settings.wordpressUrl || !settings.wordpressUsername || !settings.wordpressPassword) {
+    return { success: false, error: "WordPress settings are not configured" };
+  }
+
   const formData = new FormData();
   formData.append("file", fs.createReadStream(filePath));
 
   try {
     const response = await axios.post(
-      "https://shaunandrews.com/wp-json/wp/v2/media",
+      `${settings.wordpressUrl}/wp-json/wp/v2/media`,
       formData,
       {
         headers: {
           ...formData.getHeaders(),
-          Authorization: "Basic " + Buffer.from("shaunandrews:SwHZ j2Kk aNW4 E7DQ ieJj FvIu").toString("base64"),
+          Authorization: "Basic " + Buffer.from(`${settings.wordpressUsername}:${settings.wordpressPassword}`).toString("base64"),
         },
       }
     );
@@ -98,4 +135,23 @@ ipcMain.handle("upload-to-wordpress", async (event, filePath) => {
     console.error("Failed to upload to WordPress:", error);
     return { success: false, error: error.message };
   }
+});
+
+ipcMain.handle("save-settings", async (event, settings) => {
+  store.set('settings', settings);
+  return true;
+});
+
+ipcMain.handle("get-settings", async () => {
+  return store.get('settings');
+});
+
+// Add this new IPC handler at the end of the file
+ipcMain.handle("copy-to-clipboard", (event, text) => {
+  clipboard.writeText(text);
+});
+
+// Add this new IPC handler
+ipcMain.on('open-settings', () => {
+  createSettingsWindow();
 });
