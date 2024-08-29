@@ -2,21 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>SnapPress</title>
+    <title>SnappPress</title>
     <link rel="stylesheet" href="index.css" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data: https://shaunandrews.com; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://shaunandrews.com;"
-    />
   </head>
   <body>
     <div id="settings-icon">⚙️</div>
-    <h1>SnapPress</h1>
-    <p>Press the button to take a screenshot and upload it to WordPress.</p>
-    <div id="screenshot-preview">
-      <p>No screenshot taken yet.</p>
+    <div class="container">
+      <div class="panel" id="empty-panel">
+        <button id="take-screenshot" class="take-screenshot-btn">Take Screenshot</button>
+        <p class="panel-subtitle">or use the hotkey <span class="hotkey">⌘⇧4</span></p>
+      </div>
+      <div class="panel" id="uploaded-panel" style="display: none;">
+        <div id="screenshot-preview"></div>
+      </div>
     </div>
-    <button id="take-screenshot">Take Screenshot & Upload</button>
     <script src="renderer.js"></script>
   </body>
 </html>

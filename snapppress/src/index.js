@@ -4,6 +4,8 @@ const {
   ipcMain,
   desktopCapturer,
   clipboard,
+  dialog,
+  globalShortcut, // Add this import
 } = require("electron");
 const fs = require("fs");
 const pathModule = require("path");
@@ -31,6 +33,7 @@ const createWindow = () => {
       preload: pathModule.join(__dirname, "preload.js"),
       contextIsolation: true, // Change this to true
       nodeIntegration: false, // This should be false for security
+      autoFillEnabled: false,
     },
   });
 
@@ -38,7 +41,7 @@ const createWindow = () => {
   mainWindow.loadFile(pathModule.join(__dirname, "index.html"));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 const createSettingsWindow = () => {
@@ -71,7 +74,13 @@ const createSettingsWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
-  // createSettingsWindow();
+
+  // Register the global shortcut
+  globalShortcut.register("CommandOrControl+Shift+4", () => {
+    if (mainWindow) {
+      mainWindow.webContents.send("trigger-screenshot");
+    }
+  });
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
@@ -101,8 +110,10 @@ ipcMain.handle("capture-screen", async () => {
 
 ipcMain.handle("save-screenshot", async (event, dataURL) => {
   const base64Data = dataURL.replace(/^data:image\/png;base64,/, "");
+  const settings = store.get("settings") || {};
+  const saveDirectory = settings.saveDirectory || app.getPath("pictures");
   const filePath = pathModule.join(
-    app.getPath("pictures"),
+    saveDirectory,
     `screenshot-${Date.now()}.png`
   );
 
@@ -161,6 +172,19 @@ ipcMain.handle("get-settings", async () => {
   return store.get("settings");
 });
 
+// Add these new IPC handlers near the other handlers
+ipcMain.handle("hide-main-window", () => {
+  if (mainWindow) {
+    mainWindow.hide();
+  }
+});
+
+ipcMain.handle("show-main-window", () => {
+  if (mainWindow) {
+    mainWindow.show();
+  }
+});
+
 // Add this new IPC handler at the end of the file
 ipcMain.handle("copy-to-clipboard", (event, text) => {
   clipboard.writeText(text);
@@ -179,6 +203,24 @@ ipcMain.on("close-settings", () => {
 
 // Add the new IPC handler for capturing a specific area
 ipcMain.handle("capture-screen-area", async (event, bounds) => {
-  const sources = await desktopCapturer.getSources({ types: ['screen'] });
+  const sources = await desktopCapturer.getSources({ types: ["screen"] });
   return { sourceId: sources[0].id, bounds };
+});
+
+ipcMain.handle("select-directory", async () => {
+  const result = await dialog.showOpenDialog({
+    properties: ["openDirectory", "createDirectory"],
+    buttonLabel: "Select Folder",
+    title: "Select Save Directory",
+  });
+  if (result.canceled) {
+    return null;
+  }
+  return result.filePaths[0];
+});
+
+// Add this to handle app quit
+app.on("will-quit", () => {
+  // Unregister the global shortcut
+  globalShortcut.unregisterAll();
 });

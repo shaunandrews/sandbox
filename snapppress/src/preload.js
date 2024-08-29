@@ -10,5 +10,12 @@ contextBridge.exposeInMainWorld("electronAPI", {
   getSettings: () => ipcRenderer.invoke("get-settings"),
   openSettings: () => ipcRenderer.send("open-settings"),
   closeSettings: () => ipcRenderer.send("close-settings"),
-  captureScreenArea: (bounds) => ipcRenderer.invoke("capture-screen-area", bounds),
+  captureScreenArea: (bounds) =>
+    ipcRenderer.invoke("capture-screen-area", bounds),
+  selectDirectory: () => ipcRenderer.invoke("select-directory"),
+  
+  onTriggerScreenshot: (callback) => ipcRenderer.on('trigger-screenshot', callback),
+  
+  hideMainWindow: () => ipcRenderer.invoke("hide-main-window"),
+  showMainWindow: () => ipcRenderer.invoke("show-main-window"),
 });

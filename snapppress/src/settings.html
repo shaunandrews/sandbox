@@ -6,19 +6,23 @@
     <link rel="stylesheet" href="settings.css" />
   </head>
   <body>
-    <div id="close-icon">✖</div>
-    <h1>SnapPress Settings</h1>
     <form id="settings-form">
       <label for="wordpress-url">WordPress URL:</label>
       <input type="url" id="wordpress-url" required>
-      
-      <label for="wordpress-username">WordPress Username:</label>
+
+      <label for="wordpress-username">WordPress username:</label>
       <input type="text" id="wordpress-username" required>
-      
-      <label for="wordpress-password">WordPress Password:</label>
+
+      <label for="wordpress-password">WordPress password:</label>
       <input type="password" id="wordpress-password" required>
-      
-      <button type="submit">Save and Close</button>
+
+      <label for="save-directory">Local screenshot location</label>
+      <div class="directory-input">
+        <input type="text" id="save-directory" readonly>
+        <button type="button" id="select-directory">Select</button>
+      </div>
+
+      <button type="submit">Save Settings</button>
     </form>
     <script src="settings.js"></script>
   </body>
