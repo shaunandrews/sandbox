@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>SnapPress</title>
+    <link rel="stylesheet" href="index.css" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://shaunandrews.com;"
+    />
+  </head>
+  <body>
+    <h1>SnapPress</h1>
+    <p>Press the button to take a screenshot of your screen.</p>
+    <div id="screenshot-preview">
+      <p>No screenshot taken yet.</p>
+    </div>
+    <button id="take-screenshot">Take Screenshot</button>
+    <script src="renderer.js"></script>
+  </body>
+</html>
